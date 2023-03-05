@@ -13,7 +13,7 @@ function FilmReviews({reviews}:FilmReviewsProps):JSX.Element{
 
       </div>
       <div className="film-card__reviews-col">
-        {reviews.slice(4,6).map((review)=><FilmReviewCard review={review} key={review.id}/>)}
+        {reviews.slice(3,6).map((review)=><FilmReviewCard review={review} key={review.id}/>)}
 
       </div>
     </div>

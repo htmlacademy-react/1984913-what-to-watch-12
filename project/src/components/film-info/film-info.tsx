@@ -11,7 +11,7 @@ type FilmInfoProps = {
 
 function FilmInfo({film}:FilmInfoProps):JSX.Element{
   const tabs = Object.values(FilmTabs);
-  const currentTab:string = FilmTabs.Default;
+  const currentTab:string = FilmTabs.Reviews;
 
   const getCurrentInfo = ()=>{
     switch(currentTab){
