@@ -15,4 +15,6 @@ const FILMS_AMOUNT = 8;
 
 const DEFAULT_GENRE = 'All genres';
 
-export {AllGenres, FILMS_AMOUNT, DEFAULT_GENRE};
+const RATING_MAX = 10;
+
+export {AllGenres, FILMS_AMOUNT, DEFAULT_GENRE, RATING_MAX};

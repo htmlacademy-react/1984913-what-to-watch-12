@@ -1,5 +1,6 @@
 import FilmsList from '../../components/films-list/films-list';
 import GenresList from '../../components/genres-list/genres-list';
+import Logo from '../../components/logo/logo';
 import PromoFilmCard from '../../components/promo-film-card/promo-film-card';
 import { FILMS_AMOUNT, AllGenres} from '../../constants';
 import { mockFilms } from '../../mocks/mock-films';
@@ -25,14 +26,7 @@ function MainPage():JSX.Element{
         </section>
 
         <footer className="page-footer">
-          <div className="logo">
-            <a href='/' className="logo__link logo__link--light">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
-
+          <Logo isLight/>
           <div className="copyright">
             <p>© 2019 What to watch Ltd.</p>
           </div>
