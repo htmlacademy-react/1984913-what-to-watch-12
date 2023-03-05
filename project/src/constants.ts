@@ -17,4 +17,9 @@ const DEFAULT_GENRE = 'All genres';
 
 const RATING_MAX = 10;
 
-export {AllGenres, FILMS_AMOUNT, DEFAULT_GENRE, RATING_MAX};
+const SignInErrors = {
+  InvalidEmail: 'Please enter a valid email address',
+  InvalidUser: 'We can’t recognize this email and password combination. Please try again.',
+} as const;
+
+export {AllGenres, FILMS_AMOUNT, DEFAULT_GENRE, RATING_MAX, SignInErrors};
