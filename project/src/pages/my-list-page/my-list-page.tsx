@@ -4,13 +4,13 @@ import UserBlock from '../../components/user-block/user-block';
 import { mockFilms } from '../../mocks/mock-films';
 
 function MyListPage():JSX.Element{
-  const filmsAmount = 9;
+  const FILMS_LIST_AMOUNT = mockFilms.length;
   return(
     <div className="user-page">
       <header className="page-header user-page__head">
         <Logo/>
 
-        <h1 className="page-title user-page__title">My list <span className="user-page__film-count">{filmsAmount}</span></h1>
+        <h1 className="page-title user-page__title">My list <span className="user-page__film-count">{FILMS_LIST_AMOUNT}</span></h1>
         <UserBlock/>
       </header>
 

@@ -578,7 +578,7 @@ const mockFilms = [
     'id': 26,
     'name': 'The Grand Budapest Hotel',
     'posterImage': 'img/the-grand-budapest-hotel-poster.jpg',
-    'previewImage': 'img/the-grand-budapest-hotel.jpg',
+    'previewImage': 'img/the-grand-budapest-hotel-poster.jpg',
     'backgroundImage': 'img/bg-the-grand-budapest-hotel.jpg',
     'backgroundColor': '#ffffff',
     'videoLink': 'https://some-link',
