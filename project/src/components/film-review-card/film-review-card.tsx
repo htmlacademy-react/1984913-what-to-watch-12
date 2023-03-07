@@ -1,4 +1,5 @@
 import { Review } from '../../types/review';
+import { formatReviewDate } from '../../utils/utils';
 
 type FilmReviewCardProps = {
 review:Review;
@@ -13,7 +14,7 @@ function FilmReviewCard({review}:FilmReviewCardProps):JSX.Element{
 
         <footer className="review__details">
           <cite className="review__author">{user.name}</cite>
-          <time className="review__date" dateTime={date.slice(0,10)}>{date.slice(0,10)}</time>
+          <time className="review__date" dateTime={date}>{formatReviewDate(date)}</time>
         </footer>
       </blockquote>
 

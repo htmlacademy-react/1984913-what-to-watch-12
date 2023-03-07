@@ -1,4 +1,4 @@
-import { DEFAULT_GENRE } from '../../constants';
+import { DEFAULT_GENRE } from '../../utils/constants';
 
 type GenresListProps = {
  genres:string[];

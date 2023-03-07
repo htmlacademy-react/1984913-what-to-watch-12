@@ -1,4 +1,4 @@
-import { RATING_MAX } from '../../constants';
+import { RATING_MAX } from '../../utils/constants';
 import {Fragment} from 'react';
 
 function ReviewForm():JSX.Element{

@@ -1,4 +1,4 @@
-const AllGenres = {
+const AllGenre = {
   Default : 'All genres',
   Comedies : 'Comedies',
   Crime : 'Crime',
@@ -11,7 +11,7 @@ const AllGenres = {
   Thrillers: 'Thrillers'
 } as const;
 
-const FilmTabs = {
+const FilmTab = {
   Default : 'Overview',
   Details : 'Details',
   Reviews : 'Reviews',
@@ -19,13 +19,15 @@ const FilmTabs = {
 
 const FILMS_AMOUNT = 8;
 
+const EQUAL_FILMS_MAX = 4;
+
 const DEFAULT_GENRE = 'All genres';
 
 const RATING_MAX = 10;
 
-const SignInErrors = {
+const SignInError = {
   InvalidEmail: 'Please enter a valid email address',
   InvalidUser: 'We can’t recognize this email and password combination. Please try again.',
 } as const;
 
-export {AllGenres, FILMS_AMOUNT, DEFAULT_GENRE, RATING_MAX, SignInErrors, FilmTabs};
+export {AllGenre, FILMS_AMOUNT,EQUAL_FILMS_MAX, DEFAULT_GENRE, RATING_MAX, SignInError, FilmTab};

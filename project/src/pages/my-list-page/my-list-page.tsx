@@ -17,7 +17,7 @@ function MyListPage():JSX.Element{
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-        <FilmsList films={mockFilms.slice(0, filmsAmount)}/>
+        <FilmsList films={mockFilms}/>
       </section>
 
       <footer className="page-footer">

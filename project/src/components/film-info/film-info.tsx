@@ -1,4 +1,4 @@
-import { FilmTabs } from '../../constants';
+import { FilmTab } from '../../utils/constants';
 import { mockReviews } from '../../mocks/mock-reviews';
 import { Film } from '../../types/film';
 import FilmDetails from '../film-details/film-details';
@@ -10,16 +10,16 @@ type FilmInfoProps = {
 }
 
 function FilmInfo({film}:FilmInfoProps):JSX.Element{
-  const tabs = Object.values(FilmTabs);
-  const currentTab:string = FilmTabs.Reviews;
+  const tabs = Object.values(FilmTab);
+  const currentTab:string = FilmTab.Reviews;
 
   const getCurrentInfo = ()=>{
     switch(currentTab){
-      case FilmTabs.Default:
+      case FilmTab.Default:
         return <FilmOverview film={film}/>;
-      case FilmTabs.Details:
+      case FilmTab.Details:
         return <FilmDetails film={film}/>;
-      case FilmTabs.Reviews:
+      case FilmTab.Reviews:
         return <FilmReviews reviews={mockReviews}/>;
     }
   };

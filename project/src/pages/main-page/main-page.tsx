@@ -2,11 +2,11 @@ import FilmsList from '../../components/films-list/films-list';
 import GenresList from '../../components/genres-list/genres-list';
 import Logo from '../../components/logo/logo';
 import PromoFilmCard from '../../components/promo-film-card/promo-film-card';
-import { FILMS_AMOUNT, AllGenres} from '../../constants';
+import { FILMS_AMOUNT, AllGenre} from '../../utils/constants';
 import { mockFilms } from '../../mocks/mock-films';
 
 function MainPage():JSX.Element{
-  const genres = Object.values(AllGenres);
+  const genres = Object.values(AllGenre);
 
   return (
     <>

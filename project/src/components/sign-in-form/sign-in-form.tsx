@@ -1,4 +1,4 @@
-import { SignInErrors } from '../../constants';
+import { SignInError } from '../../utils/constants';
 
 function SignInForm():JSX.Element{
   const isInvalid = false;
@@ -6,7 +6,7 @@ function SignInForm():JSX.Element{
     <form action="#" className="sign-in__form">
       {isInvalid &&
     <div className='sign-in__message'>
-      <p>{SignInErrors.InvalidEmail}</p>
+      <p>{SignInError.InvalidEmail}</p>
     </div>}
       <div className="sign-in__fields">
         <div className="sign-in__field">

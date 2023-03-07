@@ -4,6 +4,7 @@ import Logo from '../../components/logo/logo';
 import MyListButton from '../../components/my-list-button/my-list-button';
 import PlayFilmButton from '../../components/play-film-button/play-film-button';
 import UserBlock from '../../components/user-block/user-block';
+import { EQUAL_FILMS_MAX } from '../../utils/constants';
 import { mockFilms } from '../../mocks/mock-films';
 
 function FilmPage():JSX.Element{
@@ -53,7 +54,7 @@ function FilmPage():JSX.Element{
       <div className="page-content">
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
-          <FilmsList films={mockFilms.slice(0,4)}/>
+          <FilmsList films={mockFilms.slice(0,EQUAL_FILMS_MAX)}/>
 
         </section>
 
