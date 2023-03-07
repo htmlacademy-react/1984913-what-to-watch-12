@@ -4,11 +4,17 @@ import Logo from '../../components/logo/logo';
 import MyListButton from '../../components/my-list-button/my-list-button';
 import PlayFilmButton from '../../components/play-film-button/play-film-button';
 import UserBlock from '../../components/user-block/user-block';
+import { Film, Films } from '../../types/film';
+import { Reviews } from '../../types/review';
 import { EQUAL_FILMS_MAX } from '../../utils/constants';
-import { mockFilms } from '../../mocks/mock-films';
 
-function FilmPage():JSX.Element{
-  const film = mockFilms[25];
+type FilmPageProps = {
+  film:Film;
+  equalFilms:Films;
+  reviews:Reviews;
+}
+
+function FilmPage({film,equalFilms, reviews}:FilmPageProps):JSX.Element{
   const {name, genre, released,posterImage, backgroundImage} = film;
   return(
     <>
@@ -45,7 +51,7 @@ function FilmPage():JSX.Element{
             <div className="film-card__poster film-card__poster--big">
               <img src={posterImage} alt={`${name} poster`} width="218" height="327" />
             </div>
-            <FilmInfo film={film}/>
+            <FilmInfo film={film} reviews={reviews}/>
 
           </div>
         </div>
@@ -54,7 +60,7 @@ function FilmPage():JSX.Element{
       <div className="page-content">
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
-          <FilmsList films={mockFilms.slice(0,EQUAL_FILMS_MAX)}/>
+          <FilmsList films={equalFilms.slice(0,EQUAL_FILMS_MAX)}/>
 
         </section>
 

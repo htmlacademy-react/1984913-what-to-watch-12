@@ -2,15 +2,22 @@ import FilmsList from '../../components/films-list/films-list';
 import GenresList from '../../components/genres-list/genres-list';
 import Logo from '../../components/logo/logo';
 import PromoFilmCard from '../../components/promo-film-card/promo-film-card';
-import { FILMS_AMOUNT, AllGenre} from '../../utils/constants';
-import { mockFilms } from '../../mocks/mock-films';
+import { Films } from '../../types/film';
+import { FILMS_AMOUNT} from '../../utils/constants';
 
-function MainPage():JSX.Element{
-  const genres = Object.values(AllGenre);
+type MainPageProps = {
+  films:Films;
+}
 
+function MainPage({films}:MainPageProps):JSX.Element{
+  const genres = ['All genres'];
+  films?.forEach((film)=> {
+    const isAdded = !!genres.find((genre)=> genre === film.genre);
+    !isAdded && genres.push(film.genre);
+  });
   return (
     <>
-      <PromoFilmCard promoFilm={mockFilms[25]}/>
+      <PromoFilmCard promoFilm={films[25]}/>
 
       <div className="page-content">
         <section className="catalog">
@@ -18,7 +25,7 @@ function MainPage():JSX.Element{
 
           <GenresList genres={genres}/>
 
-          <FilmsList films={mockFilms.slice(0,FILMS_AMOUNT)}/>
+          <FilmsList films={films.slice(0,FILMS_AMOUNT)}/>
 
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>

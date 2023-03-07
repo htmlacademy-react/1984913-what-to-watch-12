@@ -12,19 +12,6 @@ const FormatPattern = {
   RunTimeShort: 'mm[m]'
 } as const;
 
-const AllGenre = {
-  Default : 'All genres',
-  Comedies : 'Comedies',
-  Crime : 'Crime',
-  Documentary: 'Documentary',
-  Dramas: 'Dramas',
-  Horror: 'Horror',
-  Family: 'Kids & Family',
-  Romance: 'Romance',
-  SciFi: 'Sci-Fi',
-  Thrillers: 'Thrillers'
-} as const;
-
 const FilmTab = {
   Default : 'Overview',
   Details : 'Details',
@@ -37,4 +24,4 @@ const SignInError = {
 } as const;
 
 
-export {AllGenre, FormatPattern, FILMS_AMOUNT,EQUAL_FILMS_MAX, DEFAULT_GENRE, RATING_MAX, SignInError, FilmTab};
+export {FormatPattern, FILMS_AMOUNT,EQUAL_FILMS_MAX, DEFAULT_GENRE, RATING_MAX, SignInError, FilmTab};

@@ -1,10 +1,14 @@
 import FilmsList from '../../components/films-list/films-list';
 import Logo from '../../components/logo/logo';
 import UserBlock from '../../components/user-block/user-block';
-import { mockFilms } from '../../mocks/mock-films';
+import { Films } from '../../types/film';
 
-function MyListPage():JSX.Element{
-  const FILMS_LIST_AMOUNT = mockFilms.length;
+type MyListPageProps = {
+  films:Films;
+}
+
+function MyListPage({films}:MyListPageProps):JSX.Element{
+  const FILMS_LIST_AMOUNT = films.length;
   return(
     <div className="user-page">
       <header className="page-header user-page__head">
@@ -17,7 +21,7 @@ function MyListPage():JSX.Element{
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-        <FilmsList films={mockFilms}/>
+        <FilmsList films={films}/>
       </section>
 
       <footer className="page-footer">
