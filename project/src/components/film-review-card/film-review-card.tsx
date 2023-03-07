@@ -7,6 +7,7 @@ review:Review;
 
 function FilmReviewCard({review}:FilmReviewCardProps):JSX.Element{
   const {comment, date, user, rating} = review;
+  const formatedDate = formatReviewDate(date);
   return(
     <div className="review">
       <blockquote className="review__quote">
@@ -14,7 +15,7 @@ function FilmReviewCard({review}:FilmReviewCardProps):JSX.Element{
 
         <footer className="review__details">
           <cite className="review__author">{user.name}</cite>
-          <time className="review__date" dateTime={date}>{formatReviewDate(date)}</time>
+          <time className="review__date" dateTime={date}>{formatedDate}</time>
         </footer>
       </blockquote>
 
