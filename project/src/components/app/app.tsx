@@ -21,9 +21,11 @@ function App({films, reviews}:AppProps): JSX.Element {
         <Route path={AppRoute.Main} element={<MainPage films={films}/>}/>
         <Route path={AppRoute.MyList} element={<MyListPage films={films}/>}/>
         <Route path={AppRoute.SignIn} element={<SingInPage/>}/>
-        <Route path={AppRoute.Film} element={<FilmPage film={films[25]} equalFilms={films} reviews={reviews}/> }/>
-        <Route path={AppRoute.Player} element={<PlayerPage/>}/>
-        <Route path={AppRoute.Review} element={<ReviewPage/>}/>
+        <Route path={`${AppRoute.Film}`}>
+          <Route index element={<FilmPage film={films[0]} equalFilms={films} reviews={reviews}/>}/>
+          <Route path={`${AppRoute.Review}`} element={<ReviewPage/>}/>
+        </Route>
+        <Route path={`${AppRoute.Player}`} element={<PlayerPage/>}/>
         <Route path={AppRoute.Error} element={<ErrorPage/>}/>
       </Routes>
     </BrowserRouter>

@@ -12,7 +12,7 @@ function ErrorPage():JSX.Element{
       <div className="error-container user-page__content">
         <h1>404. Page not found</h1>
 
-        <Link to='/'>Go back to main page.</Link>
+        <Link to='/'>Go back to main page</Link>
       </div>
 
       <footer className="page-footer">

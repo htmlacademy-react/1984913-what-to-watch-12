@@ -8,6 +8,8 @@ export const RATING_MAX = 10;
 
 export const MINUTES_PER_HOUR = 60;
 
+export const STEP_BACK = -1;
+
 export const FormatPattern = {
   Date: 'MMMM D, YYYY',
   RunTimeLong: 'H[h] mm[m]',
@@ -29,9 +31,9 @@ export const AppRoute = {
   Main: '/',
   SignIn: '/login',
   MyList: '/mylist',
-  Film: '/films',
+  Film: '/films/:id',
   Review: 'review',
-  Player: '/player',
+  Player: '/player/:id',
   Error: '*'
 } as const;
 

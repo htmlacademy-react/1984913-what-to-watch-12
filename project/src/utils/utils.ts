@@ -1,4 +1,6 @@
 import { FormatPattern, MINUTES_PER_HOUR } from './constants';
+import {generatePath} from 'react-router-dom';
+
 import dayjs from 'dayjs';
 import duration from'dayjs/plugin/duration';
 dayjs.extend(duration);
@@ -11,4 +13,6 @@ const formatFilmDuration = (minutes:number)=>{
   return currentDuration.format(pattern);
 };
 
-export {formatReviewDate, formatFilmDuration};
+const getSpecificPath = (route:string, id:number):string=> generatePath(route, {id:id});
+
+export {formatReviewDate, formatFilmDuration, getSpecificPath};
