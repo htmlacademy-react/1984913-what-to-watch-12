@@ -1,3 +1,4 @@
+import {Link} from 'react-router-dom';
 function UserBlock():JSX.Element{
   return(
     <ul className="user-block">
@@ -7,7 +8,7 @@ function UserBlock():JSX.Element{
         </div>
       </li>
       <li className="user-block__item">
-        <a href='/' className="user-block__link">Sign out</a>
+        <Link to='/login' className="user-block__link">Sign out</Link>
       </li>
     </ul>
   );

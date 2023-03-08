@@ -7,7 +7,6 @@ import UserBlock from '../../components/user-block/user-block';
 import { Film, Films } from '../../types/film';
 import { Reviews } from '../../types/review';
 import { EQUAL_FILMS_MAX } from '../../utils/constants';
-
 type FilmPageProps = {
   film:Film;
   equalFilms:Films;
