@@ -1,13 +1,13 @@
 import { Film } from '../../types/film';
 import {Fragment} from 'react';
-import { formatRunTime } from '../../utils/utils';
+import { formatFilmDuration } from '../../utils/utils';
 type FilmDetailsProps = {
   film:Film;
 }
 
 function FilmDetails({film}:FilmDetailsProps):JSX.Element{
   const {genre, director, starring, runTime, released} = film;
-  const formatedRunTime = formatRunTime(runTime);
+  const filmDuration = formatFilmDuration(runTime);
   return (
     <div className="film-card__text film-card__row">
       <div className="film-card__text-col">
@@ -30,7 +30,7 @@ function FilmDetails({film}:FilmDetailsProps):JSX.Element{
       <div className="film-card__text-col">
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Run Time</strong>
-          <span className="film-card__details-value">{formatedRunTime}</span>
+          <span className="film-card__details-value">{filmDuration}</span>
         </p>
         <p className="film-card__details-item">
           <strong className="film-card__details-name">{genre}</strong>

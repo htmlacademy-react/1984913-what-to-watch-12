@@ -3,18 +3,15 @@ import GenresList from '../../components/genres-list/genres-list';
 import Logo from '../../components/logo/logo';
 import PromoFilmCard from '../../components/promo-film-card/promo-film-card';
 import { Films } from '../../types/film';
-import { FILMS_AMOUNT} from '../../utils/constants';
+import { DEFAULT_GENRE, FILMS_AMOUNT} from '../../utils/constants';
 
 type MainPageProps = {
   films:Films;
 }
 
 function MainPage({films}:MainPageProps):JSX.Element{
-  const genres = ['All genres'];
-  films?.forEach((film)=> {
-    const isAdded = !!genres.find((genre)=> genre === film.genre);
-    !isAdded && genres.push(film.genre);
-  });
+  const genres = [DEFAULT_GENRE, ...new Set(films.map(({genre})=>genre))];
+
   return (
     <>
       <PromoFilmCard promoFilm={films[25]}/>
