@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 import FilmsList from '../../components/films-list/films-list';
 import GenresList from '../../components/genres-list/genres-list';
 import Logo from '../../components/logo/logo';
@@ -14,8 +15,10 @@ function MainPage({films}:MainPageProps):JSX.Element{
 
   return (
     <>
+      <Helmet>
+        <title>WTW Main Page</title>
+      </Helmet>
       <PromoFilmCard promoFilm={films[25]}/>
-
       <div className="page-content">
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>

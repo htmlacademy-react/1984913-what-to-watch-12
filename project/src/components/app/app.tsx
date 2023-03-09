@@ -8,7 +8,9 @@ import ReviewPage from '../../pages/review-page/rewiev-page';
 import FilmPage from '../../pages/film-page/film-page';
 import { Films } from '../../types/film';
 import { Reviews } from '../../types/review';
-import { AppRoute } from '../../utils/constants';
+import { AppRoute, AuthorizationStatus } from '../../utils/constants';
+import PrivateRoute from '../private-route/private-route';
+import { HelmetProvider } from 'react-helmet-async';
 
 type AppProps = {
   films:Films;
@@ -16,19 +18,26 @@ type AppProps = {
 }
 function App({films, reviews}:AppProps): JSX.Element {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path={AppRoute.Main} element={<MainPage films={films}/>}/>
-        <Route path={AppRoute.MyList} element={<MyListPage films={films}/>}/>
-        <Route path={AppRoute.SignIn} element={<SingInPage/>}/>
-        <Route path={`${AppRoute.Film}`}>
-          <Route index element={<FilmPage film={films[0]} equalFilms={films} reviews={reviews}/>}/>
-          <Route path={`${AppRoute.Review}`} element={<ReviewPage/>}/>
-        </Route>
-        <Route path={`${AppRoute.Player}`} element={<PlayerPage/>}/>
-        <Route path={AppRoute.Error} element={<ErrorPage/>}/>
-      </Routes>
-    </BrowserRouter>
+    <HelmetProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path={AppRoute.Main} element={<MainPage films={films}/>}/>
+          <Route path={AppRoute.MyList} element={
+            <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
+              <MyListPage films={films}/>
+            </PrivateRoute>
+          }
+          />
+          <Route path={AppRoute.SignIn} element={<SingInPage/>}/>
+          <Route path={`${AppRoute.Film}`}>
+            <Route index element={<FilmPage film={films[0]} equalFilms={films} reviews={reviews}/>}/>
+            <Route path={`${AppRoute.Review}`} element={<ReviewPage/>}/>
+          </Route>
+          <Route path={`${AppRoute.Player}`} element={<PlayerPage/>}/>
+          <Route path={AppRoute.Error} element={<ErrorPage/>}/>
+        </Routes>
+      </BrowserRouter>
+    </HelmetProvider>
   );
 }
 

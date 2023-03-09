@@ -1,9 +1,13 @@
+import { Helmet } from 'react-helmet-async';
 import Logo from '../../components/logo/logo';
 import SignInForm from '../../components/sign-in-form/sign-in-form';
 
 function SingInPage():JSX.Element{
   return(
     <div className="user-page">
+      <Helmet>
+        <title>WTW Sign in</title>
+      </Helmet>
       <header className="page-header user-page__head">
         <Logo/>
         <h1 className="page-title user-page__title">Sign in</h1>

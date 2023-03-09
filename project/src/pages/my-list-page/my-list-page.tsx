@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 import FilmsList from '../../components/films-list/films-list';
 import Logo from '../../components/logo/logo';
 import UserBlock from '../../components/user-block/user-block';
@@ -11,9 +12,11 @@ function MyListPage({films}:MyListPageProps):JSX.Element{
   const filmsAmount = films.length;
   return(
     <div className="user-page">
+      <Helmet>
+        <title>WTW My List</title>
+      </Helmet>
       <header className="page-header user-page__head">
         <Logo/>
-
         <h1 className="page-title user-page__title">My list <span className="user-page__film-count">{filmsAmount}</span></h1>
         <UserBlock/>
       </header>

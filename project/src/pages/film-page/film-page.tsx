@@ -9,6 +9,7 @@ import { Reviews } from '../../types/review';
 import { AppRoute, EQUAL_FILMS_MAX } from '../../utils/constants';
 import {Link} from 'react-router-dom';
 import { getSpecificPath } from '../../utils/utils';
+import { Helmet } from 'react-helmet-async';
 
 type FilmPageProps = {
   film:Film;
@@ -21,6 +22,10 @@ function FilmPage({film,equalFilms, reviews}:FilmPageProps):JSX.Element{
   const pathName = getSpecificPath(`${AppRoute.Film}/${AppRoute.Review}`, id );
   return(
     <>
+      <Helmet>
+        <title>WTW: {name}</title>
+      </Helmet>
+
       <section className="film-card film-card--full">
         <div className="film-card__hero">
           <div className="film-card__bg">

@@ -1,10 +1,14 @@
 import Logo from '../../components/logo/logo';
 import './error-page.css';
 import {Link} from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 
 function ErrorPage():JSX.Element{
   return(
     <div className="user-page">
+      <Helmet>
+        <title>WTW Error</title>
+      </Helmet>
       <header className="page-header user-page__head">
         <Logo/>
         <h1 className="page-title user-page__title">Error</h1>

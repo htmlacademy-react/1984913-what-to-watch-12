@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 import { useNavigate } from 'react-router-dom';
 import { STEP_BACK } from '../../utils/constants';
 
@@ -8,6 +9,9 @@ function PlayerPage():JSX.Element{
 
   return(
     <div className="player">
+      <Helmet>
+        <title>WTW Player</title>
+      </Helmet>
       <video src="#" className="player__video" poster="img/player-poster.jpg"></video>
 
       <button type="button" className="player__exit" onClick={handleExitClick}>Exit</button>
