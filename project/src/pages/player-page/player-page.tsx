@@ -5,7 +5,7 @@ import { STEP_BACK } from '../../utils/constants';
 function PlayerPage():JSX.Element{
   const isPaused = false;
   const navigate = useNavigate();
-  const handleExitClick = ()=>{ navigate(STEP_BACK);};
+  const handleExitClick = ()=> navigate(STEP_BACK);
 
   return(
     <div className="player">
