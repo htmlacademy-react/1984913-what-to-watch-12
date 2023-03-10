@@ -1,19 +1,22 @@
-import { Helmet } from 'react-helmet-async';
 import Logo from '../../components/logo/logo';
-import SignInForm from '../../components/sign-in-form/sign-in-form';
+import './error-page.css';
+import {Link} from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 
-function SingInPage():JSX.Element{
+function ErrorPage():JSX.Element{
   return(
     <div className="user-page">
       <Helmet>
-        <title>WTW Sign in</title>
+        <title>WTW Error</title>
       </Helmet>
       <header className="page-header user-page__head">
         <Logo/>
-        <h1 className="page-title user-page__title">Sign in</h1>
+        <h1 className="page-title user-page__title">Error</h1>
       </header>
-      <div className="sign-in user-page__content">
-        <SignInForm/>
+      <div className="error-container user-page__content">
+        <h1>404. Page not found</h1>
+
+        <Link to='/'>Go back to main page</Link>
       </div>
 
       <footer className="page-footer">
@@ -26,4 +29,4 @@ function SingInPage():JSX.Element{
     </div>
   );
 }
-export default SingInPage;
+export default ErrorPage;

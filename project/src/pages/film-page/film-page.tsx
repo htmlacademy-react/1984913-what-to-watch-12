@@ -6,7 +6,10 @@ import PlayFilmButton from '../../components/play-film-button/play-film-button';
 import UserBlock from '../../components/user-block/user-block';
 import { Film, Films } from '../../types/film';
 import { Reviews } from '../../types/review';
-import { EQUAL_FILMS_MAX } from '../../utils/constants';
+import { AppRoute, EQUAL_FILMS_MAX } from '../../utils/constants';
+import {Link} from 'react-router-dom';
+import { getSpecificPath } from '../../utils/utils';
+import { Helmet } from 'react-helmet-async';
 
 type FilmPageProps = {
   film:Film;
@@ -15,9 +18,14 @@ type FilmPageProps = {
 }
 
 function FilmPage({film,equalFilms, reviews}:FilmPageProps):JSX.Element{
-  const {name, genre, released,posterImage, backgroundImage} = film;
+  const {name, genre, released,posterImage, backgroundImage, id} = film;
+  const pathName = getSpecificPath(`${AppRoute.Film}/${AppRoute.Review}`, id );
   return(
     <>
+      <Helmet>
+        <title>WTW: {name}</title>
+      </Helmet>
+
       <section className="film-card film-card--full">
         <div className="film-card__hero">
           <div className="film-card__bg">
@@ -38,9 +46,9 @@ function FilmPage({film,equalFilms, reviews}:FilmPageProps):JSX.Element{
               </p>
 
               <div className="film-card__buttons">
-                <PlayFilmButton/>
+                <PlayFilmButton filmId={id}/>
                 <MyListButton/>
-                <a href="add-review.html" className="btn film-card__button">Add review</a>
+                <Link to={pathName} className="btn film-card__button">Add review</Link>
               </div>
             </div>
           </div>

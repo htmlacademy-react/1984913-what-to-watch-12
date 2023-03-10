@@ -9,7 +9,7 @@ type PromoFilmCardProps = {
 }
 
 function PromoFilmCard({promoFilm}:PromoFilmCardProps):JSX.Element{
-  const {name, genre, posterImage,backgroundImage, released} = promoFilm;
+  const {name, genre, posterImage,backgroundImage, released, id} = promoFilm;
   return(
     <section className="film-card">
       <div className="film-card__bg">
@@ -37,7 +37,7 @@ function PromoFilmCard({promoFilm}:PromoFilmCardProps):JSX.Element{
             </p>
 
             <div className="film-card__buttons">
-              <PlayFilmButton/>
+              <PlayFilmButton filmId={id}/>
               <MyListButton/>
             </div>
           </div>

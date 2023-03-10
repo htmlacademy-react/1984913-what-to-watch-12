@@ -1,24 +1,24 @@
+import { Helmet } from 'react-helmet-async';
 import FilmsList from '../../components/films-list/films-list';
 import GenresList from '../../components/genres-list/genres-list';
 import Logo from '../../components/logo/logo';
 import PromoFilmCard from '../../components/promo-film-card/promo-film-card';
 import { Films } from '../../types/film';
-import { FILMS_AMOUNT} from '../../utils/constants';
+import { DEFAULT_GENRE, FILMS_AMOUNT} from '../../utils/constants';
 
 type MainPageProps = {
   films:Films;
 }
 
 function MainPage({films}:MainPageProps):JSX.Element{
-  const genres = ['All genres'];
-  films?.forEach((film)=> {
-    const isAdded = !!genres.find((genre)=> genre === film.genre);
-    !isAdded && genres.push(film.genre);
-  });
+  const genres = [DEFAULT_GENRE, ...new Set(films.map(({genre})=>genre))];
+
   return (
     <>
+      <Helmet>
+        <title>WTW Main Page</title>
+      </Helmet>
       <PromoFilmCard promoFilm={films[25]}/>
-
       <div className="page-content">
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
