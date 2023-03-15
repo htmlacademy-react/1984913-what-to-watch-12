@@ -19,7 +19,7 @@ type FilmPageProps = {
 
 function FilmPage({film,equalFilms, reviews}:FilmPageProps):JSX.Element{
   const {name, genre, released,posterImage, backgroundImage, id} = film;
-  const pathName = getSpecificPath(`${AppRoute.Film}/${AppRoute.Review}`, id );
+  const pathName = getSpecificPath(`${AppRoute.Film}/:id/${AppRoute.Review}`, id );
   return(
     <>
       <Helmet>
