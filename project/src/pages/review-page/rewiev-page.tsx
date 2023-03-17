@@ -2,13 +2,18 @@ import { Helmet } from 'react-helmet-async';
 import Logo from '../../components/logo/logo';
 import ReviewForm from '../../components/review-form/review-form';
 import UserBlock from '../../components/user-block/user-block';
-import { Film } from '../../types/film';
+import { Films } from '../../types/film';
+import { getCurrentFilm } from '../../utils/utils';
+import { useParams} from 'react-router-dom';
 
 type ReviewPageProps = {
-  film:Film;
+  films:Films;
 }
 
-function ReviewPage ({film}:ReviewPageProps):JSX.Element{
+function ReviewPage ({films}:ReviewPageProps):JSX.Element{
+  const {id:filmId} = useParams();
+  const id = filmId ? +filmId : 0;
+  const film = getCurrentFilm(films, id) || films[0];
   const {name, backgroundImage, posterImage} = film;
   return(
     <section className="film-card film-card--full">

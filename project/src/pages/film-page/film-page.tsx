@@ -4,21 +4,24 @@ import Logo from '../../components/logo/logo';
 import MyListButton from '../../components/my-list-button/my-list-button';
 import PlayFilmButton from '../../components/play-film-button/play-film-button';
 import UserBlock from '../../components/user-block/user-block';
-import { Film, Films } from '../../types/film';
+import { Films } from '../../types/film';
 import { Reviews } from '../../types/review';
 import { AppRoute, EQUAL_FILMS_MAX } from '../../utils/constants';
-import {Link} from 'react-router-dom';
-import { getSpecificPath } from '../../utils/utils';
+import {Link, useParams} from 'react-router-dom';
+import { getCurrentFilm, getSpecificPath } from '../../utils/utils';
 import { Helmet } from 'react-helmet-async';
 
 type FilmPageProps = {
-  film:Film;
+  films:Films;
   equalFilms:Films;
   reviews:Reviews;
 }
 
-function FilmPage({film,equalFilms, reviews}:FilmPageProps):JSX.Element{
-  const {name, genre, released,posterImage, backgroundImage, id} = film;
+function FilmPage({films,equalFilms, reviews}:FilmPageProps):JSX.Element{
+  const {id:filmId} = useParams();
+  const id = filmId ? +filmId : 0;
+  const film = getCurrentFilm(films, id) || films[0];
+  const {name, genre, released,posterImage, backgroundImage} = film ;
   const pathName = getSpecificPath(`${AppRoute.Film}/:id/${AppRoute.Review}`, id );
   return(
     <>

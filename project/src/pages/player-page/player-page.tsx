@@ -1,13 +1,19 @@
 import { Helmet } from 'react-helmet-async';
 import { useNavigate } from 'react-router-dom';
-import { Film } from '../../types/film';
+import { Films } from '../../types/film';
 import { STEP_BACK } from '../../utils/constants';
+import { getCurrentFilm } from '../../utils/utils';
+import {useParams} from 'react-router-dom';
 
 type PlayerPageProps = {
-  film:Film;
+  films:Films;
 }
 
-function PlayerPage({film}:PlayerPageProps):JSX.Element{
+function PlayerPage({films}:PlayerPageProps):JSX.Element{
+  const {id:filmId} = useParams();
+  const id = filmId ? +filmId : 0;
+  const film = getCurrentFilm(films, id) || films[0];
+
   const isPaused = false;
   const navigate = useNavigate();
   const handleExitClick = ()=> navigate(STEP_BACK);
