@@ -10,6 +10,7 @@ import { AppRoute, EQUAL_FILMS_MAX } from '../../utils/constants';
 import {Link, useParams} from 'react-router-dom';
 import { getCurrentFilm, getSpecificPath } from '../../utils/utils';
 import { Helmet } from 'react-helmet-async';
+import ErrorPage from '../error-page/error-page';
 
 type FilmPageProps = {
   films:Films;
@@ -19,8 +20,17 @@ type FilmPageProps = {
 
 function FilmPage({films,equalFilms, reviews}:FilmPageProps):JSX.Element{
   const {id:filmId} = useParams();
-  const id = filmId ? +filmId : 0;
-  const film = getCurrentFilm(films, id) || films[0];
+  if(!filmId ){
+    return <ErrorPage/>;
+  }
+  const id = +filmId;
+
+  const film = getCurrentFilm(films, id);
+
+  if(!film){
+    return <ErrorPage/>;
+  }
+
   const {name, genre, released,posterImage, backgroundImage} = film ;
   const pathName = getSpecificPath(`${AppRoute.Film}/:id/${AppRoute.Review}`, id );
   return(

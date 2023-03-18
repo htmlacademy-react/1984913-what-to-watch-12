@@ -4,18 +4,27 @@ import { Films } from '../../types/film';
 import { STEP_BACK } from '../../utils/constants';
 import { getCurrentFilm } from '../../utils/utils';
 import {useParams} from 'react-router-dom';
+import ErrorPage from '../error-page/error-page';
 
 type PlayerPageProps = {
   films:Films;
 }
 
 function PlayerPage({films}:PlayerPageProps):JSX.Element{
+  const navigate = useNavigate();
   const {id:filmId} = useParams();
-  const id = filmId ? +filmId : 0;
-  const film = getCurrentFilm(films, id) || films[0];
+  if(!filmId ){
+    return <ErrorPage/>;
+  }
+  const id = +filmId;
+
+  const film = getCurrentFilm(films, id);
+
+  if(!film){
+    return <ErrorPage/>;
+  }
 
   const isPaused = false;
-  const navigate = useNavigate();
   const handleExitClick = ()=> navigate(STEP_BACK);
 
   const{previewImage, videoLink} = film;

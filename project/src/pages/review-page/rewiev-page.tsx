@@ -5,6 +5,7 @@ import UserBlock from '../../components/user-block/user-block';
 import { Films } from '../../types/film';
 import { getCurrentFilm } from '../../utils/utils';
 import { useParams} from 'react-router-dom';
+import ErrorPage from '../error-page/error-page';
 
 type ReviewPageProps = {
   films:Films;
@@ -12,8 +13,17 @@ type ReviewPageProps = {
 
 function ReviewPage ({films}:ReviewPageProps):JSX.Element{
   const {id:filmId} = useParams();
-  const id = filmId ? +filmId : 0;
-  const film = getCurrentFilm(films, id) || films[0];
+  if(!filmId ){
+    return <ErrorPage/>;
+  }
+  const id = +filmId;
+
+  const film = getCurrentFilm(films, id);
+
+  if(!film){
+    return <ErrorPage/>;
+  }
+
   const {name, backgroundImage, posterImage} = film;
   return(
     <section className="film-card film-card--full">
