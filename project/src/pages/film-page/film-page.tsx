@@ -4,22 +4,35 @@ import Logo from '../../components/logo/logo';
 import MyListButton from '../../components/my-list-button/my-list-button';
 import PlayFilmButton from '../../components/play-film-button/play-film-button';
 import UserBlock from '../../components/user-block/user-block';
-import { Film, Films } from '../../types/film';
+import { Films } from '../../types/film';
 import { Reviews } from '../../types/review';
 import { AppRoute, EQUAL_FILMS_MAX } from '../../utils/constants';
-import {Link} from 'react-router-dom';
-import { getSpecificPath } from '../../utils/utils';
+import {Link, useParams} from 'react-router-dom';
+import { getCurrentFilm, getSpecificPath } from '../../utils/utils';
 import { Helmet } from 'react-helmet-async';
+import ErrorPage from '../error-page/error-page';
 
 type FilmPageProps = {
-  film:Film;
+  films:Films;
   equalFilms:Films;
   reviews:Reviews;
 }
 
-function FilmPage({film,equalFilms, reviews}:FilmPageProps):JSX.Element{
-  const {name, genre, released,posterImage, backgroundImage, id} = film;
-  const pathName = getSpecificPath(`${AppRoute.Film}/${AppRoute.Review}`, id );
+function FilmPage({films,equalFilms, reviews}:FilmPageProps):JSX.Element{
+  const {id:filmId} = useParams();
+  if(!filmId ){
+    return <ErrorPage/>;
+  }
+  const id = +filmId;
+
+  const film = getCurrentFilm(films, id);
+
+  if(!film){
+    return <ErrorPage/>;
+  }
+
+  const {name, genre, released,posterImage, backgroundImage} = film ;
+  const pathName = getSpecificPath(`${AppRoute.Film}/:id/${AppRoute.Review}`, id );
   return(
     <>
       <Helmet>

@@ -1,5 +1,5 @@
 import { Review } from '../../types/review';
-import { formatReviewDate } from '../../utils/utils';
+import { formatReviewDate, formatReviewRaiting } from '../../utils/utils';
 
 type FilmReviewCardProps = {
 review:Review;
@@ -19,7 +19,7 @@ function FilmReviewCard({review}:FilmReviewCardProps):JSX.Element{
         </footer>
       </blockquote>
 
-      <div className="review__rating">{rating}</div>
+      <div className="review__rating">{formatReviewRaiting(rating)}</div>
     </div>
 
   );

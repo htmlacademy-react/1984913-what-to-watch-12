@@ -31,9 +31,9 @@ export const AppRoute = {
   Main: '/',
   SignIn: '/login',
   MyList: '/mylist',
-  Film: '/films/:id',
+  Film: '/films',
   Review: 'review',
-  Player: '/player/:id',
+  Player: '/player',
   Error: '*'
 } as const;
 

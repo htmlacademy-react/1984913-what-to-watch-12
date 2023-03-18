@@ -1,18 +1,40 @@
 import { Helmet } from 'react-helmet-async';
 import { useNavigate } from 'react-router-dom';
+import { Films } from '../../types/film';
 import { STEP_BACK } from '../../utils/constants';
+import { getCurrentFilm } from '../../utils/utils';
+import {useParams} from 'react-router-dom';
+import ErrorPage from '../error-page/error-page';
 
-function PlayerPage():JSX.Element{
-  const isPaused = false;
+type PlayerPageProps = {
+  films:Films;
+}
+
+function PlayerPage({films}:PlayerPageProps):JSX.Element{
   const navigate = useNavigate();
+  const {id:filmId} = useParams();
+  if(!filmId ){
+    return <ErrorPage/>;
+  }
+  const id = +filmId;
+
+  const film = getCurrentFilm(films, id);
+
+  if(!film){
+    return <ErrorPage/>;
+  }
+
+  const isPaused = false;
   const handleExitClick = ()=> navigate(STEP_BACK);
+
+  const{previewImage, videoLink} = film;
 
   return(
     <div className="player">
       <Helmet>
         <title>WTW Player</title>
       </Helmet>
-      <video src="#" className="player__video" poster="img/player-poster.jpg"></video>
+      <video src={videoLink} className="player__video" poster={previewImage}></video>
 
       <button type="button" className="player__exit" onClick={handleExitClick}>Exit</button>
 

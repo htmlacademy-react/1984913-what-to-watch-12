@@ -8,7 +8,7 @@ type PlayFilmButtonProps = {
 
 function PlayFilmButton({filmId}:PlayFilmButtonProps):JSX.Element{
   const navigate = useNavigate();
-  const pathName = getSpecificPath(AppRoute.Player, filmId);
+  const pathName = getSpecificPath(`${AppRoute.Player}/:id`, filmId);
   const handlePlayClick = ()=> navigate(pathName);
   return(
     <button className="btn btn--play film-card__button" type="button" onClick={handlePlayClick}>

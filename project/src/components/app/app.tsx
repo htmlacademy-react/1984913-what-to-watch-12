@@ -29,11 +29,11 @@ function App({films, reviews}:AppProps): JSX.Element {
           }
           />
           <Route path={AppRoute.SignIn} element={<SingInPage/>}/>
-          <Route path={`${AppRoute.Film}`}>
-            <Route index element={<FilmPage film={films[0]} equalFilms={films} reviews={reviews}/>}/>
-            <Route path={`${AppRoute.Review}`} element={<ReviewPage/>}/>
+          <Route path={`${AppRoute.Film}/:id`}>
+            <Route index element={<FilmPage films={films} equalFilms={films} reviews={reviews}/>}/>
+            <Route path={`${AppRoute.Review}`} element={<ReviewPage films={films}/>}/>
           </Route>
-          <Route path={`${AppRoute.Player}`} element={<PlayerPage/>}/>
+          <Route path={`${AppRoute.Player}/:id`} element={<PlayerPage films={films}/>}/>
           <Route path={AppRoute.Error} element={<ErrorPage/>}/>
         </Routes>
       </BrowserRouter>
