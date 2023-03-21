@@ -10,8 +10,9 @@ export const MINUTES_PER_HOUR = 60;
 
 export const STEP_BACK = -1;
 
-export const FormatPattern = {
-  Date: 'MMMM D, YYYY',
+export const DATE_FORMAT = 'MMMM D, YYYY';
+
+export const TimeFormat = {
   RunTimeLong: 'H[h] mm[m]',
   RunTimeShort: 'mm[m]'
 } as const;

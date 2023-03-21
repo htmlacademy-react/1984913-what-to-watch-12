@@ -8,24 +8,23 @@ import { Films } from '../../types/film';
 import { Reviews } from '../../types/review';
 import { AppRoute, EQUAL_FILMS_MAX } from '../../utils/constants';
 import {Link, useParams} from 'react-router-dom';
-import { getCurrentFilm, getSpecificPath } from '../../utils/utils';
+import { findCurrentFilm, getSpecificPath } from '../../utils/utils';
 import { Helmet } from 'react-helmet-async';
 import ErrorPage from '../error-page/error-page';
 
 type FilmPageProps = {
   films:Films;
-  equalFilms:Films;
   reviews:Reviews;
 }
 
-function FilmPage({films,equalFilms, reviews}:FilmPageProps):JSX.Element{
+function FilmPage({films, reviews}:FilmPageProps):JSX.Element{
   const {id:filmId} = useParams();
   if(!filmId ){
     return <ErrorPage/>;
   }
   const id = +filmId;
 
-  const film = getCurrentFilm(films, id);
+  const film = findCurrentFilm(films, id);
 
   if(!film){
     return <ErrorPage/>;
@@ -81,7 +80,7 @@ function FilmPage({films,equalFilms, reviews}:FilmPageProps):JSX.Element{
       <div className="page-content">
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
-          <FilmsList films={equalFilms.slice(0,EQUAL_FILMS_MAX)}/>
+          <FilmsList films={films.slice(0,EQUAL_FILMS_MAX)}/>
 
         </section>
 
