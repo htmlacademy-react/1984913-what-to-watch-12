@@ -12,6 +12,8 @@ export const STEP_BACK = -1;
 
 export const DATE_FORMAT = 'MMMM D, YYYY';
 
+export const PLAYING_DELAY = 1000;
+
 export const TimeFormat = {
   RunTimeLong: 'H[h] mm[m]',
   RunTimeShort: 'mm[m]'
