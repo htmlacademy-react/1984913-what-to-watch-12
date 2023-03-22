@@ -20,7 +20,7 @@ function SmallFilmCard({film}:SmallFilmCardProps):JSX.Element{
     >
       <Link className="small-film-card__link" to={pathName}>
         <div className="small-film-card__image">
-          { activeCard === id ? <VideoPlayer src={previewVideoLink} poster = {previewImage} isActive/> : <img src={previewImage} alt={name} width="280" height="175" /> }
+          {activeCard === id ? <VideoPlayer src={previewVideoLink} poster = {previewImage} isActive={film.id === activeCard}/> : <img src={previewImage} alt={name} width="280" height="175" /> }
         </div>
       </Link>
       <h3 className="small-film-card__title">
