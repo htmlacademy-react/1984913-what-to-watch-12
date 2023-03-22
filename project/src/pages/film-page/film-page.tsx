@@ -14,11 +14,10 @@ import ErrorPage from '../error-page/error-page';
 
 type FilmPageProps = {
   films:Films;
-  equalFilms:Films;
   reviews:Reviews;
 }
 
-function FilmPage({films,equalFilms, reviews}:FilmPageProps):JSX.Element{
+function FilmPage({films, reviews}:FilmPageProps):JSX.Element{
   const {id:filmId} = useParams();
   if(!filmId ){
     return <ErrorPage/>;
@@ -73,7 +72,6 @@ function FilmPage({films,equalFilms, reviews}:FilmPageProps):JSX.Element{
               <img src={posterImage} alt={`${name} poster`} width="218" height="327" />
             </div>
             <FilmInfo film={film} reviews={reviews}/>
-
           </div>
         </div>
       </section>
@@ -81,8 +79,7 @@ function FilmPage({films,equalFilms, reviews}:FilmPageProps):JSX.Element{
       <div className="page-content">
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
-          <FilmsList films={equalFilms.slice(0,EQUAL_FILMS_MAX)}/>
-
+          <FilmsList films={films.filter((item)=> item.genre === genre && item.id !== id).slice(0,EQUAL_FILMS_MAX)}/>
         </section>
 
         <footer className="page-footer">

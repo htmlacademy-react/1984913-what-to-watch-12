@@ -9,6 +9,21 @@ const formatReviewDate = (date: string) => dayjs(date).format(FormatPattern.Date
 
 const formatReviewRaiting = (rating: number) => rating.toFixed(1);
 
+const getRatingName = (rating:number)=>{
+  switch(true){
+    case (rating >= 0 && rating < 3):
+      return 'Bad';
+    case (rating >= 3 && rating < 5):
+      return 'Normal';
+    case (rating >= 5 && rating < 8):
+      return 'Good';
+    case (rating >= 8 && rating < 10):
+      return 'Very good';
+    case rating === 10:
+      return 'Awesome';
+  }
+};
+
 const formatFilmDuration = (minutes: number) => {
   const currentDuration = dayjs.duration(minutes, 'm');
   const pattern = minutes >= MINUTES_PER_HOUR ? FormatPattern.RunTimeLong : FormatPattern.RunTimeShort;
@@ -17,6 +32,7 @@ const formatFilmDuration = (minutes: number) => {
 
 const getSpecificPath = (route: string, id: number): string => generatePath(route, { id });
 
-const getCurrentFilm = (films: Films, id: number) => films.find((film) => film.id === id);
+const getCurrentFilm = (films: Films, id: number) => films.find((film) => film.id === id) || null;
 
-export { formatReviewDate, formatFilmDuration, formatReviewRaiting, getCurrentFilm, getSpecificPath };
+export { formatReviewDate, formatFilmDuration,getRatingName, formatReviewRaiting, getCurrentFilm, getSpecificPath };
+
