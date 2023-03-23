@@ -17,7 +17,7 @@ function VideoPlayer({ isActive, src, poster }: VideoPlayerProps): JSX.Element {
     let timer:ReturnType<typeof setTimeout>;
 
     if(isMounted && isActive){
-      timer = setTimeout(()=>setIsPlaying(true), PLAYING_DELAY);
+      timer = setTimeout(setIsPlaying, PLAYING_DELAY, isActive);
     }
 
     return()=>{

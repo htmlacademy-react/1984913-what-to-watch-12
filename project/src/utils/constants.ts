@@ -14,9 +14,9 @@ export const DATE_FORMAT = 'MMMM D, YYYY';
 
 export const PLAYING_DELAY = 1000;
 
-export const TimeFormat = {
-  RunTimeLong: 'H[h] mm[m]',
-  RunTimeShort: 'mm[m]'
+export const RunTimeFormat = {
+  Long: 'H[h] mm[m]',
+  Short: 'mm[m]'
 } as const;
 
 export const FilmTab = {

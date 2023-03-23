@@ -1,4 +1,4 @@
-import { TimeFormat, DATE_FORMAT, MINUTES_PER_HOUR } from './constants';
+import { RunTimeFormat, DATE_FORMAT, MINUTES_PER_HOUR } from './constants';
 import { generatePath } from 'react-router-dom';
 import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
@@ -26,7 +26,7 @@ const getRatingName = (rating:number)=>{
 
 const formatFilmDuration = (minutes: number) => {
   const currentDuration = dayjs.duration(minutes, 'm');
-  const pattern = minutes >= MINUTES_PER_HOUR ? TimeFormat.RunTimeLong : TimeFormat.RunTimeShort;
+  const pattern = minutes >= MINUTES_PER_HOUR ? RunTimeFormat.Long : RunTimeFormat.Short;
   return currentDuration.format(pattern);
 };
 
