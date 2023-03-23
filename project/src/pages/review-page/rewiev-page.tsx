@@ -3,7 +3,7 @@ import Logo from '../../components/logo/logo';
 import ReviewForm from '../../components/review-form/review-form';
 import UserBlock from '../../components/user-block/user-block';
 import { Films } from '../../types/film';
-import { getCurrentFilm } from '../../utils/utils';
+import { findCurrentFilm } from '../../utils/utils';
 import { useParams} from 'react-router-dom';
 import ErrorPage from '../error-page/error-page';
 
@@ -18,7 +18,7 @@ function ReviewPage ({films}:ReviewPageProps):JSX.Element{
   }
   const id = +filmId;
 
-  const film = getCurrentFilm(films, id);
+  const film = findCurrentFilm(films, id);
 
   if(!film){
     return <ErrorPage/>;

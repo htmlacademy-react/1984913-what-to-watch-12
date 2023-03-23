@@ -1,14 +1,15 @@
 import { Fragment, ChangeEvent, FormEvent, useState } from 'react';
 import { RATING_MAX } from '../../utils/constants';
 
-function ReviewForm(): JSX.Element {
-  const defaultData = {
-    'rating': 0,
-    'comment': '',
-  };
-  const [formData, setFormData] = useState(defaultData);
+const defaultReview = {
+  'rating': 0,
+  'comment': '',
+};
 
-  const stars = Array.from({ length: RATING_MAX }, (_, i) => RATING_MAX - i);
+const ratingStars = Array.from({ length: RATING_MAX }, (_, i) => RATING_MAX - i);
+
+function ReviewForm(): JSX.Element {
+  const [formData, setFormData] = useState(defaultReview);
 
   const handleChange = (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -21,7 +22,7 @@ function ReviewForm(): JSX.Element {
     event: FormEvent<HTMLElement>
   ) => {
     event.preventDefault();
-    setFormData(defaultData);
+    setFormData(defaultReview);
   };
 
   return (
@@ -29,10 +30,10 @@ function ReviewForm(): JSX.Element {
       <form action="#" className="add-review__form" onSubmit={handleSubmit}>
         <div className="rating">
           <div className="rating__stars">
-            {stars.map((star) =>
+            {ratingStars.map((star) =>
               (
                 <Fragment key={star}>
-                  <input className="rating__input" id={`star-${star}`} type="radio" name="rating" value={star} onChange={handleChange} />
+                  <input className="rating__input" id={`star-${star}`} type="radio" name="rating" value={star} onChange={handleChange} checked={star === +formData.rating} />
                   <label className="rating__label" htmlFor={`star-${star}`}>Rating {star}</label>
                 </Fragment>
               )

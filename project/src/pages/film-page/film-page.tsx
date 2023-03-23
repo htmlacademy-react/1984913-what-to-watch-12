@@ -8,7 +8,7 @@ import { Films } from '../../types/film';
 import { Reviews } from '../../types/review';
 import { AppRoute, EQUAL_FILMS_MAX } from '../../utils/constants';
 import {Link, useParams} from 'react-router-dom';
-import { getCurrentFilm, getSpecificPath } from '../../utils/utils';
+import { findCurrentFilm, getSpecificPath } from '../../utils/utils';
 import { Helmet } from 'react-helmet-async';
 import ErrorPage from '../error-page/error-page';
 
@@ -24,7 +24,7 @@ function FilmPage({films, reviews}:FilmPageProps):JSX.Element{
   }
   const id = +filmId;
 
-  const film = getCurrentFilm(films, id);
+  const film = findCurrentFilm(films, id);
 
   if(!film){
     return <ErrorPage/>;

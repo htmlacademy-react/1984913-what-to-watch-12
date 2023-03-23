@@ -2,7 +2,7 @@ import { Helmet } from 'react-helmet-async';
 import { useNavigate } from 'react-router-dom';
 import { Films } from '../../types/film';
 import { STEP_BACK } from '../../utils/constants';
-import { getCurrentFilm } from '../../utils/utils';
+import { findCurrentFilm } from '../../utils/utils';
 import {useParams} from 'react-router-dom';
 import ErrorPage from '../error-page/error-page';
 
@@ -18,7 +18,7 @@ function PlayerPage({films}:PlayerPageProps):JSX.Element{
   }
   const id = +filmId;
 
-  const film = getCurrentFilm(films, id);
+  const film = findCurrentFilm(films, id);
 
   if(!film){
     return <ErrorPage/>;
