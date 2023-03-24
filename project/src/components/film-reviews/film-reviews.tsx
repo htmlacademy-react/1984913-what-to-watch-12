@@ -7,7 +7,8 @@ type FilmReviewsProps = {
 
 function FilmReviews({reviews}:FilmReviewsProps):JSX.Element{
   const reviewsHalf = Math.round(reviews.length / 2);
-  const sortedReviews = reviews.sort((a,b)=>b.rating - a.rating);
+  const sortedReviews = [...reviews].sort((a,b)=>b.rating - a.rating);
+
   return (
     <div className="film-card__reviews film-card__row">
       <div className="film-card__reviews-col">

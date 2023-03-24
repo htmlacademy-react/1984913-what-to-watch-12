@@ -72,7 +72,6 @@ function FilmPage({films, reviews}:FilmPageProps):JSX.Element{
               <img src={posterImage} alt={`${name} poster`} width="218" height="327" />
             </div>
             <FilmInfo film={film} reviews={reviews}/>
-
           </div>
         </div>
       </section>
@@ -80,8 +79,7 @@ function FilmPage({films, reviews}:FilmPageProps):JSX.Element{
       <div className="page-content">
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
-          <FilmsList films={films.slice(0,EQUAL_FILMS_MAX)}/>
-
+          <FilmsList films={films.filter((item)=> item.genre === genre && item.id !== id).slice(0,EQUAL_FILMS_MAX)}/>
         </section>
 
         <footer className="page-footer">
