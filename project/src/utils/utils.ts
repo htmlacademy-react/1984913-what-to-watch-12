@@ -1,4 +1,4 @@
-import { RunTimeFormat, DATE_FORMAT, MINUTES_PER_HOUR } from './constants';
+import { RunTimeFormat, DATE_FORMAT, MINUTES_PER_HOUR, RATING_NAMES } from './constants';
 import { generatePath } from 'react-router-dom';
 import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
@@ -9,19 +9,11 @@ const formatReviewDate = (date: string) => dayjs(date).format(DATE_FORMAT);
 
 const formatReviewRaiting = (rating: number) => rating.toFixed(1);
 
-const getRatingName = (rating:number)=>{
-  switch(true){
-    case (rating >= 0 && rating < 3):
-      return 'Bad';
-    case (rating >= 3 && rating < 5):
-      return 'Normal';
-    case (rating >= 5 && rating < 8):
-      return 'Good';
-    case (rating >= 8 && rating < 10):
-      return 'Very good';
-    case rating === 10:
-      return 'Awesome';
-  }
+const findRatingName = (rating:number)=>{
+ const possibleRatings =  RATING_NAMES.filter((item)=> rating  >=item.rating);
+if(possibleRatings){
+  return possibleRatings[possibleRatings.length-1].name
+} 
 };
 
 const formatFilmDuration = (minutes: number) => {
@@ -34,4 +26,4 @@ const getSpecificPath = (route: string, id: number): string => generatePath(rout
 
 const findCurrentFilm = (films: Films, id: number) => films.find((film) => film.id === id) || null;
 
-export { formatReviewDate, formatFilmDuration, formatReviewRaiting,getRatingName, findCurrentFilm, getSpecificPath };
+export { formatReviewDate, formatFilmDuration, formatReviewRaiting,findRatingName, findCurrentFilm, getSpecificPath };

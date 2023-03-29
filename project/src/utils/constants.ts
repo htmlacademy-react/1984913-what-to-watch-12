@@ -46,4 +46,10 @@ export const AuthorizationStatus = {
   Unknown: 'UNKNOWN',
 } as const;
 
-
+export const RATING_NAMES = [
+  { rating: 0, name: 'Bad' },
+  { rating: 3, name: 'Normal' },
+  { rating: 5, name: 'Good' },
+  { rating: 8, name: 'Very good' },
+  { rating: 10, name: 'Awesome' },
+];
