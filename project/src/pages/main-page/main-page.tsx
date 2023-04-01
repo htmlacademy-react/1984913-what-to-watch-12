@@ -3,29 +3,24 @@ import FilmsList from '../../components/films-list/films-list';
 import GenresList from '../../components/genres-list/genres-list';
 import Logo from '../../components/logo/logo';
 import PromoFilmCard from '../../components/promo-film-card/promo-film-card';
-import { Films } from '../../types/film';
-import { DEFAULT_GENRE, FILMS_AMOUNT} from '../../utils/constants';
+import { FILMS_AMOUNT} from '../../utils/constants';
+import { useAppSelector } from '../../hooks';
 
-type MainPageProps = {
-  films:Films;
-}
-
-function MainPage({films}:MainPageProps):JSX.Element{
-  const genres = [DEFAULT_GENRE, ...new Set(films.map(({genre})=>genre))];
-
+function MainPage():JSX.Element{
+  const filmsByGenre = useAppSelector((state)=>state.filmsByGenre);
   return (
     <>
       <Helmet>
         <title>WTW Main Page</title>
       </Helmet>
-      <PromoFilmCard promoFilm={films[25]}/>
+      <PromoFilmCard promoFilm={filmsByGenre[filmsByGenre.length - 1]}/>
       <div className="page-content">
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <GenresList genres={genres}/>
+          <GenresList/>
 
-          <FilmsList films={films.slice(0,FILMS_AMOUNT)}/>
+          <FilmsList films={filmsByGenre.slice(0,FILMS_AMOUNT)}/>
 
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>

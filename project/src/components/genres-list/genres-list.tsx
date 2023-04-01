@@ -1,14 +1,14 @@
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { changeGenre, getFilmsByGenre } from '../../store/action';
+import { DEFAULT_GENRE} from '../../utils/constants';
 
-type GenresListProps = {
- genres:string[];
-}
 
-function GenresList({genres}:GenresListProps):JSX.Element{
+function GenresList():JSX.Element{
   const dispatch = useAppDispatch();
   const activeGenre = useAppSelector((state)=>state.genre);
+  const filmsData = useAppSelector((state)=>state.films);
+  const genres = [DEFAULT_GENRE, ...new Set(filmsData.map(({genre})=>genre))];
   return(
     <ul className="catalog__genres-list">
       {
