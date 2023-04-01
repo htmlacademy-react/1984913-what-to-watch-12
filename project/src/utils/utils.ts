@@ -10,10 +10,10 @@ const formatReviewDate = (date: string) => dayjs(date).format(DATE_FORMAT);
 const formatReviewRaiting = (rating: number) => rating.toFixed(1);
 
 const findRatingName = (rating:number)=>{
- const possibleRatings =  RATING_NAMES.filter((item)=> rating  >=item.rating);
-if(possibleRatings){
-  return possibleRatings[possibleRatings.length-1].name
-} 
+  const possibleRatings = RATING_NAMES.filter((item)=> rating >= item.rating);
+  if(possibleRatings){
+    return possibleRatings[possibleRatings.length - 1].name;
+  }
 };
 
 const formatFilmDuration = (minutes: number) => {
