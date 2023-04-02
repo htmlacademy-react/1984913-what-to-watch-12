@@ -21,7 +21,7 @@ function App({films, reviews}:AppProps): JSX.Element {
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
-          <Route path={AppRoute.Main} element={<MainPage films={films}/>}/>
+          <Route path={AppRoute.Main} element={<MainPage/>}/>
           <Route path={AppRoute.MyList} element={
             <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
               <MyListPage films={films}/>

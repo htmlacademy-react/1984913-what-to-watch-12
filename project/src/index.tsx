@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
 import { mockFilms } from './mocks/mock-films';
 import { mockReviews } from './mocks/mock-reviews';
+import { Provider } from 'react-redux';
+import { store } from './store';
 
 const AppData = {
   Films:mockFilms,
@@ -15,6 +17,8 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <App films = {AppData.Films} reviews={AppData.Reviews}/>
+    <Provider store={store}>
+      <App films = {AppData.Films} reviews={AppData.Reviews}/>
+    </Provider>
   </React.StrictMode>,
 );

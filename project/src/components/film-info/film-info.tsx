@@ -12,7 +12,7 @@ type FilmInfoProps = {
   reviews:Reviews;
 }
 
-const tabs = Object.values(FilmTab);
+const TABS = Object.values(FilmTab);
 
 function FilmInfo({film, reviews}:FilmInfoProps):JSX.Element{
   const [searchParams] = useSearchParams();
@@ -42,7 +42,7 @@ function FilmInfo({film, reviews}:FilmInfoProps):JSX.Element{
     <div className="film-card__desc">
       <nav className="film-nav film-card__nav">
         <ul className="film-nav__list">
-          {tabs.map((tab)=>
+          {TABS.map((tab)=>
             (
               <li key={tab} className={`film-nav__item ${currentTab === tab ? 'film-nav__item--active' : ''}`}>
                 <Link to={`?tab=${tab}`} className="film-nav__link">{tab}</Link>

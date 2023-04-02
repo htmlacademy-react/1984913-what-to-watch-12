@@ -1,5 +1,5 @@
 import { Films } from '../../types/film';
-import SmallFilmCard from '../small-film-card/small-film.card';
+import SmallFilmCard from '../small-film-card/small-film-card';
 
 type FilmsListProps = {
 films:Films;
