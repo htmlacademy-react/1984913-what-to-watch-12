@@ -1,11 +1,11 @@
  type ShowMoreButtonProps = {
-  handleShown: ()=> void;
+  onHandleShown: ()=> void;
 }
-function ShowMoreButton({handleShown}:ShowMoreButtonProps):JSX.Element{
+function ShowMoreButton({onHandleShown}:ShowMoreButtonProps):JSX.Element{
 
   return(
     <div className="catalog__more">
-      <button className="catalog__button" type="button" onClick={handleShown}>Show more</button>
+      <button className="catalog__button" type="button" onClick={onHandleShown}>Show more</button>
     </div>
   );
 }

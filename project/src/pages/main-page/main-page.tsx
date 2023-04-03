@@ -10,15 +10,15 @@ import { useEffect, useState } from 'react';
 
 function MainPage(): JSX.Element {
   const [shownAmount, setShownAmount] = useState(0);
-  const filmsByGenre = useAppSelector((state) => state.filmsByGenre);
+  const filteredFilms = useAppSelector((state) => state.filteredFilms);
 
   useEffect(() => {
-    setShownAmount(Math.min(FILMS_AMOUNT, filmsByGenre.length));
-  }, [filmsByGenre]);
+    setShownAmount(Math.min(FILMS_AMOUNT, filteredFilms.length));
+  }, [filteredFilms]);
 
   const handleShownAmount = () => {
     setShownAmount((prevAmount) =>
-      Math.min(prevAmount + FILMS_AMOUNT, filmsByGenre.length)
+      Math.min(prevAmount + FILMS_AMOUNT, filteredFilms.length)
     );
   };
   return (
@@ -26,16 +26,16 @@ function MainPage(): JSX.Element {
       <Helmet>
         <title>WTW Main Page</title>
       </Helmet>
-      <PromoFilmCard promoFilm={filmsByGenre[filmsByGenre.length - 1]} />
+      <PromoFilmCard promoFilm={filteredFilms[filteredFilms.length - 1]} />
       <div className="page-content">
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
           <GenresList />
 
-          <FilmsList films={filmsByGenre.slice(0, shownAmount)} />
-          {filmsByGenre.length > shownAmount &&
-            <ShowMoreButton handleShown={handleShownAmount} />}
+          <FilmsList films={filteredFilms.slice(0, shownAmount)} />
+          {filteredFilms.length > shownAmount &&
+            <ShowMoreButton onHandleShown={handleShownAmount} />}
         </section>
 
         <footer className="page-footer">

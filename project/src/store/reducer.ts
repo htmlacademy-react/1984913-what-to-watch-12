@@ -7,7 +7,7 @@ const ALL_FILMS = mockFilms;
 
 const initialState = {
   genre: DEFAULT_GENRE,
-  filmsByGenre: ALL_FILMS,
+  filteredFilms: ALL_FILMS,
   films: ALL_FILMS
 };
 
@@ -17,7 +17,7 @@ const reducer = createReducer(initialState, (builder) => {
       state.genre = action.payload;
     })
     .addCase(getFilmsByGenre, (state) => {
-      state.filmsByGenre = ALL_FILMS.filter((film) => state.genre === DEFAULT_GENRE
+      state.filteredFilms = ALL_FILMS.filter((film) => state.genre === DEFAULT_GENRE
         ? true
         : film.genre === state.genre);
     });

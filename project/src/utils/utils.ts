@@ -9,10 +9,15 @@ const formatReviewDate = (date: string) => dayjs(date).format(DATE_FORMAT);
 
 const formatReviewRaiting = (rating: number) => rating.toFixed(1);
 
-const findRatingName = (rating:number)=>{
-  const possibleRatings = RATING_NAMES.filter((item)=> rating >= item.rating);
-  if(possibleRatings){
-    return possibleRatings[possibleRatings.length - 1].name;
+const findRatingName = (rating: number) => {
+  const possibleRating = RATING_NAMES.find((item, i, arr) => rating >= item.rating
+    && arr[i + 1]
+    ? rating < arr[i + 1].rating
+    : true);
+  if(possibleRating){
+    return possibleRating.name;
+  }else{
+    return RATING_NAMES[0].name;
   }
 };
 
@@ -26,4 +31,4 @@ const getSpecificPath = (route: string, id: number): string => generatePath(rout
 
 const findCurrentFilm = (films: Films, id: number) => films.find((film) => film.id === id) || null;
 
-export { formatReviewDate, formatFilmDuration, formatReviewRaiting,findRatingName, findCurrentFilm, getSpecificPath };
+export { formatReviewDate, formatFilmDuration, formatReviewRaiting, findRatingName, findCurrentFilm, getSpecificPath };
