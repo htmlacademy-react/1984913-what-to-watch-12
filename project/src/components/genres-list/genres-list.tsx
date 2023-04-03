@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { changeGenre, getFilmsByGenre } from '../../store/action';
 import { DEFAULT_GENRE} from '../../utils/constants';
+import { useEffect } from 'react';
 
 
 function GenresList():JSX.Element{
@@ -9,6 +10,11 @@ function GenresList():JSX.Element{
   const activeGenre = useAppSelector((state)=>state.genre);
   const filmsData = useAppSelector((state)=>state.films);
   const genres = [DEFAULT_GENRE, ...new Set(filmsData.map(({genre})=>genre))];
+
+  useEffect(()=>{
+    dispatch(getFilmsByGenre());
+  },[dispatch, activeGenre]);
+
   return(
     <ul className="catalog__genres-list">
       {
@@ -18,7 +24,7 @@ function GenresList():JSX.Element{
               className="catalog__genres-link"
               onClick={() =>{
                 dispatch(changeGenre(genre));
-                dispatch(getFilmsByGenre());}}
+              }}
             >{genre}
             </Link>
           </li>
