@@ -1,14 +1,20 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { mockFilms } from '../mocks/mock-films';
 import { DEFAULT_GENRE } from '../utils/constants';
-import { changeGenre, getFilmsByGenre } from './action';
+import { changeGenre, getFilmsByGenre, loadFilms, setFilmsLoadingStatus } from './action';
+import {Films, Genre} from '../types/film';
 
-const ALL_FILMS = mockFilms;
+type InitialState = {
+  genre: Genre;
+  filteredFilms: Films;
+  films: Films;
+  isFilmsLoading: boolean;
+}
 
-const initialState = {
+const initialState:InitialState = {
   genre: DEFAULT_GENRE,
-  filteredFilms: ALL_FILMS,
-  films: ALL_FILMS
+  filteredFilms: [],
+  films: [],
+  isFilmsLoading:false,
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -17,9 +23,15 @@ const reducer = createReducer(initialState, (builder) => {
       state.genre = action.payload;
     })
     .addCase(getFilmsByGenre, (state) => {
-      state.filteredFilms = ALL_FILMS.filter((film) => state.genre === DEFAULT_GENRE
+      state.filteredFilms = state.films.filter((film) => state.genre === DEFAULT_GENRE
         ? true
         : film.genre === state.genre);
+    })
+    .addCase(loadFilms, (state, action) => {
+      state.films = action.payload;
+    })
+    .addCase(setFilmsLoadingStatus, (state, action) => {
+      state.isFilmsLoading = action.payload;
     });
 });
 
