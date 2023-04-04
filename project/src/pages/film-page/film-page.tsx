@@ -1,35 +1,44 @@
-// import FilmInfo from '../../components/film-info/film-info';
-// import FilmsList from '../../components/films-list/films-list';
+import FilmInfo from '../../components/film-info/film-info';
+import FilmsList from '../../components/films-list/films-list';
 import Logo from '../../components/logo/logo';
 import MyListButton from '../../components/my-list-button/my-list-button';
 import PlayFilmButton from '../../components/play-film-button/play-film-button';
 import UserBlock from '../../components/user-block/user-block';
-import { AppRoute } from '../../utils/constants';
+import { AppRoute, EQUAL_FILMS_MAX } from '../../utils/constants';
 import {Link, useParams} from 'react-router-dom';
 import { getSpecificPath } from '../../utils/utils';
 import { Helmet } from 'react-helmet-async';
 import ErrorPage from '../error-page/error-page';
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { fetchFilmByIdAction } from '../../store/api-actions';
+import { fetchFilmById, fetchFilmComments, fetchSimilarFilms } from '../../store/api-actions';
+import Loader from '../../components/loader/loader';
 
 function FilmPage():JSX.Element{
   const dispatch = useAppDispatch();
   const {id:filmId} = useParams();
   const id = Number(filmId);
   const film = useAppSelector((state)=>state.film);
-
+  const isFilmLoading = useAppSelector((state)=>state.isFilmLoading);
+  const similarFilms = useAppSelector((state)=>state.similarFilms);
+  const isSimilarFilmsLoading = useAppSelector((state)=>state.isSimilarFilmsLoading);
+  const reviews = useAppSelector((state)=>state.comments);
   useEffect(()=>{
     if(id){
-      dispatch(fetchFilmByIdAction(id));
+      dispatch(fetchFilmById(id));
+      dispatch(fetchSimilarFilms(id));
+      dispatch(fetchFilmComments(id));
     }
   },[dispatch, id]);
 
+  if(isFilmLoading || isSimilarFilmsLoading){
+    return <Loader/>;
+  }
   if(!id || !film){
     return <ErrorPage/>;
   }
 
-  const {name, genre, released,posterImage, backgroundImage} = film ;
+  const {name, genre, released,posterImage, backgroundImage, backgroundColor} = film ;
   const pathName = getSpecificPath(`${AppRoute.Film}/:id/${AppRoute.Review}`, id );
   return(
     <>
@@ -37,7 +46,7 @@ function FilmPage():JSX.Element{
         <title>WTW: {name}</title>
       </Helmet>
 
-      <section className="film-card film-card--full">
+      <section className="film-card film-card--full" style={{backgroundColor}}>
         <div className="film-card__hero">
           <div className="film-card__bg">
             <img src={backgroundImage} alt={name} />
@@ -70,7 +79,7 @@ function FilmPage():JSX.Element{
             <div className="film-card__poster film-card__poster--big">
               <img src={posterImage} alt={`${name} poster`} width="218" height="327" />
             </div>
-            {/* <FilmInfo film={film} reviews={reviews}/> */}
+            <FilmInfo film={film} reviews={reviews}/>
           </div>
         </div>
       </section>
@@ -78,7 +87,7 @@ function FilmPage():JSX.Element{
       <div className="page-content">
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
-          {/* <FilmsList films={films.filter((item)=> item.genre === genre && item.id !== id).slice(0,EQUAL_FILMS_MAX)}/> */}
+          <FilmsList films={similarFilms.filter((item)=> item.id !== id).slice(0,EQUAL_FILMS_MAX)}/>
         </section>
 
         <footer className="page-footer">

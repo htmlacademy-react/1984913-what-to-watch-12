@@ -2,10 +2,11 @@ import {AxiosInstance} from 'axios';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {AppDispatch, State} from '../types/state.js';
 import { APIRoute } from '../utils/constants';
-import { loadFilm, loadFilms, loadPromoFilm, loadSimilarFilms, setFilmLoadingStatus, setFilmsLoadingStatus, setPromoFilmLoadingStatus } from './action';
+import { loadComments, loadFilm, loadFilms, loadPromoFilm, loadSimilarFilms, setCommentsLoadingStatus, setFilmLoadingStatus, setFilmsLoadingStatus, setPromoFilmLoadingStatus } from './action';
 import { Film, Films } from '../types/film.js';
+import { Reviews } from '../types/review.js';
 
-export const fetchFilmAction = createAsyncThunk<void, undefined, {
+export const fetchFilms = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
@@ -19,7 +20,7 @@ export const fetchFilmAction = createAsyncThunk<void, undefined, {
   },
 );
 
-export const fetchPromoFilmAction = createAsyncThunk<void, undefined, {
+export const fetchPromoFilm = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
@@ -33,7 +34,7 @@ export const fetchPromoFilmAction = createAsyncThunk<void, undefined, {
   },
 );
 
-export const fetchFilmByIdAction = createAsyncThunk<void, number, {
+export const fetchFilmById = createAsyncThunk<void, number, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
@@ -46,8 +47,21 @@ export const fetchFilmByIdAction = createAsyncThunk<void, number, {
     dispatch(loadFilm(data));
   },
 );
+export const fetchFilmComments = createAsyncThunk<void, number, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetchFilmComments',
+  async (filmId, {dispatch, extra: api}) => {
+    dispatch(setCommentsLoadingStatus(true));
+    const {data} = await api.get<Reviews>(`${APIRoute.Comments}/${filmId}`);
+    dispatch(setCommentsLoadingStatus(false));
+    dispatch(loadComments(data));
+  },
+);
 
-export const fetchSimilarFilmsAction = createAsyncThunk<void, number, {
+export const fetchSimilarFilms = createAsyncThunk<void, number, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;

@@ -1,5 +1,6 @@
 import {createAction} from '@reduxjs/toolkit';
 import { Film, Films, Genre } from '../types/film';
+import { Reviews } from '../types/review';
 
 export const changeGenre = createAction('genre/changeGenre', (genre:Genre)=>({payload:genre}));
 export const getFilmsByGenre = createAction('films/getFilmsByGenre');
@@ -15,3 +16,6 @@ export const setFilmLoadingStatus = createAction<boolean>('data/setFilmLoadingSt
 
 export const loadSimilarFilms = createAction<Films>('data/loadSimilarFilms');
 export const setSimilatFilmsLoadingStatus = createAction<boolean>('data/setSimilatFilmsLoadingStatus');
+
+export const loadComments = createAction<Reviews>('data/loadComments');
+export const setCommentsLoadingStatus = createAction<boolean>('data/setCommentsLoadingStatus');

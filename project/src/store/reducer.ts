@@ -1,7 +1,8 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { DEFAULT_GENRE } from '../utils/constants';
-import { changeGenre, getFilmsByGenre, loadFilm, loadFilms, loadPromoFilm, setFilmLoadingStatus, setFilmsLoadingStatus, setPromoFilmLoadingStatus } from './action';
+import { changeGenre, getFilmsByGenre, loadComments, loadFilm, loadFilms, loadPromoFilm, loadSimilarFilms, setCommentsLoadingStatus, setFilmLoadingStatus, setFilmsLoadingStatus, setPromoFilmLoadingStatus, setSimilatFilmsLoadingStatus } from './action';
 import {Film, Films, Genre} from '../types/film';
+import { Reviews } from '../types/review';
 
 type InitialState = {
   genre: Genre;
@@ -12,6 +13,10 @@ type InitialState = {
   isPromoFilmLoading: boolean;
   film: Film|null;
   isFilmLoading:boolean;
+  similarFilms: Films;
+  isSimilarFilmsLoading:boolean;
+  comments: Reviews;
+  isCommentsLoading: boolean;
 }
 
 const initialState:InitialState = {
@@ -23,6 +28,10 @@ const initialState:InitialState = {
   isPromoFilmLoading:false,
   film: null,
   isFilmLoading:false,
+  similarFilms: [],
+  isSimilarFilmsLoading:false,
+  comments: [],
+  isCommentsLoading: false,
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -52,6 +61,18 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setFilmLoadingStatus, (state, action) => {
       state.isFilmLoading = action.payload;
+    })
+    .addCase(loadSimilarFilms, (state, action) => {
+      state.similarFilms = action.payload;
+    })
+    .addCase(setSimilatFilmsLoadingStatus, (state, action) => {
+      state.isSimilarFilmsLoading = action.payload;
+    })
+    .addCase(loadComments, (state, action) => {
+      state.comments = action.payload;
+    })
+    .addCase(setCommentsLoadingStatus, (state, action) => {
+      state.isCommentsLoading = action.payload;
     });
 });
 
