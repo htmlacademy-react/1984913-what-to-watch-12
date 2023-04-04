@@ -11,18 +11,23 @@ import { Helmet } from 'react-helmet-async';
 import ErrorPage from '../error-page/error-page';
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { fetchFilmById, fetchFilmComments, fetchSimilarFilms } from '../../store/api-actions';
 import Loader from '../../components/loader/loader';
+import { fetchFilmById } from '../../store/film-data/api-actions';
+import { fetchSimilarFilms } from '../../store/similar-films-data/api-actions';
+import { fetchFilmComments } from '../../store/comments-data/api-actions';
+import { getFilm, getFilmStatus } from '../../store/film-data/selectors';
+import { getSimilarFilms, getSimilarFilmsStatus } from '../../store/similar-films-data/selectors';
+import { getComments } from '../../store/comments-data/selectors';
 
 function FilmPage():JSX.Element{
   const dispatch = useAppDispatch();
   const {id:filmId} = useParams();
   const id = Number(filmId);
-  const film = useAppSelector((state)=>state.film);
-  const isFilmLoading = useAppSelector((state)=>state.isFilmLoading);
-  const similarFilms = useAppSelector((state)=>state.similarFilms);
-  const isSimilarFilmsLoading = useAppSelector((state)=>state.isSimilarFilmsLoading);
-  const reviews = useAppSelector((state)=>state.comments);
+  const film = useAppSelector(getFilm);
+  const isFilmLoading = useAppSelector(getFilmStatus);
+  const similarFilms = useAppSelector(getSimilarFilms);
+  const isSimilarFilmsLoading = useAppSelector(getSimilarFilmsStatus);
+  const reviews = useAppSelector(getComments);
 
   useEffect(()=>{
     if(id){
@@ -32,7 +37,7 @@ function FilmPage():JSX.Element{
     }
   },[dispatch, id]);
 
-  if(isFilmLoading || isSimilarFilmsLoading){
+  if(isFilmLoading || isSimilarFilmsLoading ){
     return <Loader/>;
   }
 

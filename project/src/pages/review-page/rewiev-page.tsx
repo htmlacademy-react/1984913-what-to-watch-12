@@ -5,10 +5,11 @@ import UserBlock from '../../components/user-block/user-block';
 import { useParams} from 'react-router-dom';
 import ErrorPage from '../error-page/error-page';
 import { useAppSelector } from '../../hooks';
+import { getFilm } from '../../store/film-data/selectors';
 
 
 function ReviewPage ():JSX.Element{
-  const film = useAppSelector((state)=>state.film);
+  const film = useAppSelector(getFilm);
   const {id:filmId} = useParams();
   if(!filmId ){
     return <ErrorPage/>;

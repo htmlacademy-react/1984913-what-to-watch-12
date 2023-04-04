@@ -11,10 +11,12 @@ import { AppRoute } from '../../utils/constants';
 // import PrivateRoute from '../private-route/private-route';
 import { HelmetProvider } from 'react-helmet-async';
 import { useAppSelector } from '../../hooks';
+import { getFilmsStatus } from '../../store/films-data/selectors';
+import { getPromoFilmStatus } from '../../store/promo-film-data/selectors';
 
 function App(): JSX.Element {
-  const isFilmsLoading = useAppSelector((state)=>state.isFilmsLoading);
-  const isPromoFilmLoading = useAppSelector((state)=>state.isPromoFilmLoading);
+  const isFilmsLoading = useAppSelector(getFilmsStatus);
+  const isPromoFilmLoading = useAppSelector(getPromoFilmStatus);
 
   if(isFilmsLoading || isPromoFilmLoading){
     return <Loader/>;

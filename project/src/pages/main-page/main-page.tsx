@@ -8,11 +8,13 @@ import { useAppSelector } from '../../hooks';
 import ShowMoreButton from '../../components/show-more-button/show-more-button';
 import { useEffect, useState } from 'react';
 import ErrorPage from '../error-page/error-page';
+import { getFilteredFilms } from '../../store/films-data/selectors';
+import { getPromoFilm } from '../../store/promo-film-data/selectors';
 
 function MainPage(): JSX.Element {
   const [shownAmount, setShownAmount] = useState(0);
-  const filteredFilms = useAppSelector((state) => state.filteredFilms);
-  const promoFilm = useAppSelector((state) => state.promoFilm);
+  const filteredFilms = useAppSelector(getFilteredFilms);
+  const promoFilm = useAppSelector(getPromoFilm);
 
   useEffect(() => {
     setShownAmount(Math.min(FILMS_AMOUNT, filteredFilms.length));

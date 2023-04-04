@@ -1,7 +1,7 @@
 import {AxiosInstance} from 'axios';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {AppDispatch, State} from '../../types/state.js';
-import { APIRoute } from '../../utils/constants';
+import { APIRoute, ReducerName } from '../../utils/constants';
 import { Film } from '../../types/film.js';
 
 export const fetchPromoFilm = createAsyncThunk<Film, undefined, {
@@ -9,8 +9,8 @@ export const fetchPromoFilm = createAsyncThunk<Film, undefined, {
   state: State;
   extra: AxiosInstance;
 }>(
-  'data/fetchPromoFilm',
-  async (_arg, {dispatch, extra: api}) => {
+  `${ReducerName.PromoFilm}/fetchPromoFilm`,
+  async (_arg, {extra: api}) => {
     const {data} = await api.get<Film>(APIRoute.PromoFilm);
     return data;
   },

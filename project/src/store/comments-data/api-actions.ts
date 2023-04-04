@@ -1,7 +1,7 @@
 import {AxiosInstance} from 'axios';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {AppDispatch, State} from '../../types/state.js';
-import { APIRoute } from '../../utils/constants';
+import { APIRoute, ReducerName } from '../../utils/constants';
 import { Reviews } from '../../types/review.js';
 
 export const fetchFilmComments = createAsyncThunk<Reviews, number, {
@@ -9,8 +9,8 @@ export const fetchFilmComments = createAsyncThunk<Reviews, number, {
   state: State;
   extra: AxiosInstance;
 }>(
-  'data/fetchFilmComments',
-  async (filmId, {dispatch, extra: api}) => {
+  `${ReducerName.Comments}/fetchFilmComments`,
+  async (filmId, {extra: api}) => {
     const {data} = await api.get<Reviews>(`${APIRoute.Comments}/${filmId}`);
     return data;
   },

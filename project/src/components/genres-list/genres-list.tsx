@@ -3,12 +3,13 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { changeGenre, getFilmsByGenre } from '../../store/films-data/action';
 import { DEFAULT_GENRE} from '../../utils/constants';
 import { useEffect } from 'react';
+import { getActiveGenre, getFilmsData } from '../../store/films-data/selectors';
 
 
 function GenresList():JSX.Element{
   const dispatch = useAppDispatch();
-  const activeGenre = useAppSelector((state)=>state.genre);
-  const filmsData = useAppSelector((state)=>state.films);
+  const activeGenre = useAppSelector(getActiveGenre);
+  const filmsData = useAppSelector(getFilmsData);
   const genres = [DEFAULT_GENRE, ...new Set(filmsData.map(({genre})=>genre))];
 
   useEffect(()=>{

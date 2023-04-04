@@ -1,7 +1,7 @@
 import {AxiosInstance} from 'axios';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {AppDispatch, State} from '../../types/state.js';
-import { APIRoute } from '../../utils/constants';
+import { APIRoute, ReducerName } from '../../utils/constants';
 import { Films } from '../../types/film.js';
 
 export const fetchSimilarFilms = createAsyncThunk<Films, number, {
@@ -9,8 +9,8 @@ export const fetchSimilarFilms = createAsyncThunk<Films, number, {
   state: State;
   extra: AxiosInstance;
 }>(
-  'data/fetchFilmById',
-  async (filmId, {dispatch, extra: api}) => {
+  `${ReducerName.SimilarFilms}/fetchFilmById`,
+  async (filmId, {extra: api}) => {
     const {data} = await api.get<Films>(`${APIRoute.Films}/${filmId}${APIRoute.SimilarFilms}`);
     return data;
   },

@@ -11,5 +11,5 @@ export const rootReducer = combineReducers({
   [ReducerName.PromoFilm]: promoFilmData.reducer,
   [ReducerName.Film]: filmData.reducer,
   [ReducerName.SimilarFilms]: similarFilmsData.reducer,
-  [ReducerName.Comments]: commentsData.reducer,
+  [ReducerName.Comments]: commentsData.reducer
 });
