@@ -2,23 +2,17 @@ import { Helmet } from 'react-helmet-async';
 import Logo from '../../components/logo/logo';
 import ReviewForm from '../../components/review-form/review-form';
 import UserBlock from '../../components/user-block/user-block';
-import { Films } from '../../types/film';
-import { findCurrentFilm } from '../../utils/utils';
 import { useParams} from 'react-router-dom';
 import ErrorPage from '../error-page/error-page';
+import { useAppSelector } from '../../hooks';
 
-type ReviewPageProps = {
-  films:Films;
-}
 
-function ReviewPage ({films}:ReviewPageProps):JSX.Element{
+function ReviewPage ():JSX.Element{
+  const film = useAppSelector((state)=>state.film);
   const {id:filmId} = useParams();
   if(!filmId ){
     return <ErrorPage/>;
   }
-  const id = +filmId;
-
-  const film = findCurrentFilm(films, id);
 
   if(!film){
     return <ErrorPage/>;

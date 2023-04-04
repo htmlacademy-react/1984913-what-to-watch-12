@@ -1,32 +1,31 @@
-import FilmInfo from '../../components/film-info/film-info';
-import FilmsList from '../../components/films-list/films-list';
+// import FilmInfo from '../../components/film-info/film-info';
+// import FilmsList from '../../components/films-list/films-list';
 import Logo from '../../components/logo/logo';
 import MyListButton from '../../components/my-list-button/my-list-button';
 import PlayFilmButton from '../../components/play-film-button/play-film-button';
 import UserBlock from '../../components/user-block/user-block';
-import { Films } from '../../types/film';
-import { Reviews } from '../../types/review';
-import { AppRoute, EQUAL_FILMS_MAX } from '../../utils/constants';
+import { AppRoute } from '../../utils/constants';
 import {Link, useParams} from 'react-router-dom';
-import { findCurrentFilm, getSpecificPath } from '../../utils/utils';
+import { getSpecificPath } from '../../utils/utils';
 import { Helmet } from 'react-helmet-async';
 import ErrorPage from '../error-page/error-page';
+import { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { fetchFilmByIdAction } from '../../store/api-actions';
 
-type FilmPageProps = {
-  films:Films;
-  reviews:Reviews;
-}
-
-function FilmPage({films, reviews}:FilmPageProps):JSX.Element{
+function FilmPage():JSX.Element{
+  const dispatch = useAppDispatch();
   const {id:filmId} = useParams();
-  if(!filmId ){
-    return <ErrorPage/>;
-  }
-  const id = +filmId;
+  const id = Number(filmId);
+  const film = useAppSelector((state)=>state.film);
 
-  const film = findCurrentFilm(films, id);
+  useEffect(()=>{
+    if(id){
+      dispatch(fetchFilmByIdAction(id));
+    }
+  },[dispatch, id]);
 
-  if(!film){
+  if(!id || !film){
     return <ErrorPage/>;
   }
 
@@ -71,7 +70,7 @@ function FilmPage({films, reviews}:FilmPageProps):JSX.Element{
             <div className="film-card__poster film-card__poster--big">
               <img src={posterImage} alt={`${name} poster`} width="218" height="327" />
             </div>
-            <FilmInfo film={film} reviews={reviews}/>
+            {/* <FilmInfo film={film} reviews={reviews}/> */}
           </div>
         </div>
       </section>
@@ -79,7 +78,7 @@ function FilmPage({films, reviews}:FilmPageProps):JSX.Element{
       <div className="page-content">
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
-          <FilmsList films={films.filter((item)=> item.genre === genre && item.id !== id).slice(0,EQUAL_FILMS_MAX)}/>
+          {/* <FilmsList films={films.filter((item)=> item.genre === genre && item.id !== id).slice(0,EQUAL_FILMS_MAX)}/> */}
         </section>
 
         <footer className="page-footer">

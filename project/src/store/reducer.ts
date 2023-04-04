@@ -1,6 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { DEFAULT_GENRE } from '../utils/constants';
-import { changeGenre, getFilmsByGenre, loadFilms, loadPromoFilm, setFilmsLoadingStatus, setPromoFilmLoadingStatus } from './action';
+import { changeGenre, getFilmsByGenre, loadFilm, loadFilms, loadPromoFilm, setFilmLoadingStatus, setFilmsLoadingStatus, setPromoFilmLoadingStatus } from './action';
 import {Film, Films, Genre} from '../types/film';
 
 type InitialState = {
@@ -10,6 +10,8 @@ type InitialState = {
   promoFilm: Film|null;
   isFilmsLoading: boolean;
   isPromoFilmLoading: boolean;
+  film: Film|null;
+  isFilmLoading:boolean;
 }
 
 const initialState:InitialState = {
@@ -19,6 +21,8 @@ const initialState:InitialState = {
   promoFilm: null,
   isFilmsLoading:false,
   isPromoFilmLoading:false,
+  film: null,
+  isFilmLoading:false,
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -42,6 +46,12 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setPromoFilmLoadingStatus, (state, action) => {
       state.isPromoFilmLoading = action.payload;
+    })
+    .addCase(loadFilm, (state, action) => {
+      state.film = action.payload;
+    })
+    .addCase(setFilmLoadingStatus, (state, action) => {
+      state.isFilmLoading = action.payload;
     });
 });
 

@@ -5,18 +5,14 @@ import MainPage from '../../pages/main-page/main-page';
 import SingInPage from '../../pages/sign-in-page/sign-in-page';
 // import MyListPage from '../../pages/my-list-page/my-list-page';
 // import ReviewPage from '../../pages/review-page/rewiev-page';
-// import FilmPage from '../../pages/film-page/film-page';
+import FilmPage from '../../pages/film-page/film-page';
 import Loader from '../../components/loader/loader';
-import { Reviews } from '../../types/review';
 import { AppRoute } from '../../utils/constants';
 // import PrivateRoute from '../private-route/private-route';
 import { HelmetProvider } from 'react-helmet-async';
 import { useAppSelector } from '../../hooks';
 
-type AppProps = {
-  reviews:Reviews;
-}
-function App({reviews}:AppProps): JSX.Element {
+function App(): JSX.Element {
   const isFilmsLoading = useAppSelector((state)=>state.isFilmsLoading);
   const isPromoFilmLoading = useAppSelector((state)=>state.isPromoFilmLoading);
 
@@ -35,11 +31,11 @@ function App({reviews}:AppProps): JSX.Element {
           }
           /> */}
           <Route path={AppRoute.SignIn} element={<SingInPage/>}/>
-          {/* <Route path={`${AppRoute.Film}/:id`}>
-            <Route index element={<FilmPage films={films} reviews={reviews}/>}/>
-            <Route path={`${AppRoute.Review}`} element={<ReviewPage films={films}/>}/>
+          <Route path={`${AppRoute.Film}/:id`}>
+            <Route index element={<FilmPage />}/>
+            {/* <Route path={`${AppRoute.Review}`} element={<ReviewPage />}/> */}
           </Route>
-          <Route path={`${AppRoute.Player}/:id`} element={<PlayerPage films={films}/>}/> */}
+          {/* <Route path={`${AppRoute.Player}/:id`} element={<PlayerPage films={films}/>}/> */}
           <Route path={AppRoute.Error} element={<ErrorPage/>}/>
         </Routes>
       </BrowserRouter>

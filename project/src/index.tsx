@@ -1,17 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
-import { mockReviews } from './mocks/mock-reviews';
 import { Provider } from 'react-redux';
 import { store } from './store';
 import { fetchFilmAction, fetchPromoFilmAction } from './store/api-actions';
 
 store.dispatch(fetchFilmAction());
 store.dispatch(fetchPromoFilmAction());
-
-const AppData = {
-  Reviews:mockReviews
-} as const;
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
@@ -20,7 +15,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App reviews={AppData.Reviews}/>
+      <App />
     </Provider>
   </React.StrictMode>,
 );
