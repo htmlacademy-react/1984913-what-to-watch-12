@@ -60,6 +60,14 @@ export const APIRoute = {
   Logout: '/logout',
 } as const;
 
+export const ReducerName = {
+  Films: 'FILMS',
+  PromoFilm: 'PROMO',
+  Film: 'FILM',
+  SimilarFilms: 'SIMILAR',
+  Comments: 'COMMENTS',
+} as const;
+
 export const RATING_NAMES = [
   { rating: 0, name: 'Bad' },
   { rating: 3, name: 'Normal' },

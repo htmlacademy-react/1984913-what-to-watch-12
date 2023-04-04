@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { changeGenre, getFilmsByGenre } from '../../store/action';
+import { changeGenre, getFilmsByGenre } from '../../store/films-data/action';
 import { DEFAULT_GENRE} from '../../utils/constants';
 import { useEffect } from 'react';
 
