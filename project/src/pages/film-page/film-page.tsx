@@ -4,33 +4,52 @@ import Logo from '../../components/logo/logo';
 import MyListButton from '../../components/my-list-button/my-list-button';
 import PlayFilmButton from '../../components/play-film-button/play-film-button';
 import UserBlock from '../../components/user-block/user-block';
-import { Films } from '../../types/film';
-import { Reviews } from '../../types/review';
 import { AppRoute, EQUAL_FILMS_MAX } from '../../utils/constants';
 import {Link, useParams} from 'react-router-dom';
-import { findCurrentFilm, getSpecificPath } from '../../utils/utils';
+import { getSpecificPath } from '../../utils/utils';
 import { Helmet } from 'react-helmet-async';
 import ErrorPage from '../error-page/error-page';
+import { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import Loader from '../../components/loader/loader';
+import { fetchFilmById } from '../../store/film-data/api-actions';
+import { fetchSimilarFilms } from '../../store/similar-films-data/api-actions';
+import { fetchFilmComments } from '../../store/comments-data/api-actions';
+import { getFilm, getFilmError, getFilmStatus } from '../../store/film-data/selectors';
+import { getSimilarFilms, getSimilarFilmsStatus } from '../../store/similar-films-data/selectors';
+import { getComments } from '../../store/comments-data/selectors';
 
-type FilmPageProps = {
-  films:Films;
-  reviews:Reviews;
-}
-
-function FilmPage({films, reviews}:FilmPageProps):JSX.Element{
+function FilmPage():JSX.Element{
+  const dispatch = useAppDispatch();
   const {id:filmId} = useParams();
-  if(!filmId ){
+  const id = Number(filmId);
+  const film = useAppSelector(getFilm);
+  const isFilmLoading = useAppSelector(getFilmStatus);
+  const similarFilms = useAppSelector(getSimilarFilms);
+  const isSimilarFilmsLoading = useAppSelector(getSimilarFilmsStatus);
+  const reviews = useAppSelector(getComments);
+  const filmError = useAppSelector(getFilmError);
+
+  useEffect(()=>{
+    if(id){
+      dispatch(fetchFilmById(id));
+      dispatch(fetchSimilarFilms(id));
+      dispatch(fetchFilmComments(id));
+    }
+  },[dispatch, id]);
+
+  if(isFilmLoading || isSimilarFilmsLoading ){
+    return <Loader/>;
+  }
+
+  if(!id || !film || filmError){
     return <ErrorPage/>;
   }
-  const id = +filmId;
 
-  const film = findCurrentFilm(films, id);
 
-  if(!film){
-    return <ErrorPage/>;
-  }
+  const isAuthorized = true;
 
-  const {name, genre, released,posterImage, backgroundImage} = film ;
+  const {name, genre, released,posterImage, backgroundImage, backgroundColor} = film ;
   const pathName = getSpecificPath(`${AppRoute.Film}/:id/${AppRoute.Review}`, id );
   return(
     <>
@@ -38,7 +57,7 @@ function FilmPage({films, reviews}:FilmPageProps):JSX.Element{
         <title>WTW: {name}</title>
       </Helmet>
 
-      <section className="film-card film-card--full">
+      <section className="film-card film-card--full" style={{backgroundColor}}>
         <div className="film-card__hero">
           <div className="film-card__bg">
             <img src={backgroundImage} alt={name} />
@@ -60,7 +79,7 @@ function FilmPage({films, reviews}:FilmPageProps):JSX.Element{
               <div className="film-card__buttons">
                 <PlayFilmButton filmId={id}/>
                 <MyListButton/>
-                <Link to={pathName} className="btn film-card__button">Add review</Link>
+                {isAuthorized && <Link to={pathName} className="btn film-card__button">Add review</Link> }
               </div>
             </div>
           </div>
@@ -79,7 +98,7 @@ function FilmPage({films, reviews}:FilmPageProps):JSX.Element{
       <div className="page-content">
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
-          <FilmsList films={films.filter((item)=> item.genre === genre && item.id !== id).slice(0,EQUAL_FILMS_MAX)}/>
+          <FilmsList films={similarFilms.filter((item)=> item.id !== id).slice(0,EQUAL_FILMS_MAX)}/>
         </section>
 
         <footer className="page-footer">

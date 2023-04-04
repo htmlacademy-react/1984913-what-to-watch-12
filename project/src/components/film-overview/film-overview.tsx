@@ -7,13 +7,12 @@ type FilmOverviewProps = {
 
 function FilmOverview({film}:FilmOverviewProps):JSX.Element{
   const {rating, scoresCount, description, director, starring} = film;
-  const ratingName = findRatingName(rating);
   return (
     <>
       <div className="film-rating">
         <div className="film-rating__score">{rating}</div>
         <p className="film-rating__meta">
-          <span className="film-rating__level">{ratingName ? ratingName : ''}</span>
+          <span className="film-rating__level">{findRatingName(rating)}</span>
           <span className="film-rating__count">{scoresCount} ratings</span>
         </p>
       </div>

@@ -14,6 +14,10 @@ export const DATE_FORMAT = 'MMMM D, YYYY';
 
 export const PLAYING_DELAY = 1000;
 
+export const API_URL = 'https://12.react.pages.academy/wtw';
+
+export const REQUEST_TIMEOUT = 5000;
+
 export const RunTimeFormat = {
   Long: 'H[h] mm[m]',
   Short: 'mm[m]'
@@ -44,6 +48,24 @@ export const AuthorizationStatus = {
   Auth: 'AUTH',
   NoAuth: 'NO_AUTH',
   Unknown: 'UNKNOWN',
+} as const;
+
+export const APIRoute = {
+  Films: '/films',
+  PromoFilm: '/promo',
+  Favorite: '/favorite',
+  Comments: '/comments',
+  SimilarFilms: '/similar',
+  Login: '/login',
+  Logout: '/logout',
+} as const;
+
+export const ReducerName = {
+  Films: 'FILMS',
+  PromoFilm: 'PROMO',
+  Film: 'FILM',
+  SimilarFilms: 'SIMILAR',
+  Comments: 'COMMENTS',
 } as const;
 
 export const RATING_NAMES = [
