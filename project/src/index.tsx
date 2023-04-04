@@ -4,9 +4,10 @@ import App from './components/app/app';
 import { mockReviews } from './mocks/mock-reviews';
 import { Provider } from 'react-redux';
 import { store } from './store';
-import { fetchFilmAction } from './store/api-actions';
+import { fetchFilmAction, fetchPromoFilmAction } from './store/api-actions';
 
 store.dispatch(fetchFilmAction());
+store.dispatch(fetchPromoFilmAction());
 
 const AppData = {
   Reviews:mockReviews

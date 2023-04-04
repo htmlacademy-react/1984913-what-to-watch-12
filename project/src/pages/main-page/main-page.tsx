@@ -2,20 +2,25 @@ import { Helmet } from 'react-helmet-async';
 import FilmsList from '../../components/films-list/films-list';
 import GenresList from '../../components/genres-list/genres-list';
 import Logo from '../../components/logo/logo';
-// import PromoFilmCard from '../../components/promo-film-card/promo-film-card';
+import PromoFilmCard from '../../components/promo-film-card/promo-film-card';
 import { FILMS_AMOUNT } from '../../utils/constants';
 import { useAppSelector } from '../../hooks';
 import ShowMoreButton from '../../components/show-more-button/show-more-button';
 import { useEffect, useState } from 'react';
+import ErrorPage from '../error-page/error-page';
 
 function MainPage(): JSX.Element {
   const [shownAmount, setShownAmount] = useState(0);
   const filteredFilms = useAppSelector((state) => state.filteredFilms);
+  const promoFilm = useAppSelector((state) => state.promoFilm);
 
   useEffect(() => {
     setShownAmount(Math.min(FILMS_AMOUNT, filteredFilms.length));
   }, [filteredFilms]);
 
+  if(!promoFilm){
+    return <ErrorPage/>;
+  }
   const handleShownAmount = () => {
     setShownAmount((prevAmount) =>
       Math.min(prevAmount + FILMS_AMOUNT, filteredFilms.length)
@@ -27,7 +32,7 @@ function MainPage(): JSX.Element {
       <Helmet>
         <title>WTW Main Page</title>
       </Helmet>
-      {/* <PromoFilmCard promoFilm={filteredFilms[filteredFilms.length - 1]} /> */}
+      <PromoFilmCard promoFilm={promoFilm} />
       <div className="page-content">
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>

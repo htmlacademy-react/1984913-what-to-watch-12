@@ -18,8 +18,9 @@ type AppProps = {
 }
 function App({reviews}:AppProps): JSX.Element {
   const isFilmsLoading = useAppSelector((state)=>state.isFilmsLoading);
+  const isPromoFilmLoading = useAppSelector((state)=>state.isPromoFilmLoading);
 
-  if(isFilmsLoading){
+  if(isFilmsLoading || isPromoFilmLoading){
     return <Loader/>;
   }
   return (
