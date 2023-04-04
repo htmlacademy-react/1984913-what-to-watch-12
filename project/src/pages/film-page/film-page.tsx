@@ -15,7 +15,7 @@ import Loader from '../../components/loader/loader';
 import { fetchFilmById } from '../../store/film-data/api-actions';
 import { fetchSimilarFilms } from '../../store/similar-films-data/api-actions';
 import { fetchFilmComments } from '../../store/comments-data/api-actions';
-import { getFilm, getFilmStatus } from '../../store/film-data/selectors';
+import { getFilm, getFilmError, getFilmStatus } from '../../store/film-data/selectors';
 import { getSimilarFilms, getSimilarFilmsStatus } from '../../store/similar-films-data/selectors';
 import { getComments } from '../../store/comments-data/selectors';
 
@@ -28,6 +28,7 @@ function FilmPage():JSX.Element{
   const similarFilms = useAppSelector(getSimilarFilms);
   const isSimilarFilmsLoading = useAppSelector(getSimilarFilmsStatus);
   const reviews = useAppSelector(getComments);
+  const filmError = useAppSelector(getFilmError);
 
   useEffect(()=>{
     if(id){
@@ -41,9 +42,10 @@ function FilmPage():JSX.Element{
     return <Loader/>;
   }
 
-  if(!id || !film){
+  if(!id || !film || filmError){
     return <ErrorPage/>;
   }
+
 
   const isAuthorized = true;
 

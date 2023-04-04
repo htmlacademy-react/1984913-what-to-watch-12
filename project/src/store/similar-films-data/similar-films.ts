@@ -22,6 +22,9 @@ export const similarFilmsData = createSlice({
       .addCase(fetchSimilarFilms.pending, (state) => {
         state.isSimilarFilmsLoading = true;
       })
+      .addCase(fetchSimilarFilms.rejected, (state) => {
+        state.isSimilarFilmsLoading = false;
+      })
       .addCase(fetchSimilarFilms.fulfilled, (state, action) => {
         state.isSimilarFilmsLoading = false;
         state.similarFilms = action.payload;
