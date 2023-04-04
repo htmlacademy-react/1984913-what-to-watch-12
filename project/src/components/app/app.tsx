@@ -33,7 +33,12 @@ function App(): JSX.Element {
           <Route path={AppRoute.SignIn} element={<SingInPage/>}/>
           <Route path={`${AppRoute.Film}/:id`}>
             <Route index element={<FilmPage />}/>
-            {/* <Route path={`${AppRoute.Review}`} element={<ReviewPage />}/> */}
+            {/* <Route path={`${AppRoute.Review}`} element={
+            <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
+              <ReviewPage />
+            </PrivateRoute>
+            }
+            /> */}
           </Route>
           {/* <Route path={`${AppRoute.Player}/:id`} element={<PlayerPage films={films}/>}/> */}
           <Route path={AppRoute.Error} element={<ErrorPage/>}/>

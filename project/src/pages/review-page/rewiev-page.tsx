@@ -18,9 +18,9 @@ function ReviewPage ():JSX.Element{
     return <ErrorPage/>;
   }
 
-  const {name, backgroundImage, posterImage} = film;
+  const {name, backgroundImage, backgroundColor, posterImage} = film;
   return(
-    <section className="film-card film-card--full">
+    <section className="film-card film-card--full" style={{backgroundColor}}>
       <Helmet>
         <title>WTW Add Review</title>
       </Helmet>
@@ -51,7 +51,7 @@ function ReviewPage ():JSX.Element{
         </div>
       </div>
 
-      <ReviewForm/>
+      <ReviewForm />
 
     </section>
   );

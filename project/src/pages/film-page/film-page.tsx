@@ -23,6 +23,7 @@ function FilmPage():JSX.Element{
   const similarFilms = useAppSelector((state)=>state.similarFilms);
   const isSimilarFilmsLoading = useAppSelector((state)=>state.isSimilarFilmsLoading);
   const reviews = useAppSelector((state)=>state.comments);
+
   useEffect(()=>{
     if(id){
       dispatch(fetchFilmById(id));
@@ -34,9 +35,12 @@ function FilmPage():JSX.Element{
   if(isFilmLoading || isSimilarFilmsLoading){
     return <Loader/>;
   }
+
   if(!id || !film){
     return <ErrorPage/>;
   }
+
+  const isAuthorized = true;
 
   const {name, genre, released,posterImage, backgroundImage, backgroundColor} = film ;
   const pathName = getSpecificPath(`${AppRoute.Film}/:id/${AppRoute.Review}`, id );
@@ -68,7 +72,7 @@ function FilmPage():JSX.Element{
               <div className="film-card__buttons">
                 <PlayFilmButton filmId={id}/>
                 <MyListButton/>
-                <Link to={pathName} className="btn film-card__button">Add review</Link>
+                {isAuthorized && <Link to={pathName} className="btn film-card__button">Add review</Link> }
               </div>
             </div>
           </div>
