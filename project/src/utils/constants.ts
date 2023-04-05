@@ -50,7 +50,7 @@ export const AuthorizationStatus = {
   Unknown: 'UNKNOWN',
 } as const;
 
-export const APIRoute = {
+export const ApiRoute = {
   Films: '/films',
   PromoFilm: '/promo',
   Favorite: '/favorite',
