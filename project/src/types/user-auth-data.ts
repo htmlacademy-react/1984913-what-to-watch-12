@@ -1,5 +1,7 @@
 export type UserAuthStatus = string;
 
+export type Token = string;
+
 export type AuthData = {
   login: string;
   password:string;

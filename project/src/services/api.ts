@@ -2,7 +2,7 @@ import axios, {AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse} fro
 import { API_URL, REQUEST_TIMEOUT } from '../utils/constants';
 import { getToken } from './token';
 import { StatusCodes } from 'http-status-codes';
-
+import {toast} from 'react-toastify';
 const StatusCodeMaping:Record<number, boolean> = {
   [StatusCodes.BAD_REQUEST]:true,
   [StatusCodes.UNAUTHORIZED]:true,
@@ -32,10 +32,10 @@ export const createAPI = (): AxiosInstance => {
   api.interceptors.response.use(
     (response) => response,
     (error:AxiosError<{error:string}>)=>{
-      const errorInfo = error.response;
-      if(errorInfo && showApiError(errorInfo)){
-        throw error;
+      if(error.response && showApiError(error.response)){
+        toast.warn(error.response.data.error);
       }
+      throw error;
     }
   );
 

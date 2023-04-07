@@ -30,8 +30,14 @@ export const FilmTab = {
 } as const;
 
 export const SignInError = {
-  InvalidEmail: 'Please enter a valid email address',
+  InvalidEmail: 'Please enter a valid email address.',
+  InvalidPassword: 'Your password is invalid. Please enter at least one number and one letter',
   InvalidUser: 'We can’t recognize this email and password combination. Please try again.',
+} as const;
+
+export const ValidationPatterns = {
+  Email: /^([a-z0-9_.-]+)@([\da-z.-]+).([a-z.]{2,6})$/,
+  Password: /([0-9].*[a-zA-Z])|([a-zA-Z].*[0-9])/,
 } as const;
 
 export const AppRoute = {
