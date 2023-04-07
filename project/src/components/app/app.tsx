@@ -27,7 +27,7 @@ function App(): JSX.Element {
         <Routes>
           <Route path={AppRoute.Main} element={<MainPage/>}/>
           {/* <Route path={AppRoute.MyList} element={
-            <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
+            <PrivateRoute authStatus={AuthStatus.Auth}>
               <MyListPage films={films}/>
             </PrivateRoute>
           }
@@ -36,7 +36,7 @@ function App(): JSX.Element {
           <Route path={`${AppRoute.Film}/:id`}>
             <Route index element={<FilmPage />}/>
             {/* <Route path={`${AppRoute.Review}`} element={
-            <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
+            <PrivateRoute authStatus={AuthStatus.Auth}>
               <ReviewPage />
             </PrivateRoute>
             }

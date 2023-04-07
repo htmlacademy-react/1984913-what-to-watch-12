@@ -44,7 +44,7 @@ export const AppRoute = {
   Error: '*'
 } as const;
 
-export const AuthorizationStatus = {
+export const AuthStatus = {
   Auth: 'AUTH',
   NoAuth: 'NO_AUTH',
   Unknown: 'UNKNOWN',
@@ -66,6 +66,7 @@ export const ReducerName = {
   Film: 'FILM',
   SimilarFilms: 'SIMILAR',
   Comments: 'COMMENTS',
+  User: 'USER',
 } as const;
 
 export const RATING_NAMES = [
