@@ -1,7 +1,11 @@
+import { useAppSelector } from '../../hooks';
+import { getFavoriteFilmsAmount } from '../../store/favorite-films-data/selectors';
+
 type MyListButtonProps ={
   inList?:boolean;
 }
 function MyListButton({inList}:MyListButtonProps):JSX.Element{
+  const filmsAmount = useAppSelector(getFavoriteFilmsAmount);
   return(
     <button className="btn btn--list film-card__button" type="button">
       { inList ? (
@@ -15,7 +19,7 @@ function MyListButton({inList}:MyListButtonProps):JSX.Element{
           </svg>
         )}
       <span>My list</span>
-      <span className="film-card__count">9</span>
+      <span className="film-card__count">{filmsAmount}</span>
     </button>
   );
 }

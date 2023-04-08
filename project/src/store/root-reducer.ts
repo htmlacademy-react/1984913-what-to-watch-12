@@ -6,12 +6,14 @@ import { filmData } from './film-data/film-data';
 import { similarFilmsData } from './similar-films-data/similar-films';
 import { commentsData } from './comments-data/comments-data';
 import { userData } from './user-data/user-data';
+import { favoriteFilmsData } from './favorite-films-data/favorite-films-data';
 
 export const rootReducer = combineReducers({
   [ReducerName.Films]: filmsData.reducer,
   [ReducerName.PromoFilm]: promoFilmData.reducer,
   [ReducerName.Film]: filmData.reducer,
   [ReducerName.SimilarFilms]: similarFilmsData.reducer,
+  [ReducerName.FavoriteFilms]: favoriteFilmsData.reducer,
   [ReducerName.Comments]: commentsData.reducer,
   [ReducerName.User]: userData.reducer
 });

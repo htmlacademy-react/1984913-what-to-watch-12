@@ -2,14 +2,12 @@ import { Helmet } from 'react-helmet-async';
 import FilmsList from '../../components/films-list/films-list';
 import Logo from '../../components/logo/logo';
 import UserBlock from '../../components/user-block/user-block';
-import { Films } from '../../types/film';
+import { useAppSelector } from '../../hooks';
+import { getFavoriteFilms, getFavoriteFilmsAmount } from '../../store/favorite-films-data/selectors';
 
-type MyListPageProps = {
-  films:Films;
-}
-
-function MyListPage({films}:MyListPageProps):JSX.Element{
-  const filmsAmount = films.length;
+function MyListPage():JSX.Element{
+  const films = useAppSelector(getFavoriteFilms);
+  const filmsAmount = useAppSelector(getFavoriteFilmsAmount);
   return(
     <div className="user-page">
       <Helmet>

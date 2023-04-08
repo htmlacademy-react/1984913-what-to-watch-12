@@ -71,6 +71,7 @@ export const ReducerName = {
   PromoFilm: 'PROMO',
   Film: 'FILM',
   SimilarFilms: 'SIMILAR',
+  FavoriteFilms: 'FAVORITE',
   Comments: 'COMMENTS',
   User: 'USER',
 } as const;
