@@ -3,12 +3,14 @@ export type UserAuthStatus = string;
 export type Token = string;
 
 export type AuthData = {
-  login: string;
+  email: string;
   password:string;
 }
 
 export type UserData = {
-  id:number;
+  avatarUrl: string;
   email: string;
-  token:string;
+  id: number;
+  name: string;
+  token: string;
 }

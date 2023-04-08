@@ -2,21 +2,22 @@ import {Link} from 'react-router-dom';
 import { AppRoute } from '../../utils/constants';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { logout } from '../../store/user-data/api-actions';
-import { getIsAuthorized } from '../../store/user-data/selectors';
+import { getIsAuthorized, getUserData } from '../../store/user-data/selectors';
 function UserBlock():JSX.Element{
   const dispatch = useAppDispatch();
   const isAuthorized = useAppSelector(getIsAuthorized);
+  const userData = useAppSelector(getUserData);
 
   const handleLogout = ()=>{
     dispatch(logout());
   };
 
-  return(isAuthorized ? (
+  return(isAuthorized && userData ? (
     <ul className="user-block">
       <li className="user-block__item">
         <Link to={AppRoute.MyList}>
           <div className="user-block__avatar">
-            <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
+            <img src={userData.avatarUrl} alt={userData.name} width="63" height="63" />
           </div>
         </Link>
       </li>

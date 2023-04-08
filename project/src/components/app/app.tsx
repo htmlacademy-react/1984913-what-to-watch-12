@@ -9,17 +9,23 @@ import FilmPage from '../../pages/film-page/film-page';
 import { AppRoute } from '../../utils/constants';
 import PrivateRoute from '../private-route/private-route';
 import { HelmetProvider } from 'react-helmet-async';
-import { useAppDispatch } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { checkAuth } from '../../store/user-data/api-actions';
 import { useEffect } from 'react';
+import { getAuthCheckedStatus } from '../../store/user-data/selectors';
+import Loader from '../loader/loader';
 
 function App(): JSX.Element {
-
+  const isAuthChecked = useAppSelector(getAuthCheckedStatus);
   const dispatch = useAppDispatch();
+
   useEffect(()=>{
     dispatch(checkAuth());
   },[dispatch]);
 
+  if(!isAuthChecked){
+    return <Loader/>;
+  }
 
   return (
     <HelmetProvider>

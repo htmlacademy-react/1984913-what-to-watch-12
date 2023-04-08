@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 function SignInForm():JSX.Element{
   const [invalidFields, setInvalidFields] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
-  const loginRef = useRef<HTMLInputElement|null>(null);
+  const emailRef = useRef<HTMLInputElement|null>(null);
   const passwordRef = useRef<HTMLInputElement|null>(null);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -19,13 +19,13 @@ function SignInForm():JSX.Element{
 
   const handleSubmit = (evt:FormEvent<HTMLFormElement>)=>{
     evt.preventDefault();
-    if(loginRef.current && passwordRef.current){
-      const isLoginValid = checkValidity(loginRef.current, ValidationPatterns.Email);
+    if(emailRef.current && passwordRef.current){
+      const isEmailValid = checkValidity(emailRef.current, ValidationPatterns.Email);
       const isPasswordValid = checkValidity(passwordRef.current, ValidationPatterns.Password);
 
-      if(isLoginValid && isPasswordValid ){
+      if(isEmailValid && isPasswordValid ){
         onSubmit({
-          login: loginRef.current.value,
+          email: emailRef.current.value,
           password: passwordRef.current.value,
         });
         setInvalidFields(false);
@@ -33,7 +33,7 @@ function SignInForm():JSX.Element{
         navigate(AppRoute.Main);
       }else{
         setInvalidFields(true);
-        const error = !isLoginValid ? SignInError.InvalidEmail : SignInError.InvalidPassword;
+        const error = !isEmailValid ? SignInError.InvalidEmail : SignInError.InvalidPassword;
         setErrorMessage(error);
       }
     }
@@ -47,7 +47,7 @@ function SignInForm():JSX.Element{
     </div>}
       <div className="sign-in__fields">
         <div className="sign-in__field">
-          <input className="sign-in__input" type="email" placeholder="Email address" name="user-email" id="user-email" ref = {loginRef}/>
+          <input className="sign-in__input" type="email" placeholder="Email address" name="user-email" id="user-email" ref = {emailRef}/>
           <label className="sign-in__label visually-hidden" htmlFor="user-email">Email address</label>
         </div>
         <div className="sign-in__field">
