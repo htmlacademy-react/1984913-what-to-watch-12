@@ -4,25 +4,41 @@ import GenresList from '../../components/genres-list/genres-list';
 import Logo from '../../components/logo/logo';
 import PromoFilmCard from '../../components/promo-film-card/promo-film-card';
 import { FILMS_AMOUNT } from '../../utils/constants';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import ShowMoreButton from '../../components/show-more-button/show-more-button';
 import { useEffect, useState } from 'react';
 import ErrorPage from '../error-page/error-page';
-import { getFilteredFilms } from '../../store/films-data/selectors';
-import { getPromoFilm } from '../../store/promo-film-data/selectors';
+import { getFilmsStatus, getFilteredFilms } from '../../store/films-data/selectors';
+import { getPromoFilm, getPromoFilmStatus} from '../../store/promo-film-data/selectors';
+import { fetchFilms } from '../../store/films-data/api-actions';
+import { fetchPromoFilm } from '../../store/promo-film-data/api-actions';
+import Loader from '../../components/loader/loader';
 
 function MainPage(): JSX.Element {
   const [shownAmount, setShownAmount] = useState(0);
+  const dispatch = useAppDispatch();
   const filteredFilms = useAppSelector(getFilteredFilms);
   const promoFilm = useAppSelector(getPromoFilm);
+  const isFilmsLoading = useAppSelector(getFilmsStatus);
+  const isPromoFilmLoading = useAppSelector(getPromoFilmStatus);
+
+  useEffect(() => {
+    dispatch(fetchFilms());
+    dispatch(fetchPromoFilm());
+  }, [dispatch]);
 
   useEffect(() => {
     setShownAmount(Math.min(FILMS_AMOUNT, filteredFilms.length));
   }, [filteredFilms]);
 
-  if(!promoFilm){
+  if(isFilmsLoading || isPromoFilmLoading){
+    return <Loader/>;
+  }
+
+  if( !promoFilm){
     return <ErrorPage/>;
   }
+
   const handleShownAmount = () => {
     setShownAmount((prevAmount) =>
       Math.min(prevAmount + FILMS_AMOUNT, filteredFilms.length)

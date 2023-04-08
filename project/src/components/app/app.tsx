@@ -3,48 +3,40 @@ import {Route, Routes, BrowserRouter } from 'react-router-dom';
 import MainPage from '../../pages/main-page/main-page';
 // import PlayerPage from '../../pages/player-page/player-page';
 import SingInPage from '../../pages/sign-in-page/sign-in-page';
-// import MyListPage from '../../pages/my-list-page/my-list-page';
+import MyListPage from '../../pages/my-list-page/my-list-page';
 import ReviewPage from '../../pages/review-page/rewiev-page';
 import FilmPage from '../../pages/film-page/film-page';
-import Loader from '../../components/loader/loader';
 import { AppRoute } from '../../utils/constants';
 import PrivateRoute from '../private-route/private-route';
 import { HelmetProvider } from 'react-helmet-async';
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { getFilmsStatus } from '../../store/films-data/selectors';
-import { getPromoFilmStatus } from '../../store/promo-film-data/selectors';
-import { getAuthStatus } from '../../store/user-data/selectors';
+import { useAppDispatch } from '../../hooks';
 import { checkAuth } from '../../store/user-data/api-actions';
 import { useEffect } from 'react';
 
 function App(): JSX.Element {
-  const isFilmsLoading = useAppSelector(getFilmsStatus);
-  const isPromoFilmLoading = useAppSelector(getPromoFilmStatus);
-  const authStatus = useAppSelector(getAuthStatus);
+
   const dispatch = useAppDispatch();
   useEffect(()=>{
     dispatch(checkAuth());
   },[dispatch]);
 
-  if(isFilmsLoading || isPromoFilmLoading){
-    return <Loader/>;
-  }
+
   return (
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
           <Route path={AppRoute.Main} element={<MainPage/>}/>
-          {/* <Route path={AppRoute.MyList} element={
-            <PrivateRoute authStatus={AuthStatus.Auth}>
-              <MyListPage films={films}/>
+          <Route path={AppRoute.MyList} element={
+            <PrivateRoute >
+              <MyListPage />
             </PrivateRoute>
           }
-          /> */}
+          />
           <Route path={AppRoute.SignIn} element={<SingInPage/>}/>
           <Route path={`${AppRoute.Film}/:id`}>
             <Route index element={<FilmPage />}/>
             <Route path={`${AppRoute.Review}`} element={
-              <PrivateRoute authStatus={authStatus}>
+              <PrivateRoute >
                 <ReviewPage />
               </PrivateRoute>
             }

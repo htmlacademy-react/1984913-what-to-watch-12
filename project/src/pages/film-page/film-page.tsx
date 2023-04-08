@@ -4,7 +4,7 @@ import Logo from '../../components/logo/logo';
 import MyListButton from '../../components/my-list-button/my-list-button';
 import PlayFilmButton from '../../components/play-film-button/play-film-button';
 import UserBlock from '../../components/user-block/user-block';
-import { AppRoute, AuthStatus, EQUAL_FILMS_MAX } from '../../utils/constants';
+import { AppRoute, EQUAL_FILMS_MAX } from '../../utils/constants';
 import {Link, useParams} from 'react-router-dom';
 import { getSpecificPath } from '../../utils/utils';
 import { Helmet } from 'react-helmet-async';
@@ -18,7 +18,7 @@ import { fetchFilmComments } from '../../store/comments-data/api-actions';
 import { getFilm, getFilmError, getFilmStatus } from '../../store/film-data/selectors';
 import { getSimilarFilms, getSimilarFilmsStatus } from '../../store/similar-films-data/selectors';
 import { getComments } from '../../store/comments-data/selectors';
-import { getAuthStatus } from '../../store/user-data/selectors';
+import { getIsAuthorized } from '../../store/user-data/selectors';
 
 function FilmPage():JSX.Element{
   const dispatch = useAppDispatch();
@@ -30,7 +30,7 @@ function FilmPage():JSX.Element{
   const isSimilarFilmsLoading = useAppSelector(getSimilarFilmsStatus);
   const reviews = useAppSelector(getComments);
   const filmError = useAppSelector(getFilmError);
-  const currentAuthStatus = useAppSelector(getAuthStatus);
+  const isAuthorized = useAppSelector(getIsAuthorized);
 
   useEffect(()=>{
     if(id){
@@ -47,8 +47,6 @@ function FilmPage():JSX.Element{
   if(!id || !film || filmError){
     return <ErrorPage/>;
   }
-
-  const isAuthorized = currentAuthStatus === AuthStatus.Auth;
 
   const {name, genre, released,posterImage, backgroundImage, backgroundColor} = film ;
   const pathName = getSpecificPath(`${AppRoute.Film}/:id/${AppRoute.Review}`, id );

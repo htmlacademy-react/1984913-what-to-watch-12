@@ -1,18 +1,17 @@
 import {Link} from 'react-router-dom';
-import { AppRoute, AuthStatus } from '../../utils/constants';
+import { AppRoute } from '../../utils/constants';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { logout } from '../../store/user-data/api-actions';
-import { getAuthStatus } from '../../store/user-data/selectors';
+import { getIsAuthorized } from '../../store/user-data/selectors';
 function UserBlock():JSX.Element{
   const dispatch = useAppDispatch();
-  const currentAuth = useAppSelector(getAuthStatus);
-  const isAuthorised = currentAuth === AuthStatus.Auth;
+  const isAuthorized = useAppSelector(getIsAuthorized);
 
   const handleLogout = ()=>{
     dispatch(logout());
   };
 
-  return(isAuthorised ? (
+  return(isAuthorized ? (
     <ul className="user-block">
       <li className="user-block__item">
         <Link to={AppRoute.MyList}>

@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { AuthStatus, ReducerName} from '../../utils/constants';
 import { UserAuthStatus } from '../../types/user-auth-data';
-import { requireAuth } from './action';
+import { checkAuth, login, logout } from './api-actions';
 
 type InitialState = {
  authStatus: UserAuthStatus;
@@ -16,8 +16,21 @@ export const userData = createSlice({
   initialState,
   reducers:{},
   extraReducers(builder){
-    builder.addCase(requireAuth, (state,action) => {
-      state.authStatus = action.payload;
-    });
+    builder
+      .addCase(checkAuth.fulfilled, (state) => {
+        state.authStatus = AuthStatus.Auth;
+      })
+      .addCase(checkAuth.rejected, (state) => {
+        state.authStatus = AuthStatus.NoAuth;
+      })
+      .addCase(login.fulfilled, (state) => {
+        state.authStatus = AuthStatus.Auth;
+      })
+      .addCase(login.rejected, (state) => {
+        state.authStatus = AuthStatus.NoAuth;
+      })
+      .addCase(logout.fulfilled, (state) => {
+        state.authStatus = AuthStatus.NoAuth;
+      });
   }
 });

@@ -3,13 +3,8 @@ import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
 import { Provider } from 'react-redux';
 import { store } from './store';
-import { fetchFilms } from './store/films-data/api-actions';
-import { fetchPromoFilm } from './store/promo-film-data/api-actions';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
-store.dispatch(fetchFilms());
-store.dispatch(fetchPromoFilm());
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
