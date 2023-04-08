@@ -66,6 +66,18 @@ export const ApiRoute = {
   Logout: '/logout',
 } as const;
 
+export const ApiErrors = {
+  Films: 'Failed to load films',
+  PromoFilm: 'Failed to load promo film',
+  Film: 'Failed to load film data',
+  Favorite: 'Failed to load favorite films',
+  Comments: 'Failed to load comments',
+  SimilarFilms: 'Failed to load similar films ',
+  Login: 'Failed to login',
+  Logout: 'Failed to logout',
+  Unauthorized:'You\'re not logged in. Some features are not available'
+} as const;
+
 export const ReducerName = {
   Films: 'FILMS',
   PromoFilm: 'PROMO',

@@ -27,7 +27,7 @@ export const similarFilmsData = createSlice({
       })
       .addCase(fetchSimilarFilms.fulfilled, (state, action) => {
         state.isSimilarFilmsLoading = false;
-        state.similarFilms = action.payload;
+        state.similarFilms = action.payload ?? [];
       });
   }
 });

@@ -1,15 +1,8 @@
-import axios, {AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse} from 'axios';
+import axios, {AxiosError, AxiosInstance, AxiosRequestConfig} from 'axios';
 import { API_URL, REQUEST_TIMEOUT } from '../utils/constants';
 import { getToken } from './token';
 import { StatusCodes } from 'http-status-codes';
 import {toast} from 'react-toastify';
-const StatusCodeMaping:Record<number, boolean> = {
-  [StatusCodes.BAD_REQUEST]:true,
-  [StatusCodes.UNAUTHORIZED]:true,
-  [StatusCodes.NOT_FOUND]:true,
-};
-
-const showApiError = (response:AxiosResponse)=>!!StatusCodeMaping[response.status];
 
 export const createAPI = (): AxiosInstance => {
   const api = axios.create({
@@ -32,8 +25,11 @@ export const createAPI = (): AxiosInstance => {
   api.interceptors.response.use(
     (response) => response,
     (error:AxiosError<{error:string}>)=>{
-      if(error.response && showApiError(error.response)){
-        toast.warn(error.response.data.error);
+      if (error.response?.status === StatusCodes.UNAUTHORIZED) {
+        toast.warn('You\'re not logged in. Some features are not available', {toastId: error.code});
+      }
+      if (error.response?.status === StatusCodes.NOT_FOUND) {
+        toast.error(error.response.data.error, {toastId:error.code});
       }
       throw error;
     }

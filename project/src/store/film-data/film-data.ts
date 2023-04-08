@@ -30,7 +30,7 @@ export const filmData = createSlice({
       })
       .addCase(fetchFilmById.fulfilled, (state, action) => {
         state.isFilmLoading = false;
-        state.film = action.payload;
+        state.film = action.payload ?? null;
         state.hasError = false;
       });
   }

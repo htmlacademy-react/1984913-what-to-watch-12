@@ -3,6 +3,7 @@ import {AxiosInstance} from 'axios';
 import {AppDispatch, State} from '../../types/state';
 import {Films} from '../../types/film';
 import { ReducerName, ApiRoute } from '../../utils/constants';
+import { toast } from 'react-toastify';
 
 export const fetchFavoriteFilms = createAsyncThunk<Films | void, undefined, {
   dispatch: AppDispatch;
@@ -11,7 +12,11 @@ export const fetchFavoriteFilms = createAsyncThunk<Films | void, undefined, {
 }>(
   `${ReducerName.FavoriteFilms}/fetchFavoriteFilms`,
   async (_arg, {extra: api}) => {
-    const {data} = await api.get<Films>(ApiRoute.Favorite);
-    return data;
+    try {
+      const {data} = await api.get<Films>(ApiRoute.Favorite);
+      return data;
+    } catch {
+      toast.error('Failed to load favorite films', {toastId:'fetchFavoriteFilms'});
+    }
   }
 );

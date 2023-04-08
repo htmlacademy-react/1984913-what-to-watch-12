@@ -24,7 +24,7 @@ export const commentsData = createSlice({
       })
       .addCase(fetchFilmComments.fulfilled, (state, action) => {
         state.isCommentsLoading = false;
-        state.comments = action.payload;
+        state.comments = action.payload ?? [];
       });
   }
 });

@@ -2,8 +2,9 @@ import {AxiosInstance} from 'axios';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {AppDispatch, State} from '../../types/state.js';
 import {AuthData, UserData} from '../../types/user-auth-data.js';
-import { ApiRoute, ReducerName } from '../../utils/constants';
+import { ApiErrors, ApiRoute, ReducerName } from '../../utils/constants';
 import {saveToken, dropToken} from '../../services/token';
+import { toast } from 'react-toastify';
 
 export const checkAuth = createAsyncThunk<UserData, undefined, {
   dispatch: AppDispatch;
@@ -24,9 +25,12 @@ export const login = createAsyncThunk<UserData|void, AuthData, {
 }>(
   `${ReducerName.User}/login`,
   async (authData, { extra: api}) => {
-    const {data} = await api.post<UserData>(ApiRoute.Login, authData);
-    saveToken(data.token);
-    return data;
+    try{ const {data} = await api.post<UserData>(ApiRoute.Login, authData);
+      saveToken(data.token);
+      return data;}
+    catch{
+      toast.error(ApiErrors.Login, {toastId:'login'});
+    }
   },
 );
 
@@ -37,7 +41,13 @@ export const logout = createAsyncThunk<void, undefined, {
 }>(
   `${ReducerName.User}/logout`,
   async (_arg, { extra: api}) => {
-    await api.delete(ApiRoute.Logout);
-    dropToken();
+
+    try{
+      await api.delete(ApiRoute.Logout);
+      dropToken();
+    }
+    catch{
+      toast.error(ApiErrors.Logout, {toastId:'logout'});
+    }
   },
 );
