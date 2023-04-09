@@ -1,31 +1,31 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { ReducerName } from '../../utils/constants';
 import { Reviews } from '../../types/review';
-import { fetchFilmComments, postFilmReview } from './api-actions';
+import { fetchFilmReviews, postFilmReview } from './api-actions';
 
 type InitialState = {
   comments: Reviews;
-  isCommentsLoading: boolean;
+  isReviewsLoading: boolean;
   isReviewPosting: boolean;
 }
 
 const initialState:InitialState = {
   comments: [],
-  isCommentsLoading: false,
+  isReviewsLoading: false,
   isReviewPosting: false
 };
 
 export const commentsData = createSlice({
-  name: ReducerName.Comments,
+  name: ReducerName.Reviews,
   initialState,
   reducers:{},
   extraReducers(builder){
     builder
-      .addCase(fetchFilmComments.pending, (state) => {
-        state.isCommentsLoading = true;
+      .addCase(fetchFilmReviews.pending, (state) => {
+        state.isReviewsLoading = true;
       })
-      .addCase(fetchFilmComments.fulfilled, (state, action) => {
-        state.isCommentsLoading = false;
+      .addCase(fetchFilmReviews.fulfilled, (state, action) => {
+        state.isReviewsLoading = false;
         state.comments = action.payload ?? [];
       })
       .addCase(postFilmReview.pending, (state) => {

@@ -60,7 +60,7 @@ export const ApiRoute = {
   Films: '/films',
   PromoFilm: '/promo',
   Favorite: '/favorite',
-  Comments: '/comments',
+  Reviews: '/comments',
   SimilarFilms: '/similar',
   Login: '/login',
   Logout: '/logout',
@@ -71,7 +71,7 @@ export const ApiErrors = {
   PromoFilm: 'Failed to load promo film',
   Film: 'Failed to load film data',
   Favorite: 'Failed to load favorite films',
-  Comments: 'Failed to load comments',
+  Reviews: 'Failed to load reviews',
   PostReview: 'Failed to post review',
   SimilarFilms: 'Failed to load similar films ',
   Login: 'Failed to login',
@@ -85,7 +85,7 @@ export const ReducerName = {
   Film: 'FILM',
   SimilarFilms: 'SIMILAR',
   FavoriteFilms: 'FAVORITE',
-  Comments: 'COMMENTS',
+  Reviews: 'REVIEWS',
   User: 'USER',
 } as const;
 

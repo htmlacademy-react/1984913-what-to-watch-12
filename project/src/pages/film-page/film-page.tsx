@@ -14,10 +14,8 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import Loader from '../../components/loader/loader';
 import { fetchFilmById } from '../../store/film-data/api-actions';
 import { fetchSimilarFilms } from '../../store/similar-films-data/api-actions';
-import { fetchFilmComments } from '../../store/comments-data/api-actions';
 import { getFilm, getFilmError, getFilmStatus } from '../../store/film-data/selectors';
 import { getSimilarFilms, getSimilarFilmsStatus } from '../../store/similar-films-data/selectors';
-import { getComments } from '../../store/comments-data/selectors';
 import { getIsAuthorized } from '../../store/user-data/selectors';
 
 function FilmPage():JSX.Element{
@@ -28,7 +26,6 @@ function FilmPage():JSX.Element{
   const isFilmLoading = useAppSelector(getFilmStatus);
   const similarFilms = useAppSelector(getSimilarFilms);
   const isSimilarFilmsLoading = useAppSelector(getSimilarFilmsStatus);
-  const reviews = useAppSelector(getComments);
   const filmError = useAppSelector(getFilmError);
   const isAuthorized = useAppSelector(getIsAuthorized);
 
@@ -36,7 +33,6 @@ function FilmPage():JSX.Element{
     if(id){
       dispatch(fetchFilmById(id));
       dispatch(fetchSimilarFilms(id));
-      dispatch(fetchFilmComments(id));
     }
   },[dispatch, id]);
 
@@ -89,7 +85,7 @@ function FilmPage():JSX.Element{
             <div className="film-card__poster film-card__poster--big">
               <img src={posterImage} alt={`${name} poster`} width="218" height="327" />
             </div>
-            <FilmInfo film={film} reviews={reviews}/>
+            <FilmInfo film={film} />
           </div>
         </div>
       </section>

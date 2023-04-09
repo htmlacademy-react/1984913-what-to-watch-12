@@ -2,7 +2,7 @@ import { Fragment, ChangeEvent, FormEvent, useState } from 'react';
 import { RATING_MAX, ReviewLength } from '../../utils/constants';
 import { NewReview } from '../../types/review';
 import { useAppSelector } from '../../hooks';
-import { getPostingStatus } from '../../store/comments-data/selectors';
+import { getPostingStatus } from '../../store/reviews-data/selectors';
 
 const DEFAULT_REVIEW = {
   rating: 0,

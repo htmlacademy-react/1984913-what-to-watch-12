@@ -7,9 +7,11 @@ import ErrorPage from '../error-page/error-page';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getFilm } from '../../store/film-data/selectors';
 import { NewReview } from '../../types/review';
-import { postFilmReview } from '../../store/comments-data/api-actions';
+import { postFilmReview } from '../../store/reviews-data/api-actions';
 import { getSpecificPath } from '../../utils/utils';
 import { AppRoute } from '../../utils/constants';
+import { useEffect } from 'react';
+import { fetchFilmById } from '../../store/film-data/api-actions';
 
 
 function ReviewPage ():JSX.Element{
@@ -17,11 +19,9 @@ function ReviewPage ():JSX.Element{
   const {id} = useParams();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  if(!id ){
-    return <ErrorPage/>;
-  }
-  const filmId = +id;
+  const filmId = Number(id);
 
+  useEffect(()=>{dispatch(fetchFilmById(filmId));},[dispatch, filmId]);
 
   const handleReviewSubmit = (review: NewReview) => {
     dispatch(postFilmReview({filmId, review}));
@@ -29,7 +29,7 @@ function ReviewPage ():JSX.Element{
     navigate(path);
   };
 
-  if(!film){
+  if(!film || !id ){
     return <ErrorPage/>;
   }
 

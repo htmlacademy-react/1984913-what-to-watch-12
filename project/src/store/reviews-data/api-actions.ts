@@ -5,18 +5,18 @@ import { ApiErrors, ApiRoute, ReducerName } from '../../utils/constants';
 import { NewReview, Reviews } from '../../types/review.js';
 import { toast } from 'react-toastify';
 
-export const fetchFilmComments = createAsyncThunk<Reviews|void, number, {
+export const fetchFilmReviews = createAsyncThunk<Reviews|void, number, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
-  `${ReducerName.Comments}/fetchFilmComments`,
+  `${ReducerName.Reviews}/fetchFilmReviews`,
   async (filmId, {extra: api}) => {
     try {
-      const {data} = await api.get<Reviews>(`${ApiRoute.Comments}/${filmId}`);
+      const {data} = await api.get<Reviews>(`${ApiRoute.Reviews}/${filmId}`);
       return data;
     } catch {
-      toast.error(ApiErrors.Comments, {toastId:'fetchFilmComments'});
+      toast.error(ApiErrors.Reviews, {toastId:'fetchFilmReviews'});
     }
   },
 );
@@ -29,10 +29,10 @@ export const postFilmReview = createAsyncThunk<NewReview|void, {
   state: State;
   extra: AxiosInstance;
 }>(
-  `${ReducerName.Comments}/postFilmReview`,
+  `${ReducerName.Reviews}/postFilmReview`,
   async ({filmId, review}, {extra: api}) => {
     try {
-      const {data} = await api.post<NewReview>(`${ApiRoute.Comments}/${filmId}`, review);
+      const {data} = await api.post<NewReview>(`${ApiRoute.Reviews}/${filmId}`, review);
       return data;
     } catch {
       toast.error(ApiErrors.PostReview, {toastId:'postFilmReview'});
