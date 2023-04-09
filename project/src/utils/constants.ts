@@ -72,6 +72,7 @@ export const ApiErrors = {
   Film: 'Failed to load film data',
   Favorite: 'Failed to load favorite films',
   Comments: 'Failed to load comments',
+  PostReview: 'Failed to post review',
   SimilarFilms: 'Failed to load similar films ',
   Login: 'Failed to login',
   Logout: 'Failed to logout',
@@ -86,6 +87,11 @@ export const ReducerName = {
   FavoriteFilms: 'FAVORITE',
   Comments: 'COMMENTS',
   User: 'USER',
+} as const;
+
+export const ReviewLength = {
+  Min: 50,
+  Max:400,
 } as const;
 
 export const RATING_NAMES = [
