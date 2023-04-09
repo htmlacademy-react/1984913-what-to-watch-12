@@ -73,7 +73,7 @@ function FilmPage():JSX.Element{
 
               <div className="film-card__buttons">
                 <PlayFilmButton filmId={id}/>
-                <MyListButton/>
+                <MyListButton filmId={id}/>
                 {isAuthorized && <Link to={pathName} className="btn film-card__button">Add review</Link> }
               </div>
             </div>

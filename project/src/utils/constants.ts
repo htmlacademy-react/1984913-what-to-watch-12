@@ -71,6 +71,7 @@ export const ApiErrors = {
   PromoFilm: 'Failed to load promo film',
   Film: 'Failed to load film data',
   Favorite: 'Failed to load favorite films',
+  PostFavorite: 'Failed to change favorite status',
   Reviews: 'Failed to load reviews',
   PostReview: 'Failed to post review',
   SimilarFilms: 'Failed to load similar films ',

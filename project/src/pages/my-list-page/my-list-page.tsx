@@ -3,11 +3,16 @@ import FilmsList from '../../components/films-list/films-list';
 import Logo from '../../components/logo/logo';
 import UserBlock from '../../components/user-block/user-block';
 import { useAppSelector } from '../../hooks';
-import { getFavoriteFilms, getFavoriteFilmsAmount } from '../../store/favorite-films-data/selectors';
+import { getFavoriteFilms, getFavoriteFilmsAmount, getFavoriteFilmsStatus } from '../../store/favorite-films-data/selectors';
+import Loader from '../../components/loader/loader';
 
 function MyListPage():JSX.Element{
   const films = useAppSelector(getFavoriteFilms);
   const filmsAmount = useAppSelector(getFavoriteFilmsAmount);
+  const isFavoriteLoading = useAppSelector(getFavoriteFilmsStatus);
+  if(isFavoriteLoading){
+    return <Loader/>;
+  }
   return(
     <div className="user-page">
       <Helmet>
