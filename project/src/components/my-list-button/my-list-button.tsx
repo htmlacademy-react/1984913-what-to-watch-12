@@ -22,7 +22,7 @@ function MyListButton({filmId}:MyListButtonProps):JSX.Element{
   };
   return(
     <button className="btn btn--list film-card__button" type="button" onClick={handleFavorite}>
-      { isFavorite ? (
+      {isAuthorized && isFavorite ? (
         <svg viewBox="0 0 18 14" width="18" height="14">
           <use xlinkHref="#in-list"></use>
         </svg>
@@ -33,7 +33,7 @@ function MyListButton({filmId}:MyListButtonProps):JSX.Element{
           </svg>
         )}
       <span>My list</span>
-      <span className="film-card__count">{filmsAmount}</span>
+      <span className="film-card__count">{isAuthorized ? filmsAmount : 0}</span>
     </button>
   );
 }

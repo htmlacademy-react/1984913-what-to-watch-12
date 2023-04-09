@@ -23,7 +23,7 @@ function FilmReviews({filmId}:FilmReviewsProps):JSX.Element{
   }
   return (
     <div className="film-card__reviews film-card__row">
-      { !reviews.length ? (<h3 style={{color:'#252525'}}>Leave the first review yourself</h3>) : (
+      { !reviews.length ? (<h3 style={{color:'#252525'}}>There are no reviews yet</h3>) : (
         <>
           <div className="film-card__reviews-col">
             {sortedReviews.slice(0,reviewsHalf).map((review)=><FilmReviewCard review={review} key={review.id}/>)}
