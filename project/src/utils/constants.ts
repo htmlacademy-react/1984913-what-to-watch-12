@@ -35,7 +35,7 @@ export const SignInError = {
   InvalidUser: 'We can’t recognize this email and password combination. Please try again.',
 } as const;
 
-export const ValidationPatterns = {
+export const ValidationPattern = {
   Email: /^([a-z0-9_.-]+)@([\da-z.-]+).([a-z.]{2,6})$/,
   Password: /([0-9].*[a-zA-Z])|([a-zA-Z].*[0-9])/,
 } as const;
@@ -66,7 +66,7 @@ export const ApiRoute = {
   Logout: '/logout',
 } as const;
 
-export const ApiErrors = {
+export const ApiError = {
   Films: 'Failed to load films',
   PromoFilm: 'Failed to load promo film',
   Film: 'Failed to load film data',
@@ -77,7 +77,7 @@ export const ApiErrors = {
   SimilarFilms: 'Failed to load similar films ',
   Login: 'Failed to login',
   Logout: 'Failed to logout',
-  Unauthorized:'You\'re not logged in. Some features are not available'
+  Unauthorized: 'You\'re not logged in. Some features are not available'
 } as const;
 
 export const ReducerName = {
@@ -92,8 +92,8 @@ export const ReducerName = {
 
 export const ReviewLength = {
   Min: 50,
-  Max:400,
-} as const;
+  Max: 400,
+};
 
 export const RATING_NAMES = [
   { rating: 0, name: 'Bad' },

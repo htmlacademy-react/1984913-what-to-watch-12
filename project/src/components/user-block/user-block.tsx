@@ -8,7 +8,7 @@ function UserBlock():JSX.Element{
   const isAuthorized = useAppSelector(getIsAuthorized);
   const userData = useAppSelector(getUserData);
 
-  const handleLogout = ()=>{
+  const handleLogoutClick = ()=>{
     dispatch(logout());
   };
 
@@ -22,7 +22,7 @@ function UserBlock():JSX.Element{
         </Link>
       </li>
       <li className="user-block__item">
-        <Link to={AppRoute.Main} className="user-block__link" onClick={handleLogout}>Sign out</Link>
+        <Link to={AppRoute.Main} className="user-block__link" onClick={handleLogoutClick}>Sign out</Link>
       </li>
     </ul>
   ) : (

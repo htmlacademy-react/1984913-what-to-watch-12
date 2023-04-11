@@ -57,7 +57,7 @@ function MainPage(): JSX.Element {
           <GenresList />
           <FilmsList films={filteredFilms.slice(0, shownAmount)} />
           {filteredFilms.length > shownAmount &&
-            <ShowMoreButton onHandleShown={handleShownAmount} />}
+            <ShowMoreButton onShown={handleShownAmount} />}
         </section>
 
         <footer className="page-footer">

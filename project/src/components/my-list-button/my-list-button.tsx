@@ -15,13 +15,13 @@ function MyListButton({filmId}:MyListButtonProps):JSX.Element{
   const filmsAmount = useAppSelector(getFavoriteFilmsAmount);
   const isAuthorized = useAppSelector(getIsAuthorized);
   const isFavorite = useAppSelector(getIsFilmFavorite(filmId));
-  const handleFavorite = ()=> {
+  const handleButtonClick = ()=> {
     isAuthorized
       ? dispatch(postFavoriteFilm({filmId, status:isFavorite ? 0 : 1}))
       : navigate(AppRoute.SignIn);
   };
   return(
-    <button className="btn btn--list film-card__button" type="button" onClick={handleFavorite}>
+    <button className="btn btn--list film-card__button" type="button" onClick={handleButtonClick}>
       {isAuthorized && isFavorite ? (
         <svg viewBox="0 0 18 14" width="18" height="14">
           <use xlinkHref="#in-list"></use>

@@ -2,7 +2,7 @@ import {AxiosInstance} from 'axios';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {AppDispatch, State} from '../../types/state.js';
 import {AuthData, UserData} from '../../types/user-auth-data.js';
-import { ApiErrors, ApiRoute, ReducerName } from '../../utils/constants';
+import { ApiError, ApiRoute, ReducerName } from '../../utils/constants';
 import {saveToken, dropToken} from '../../services/token';
 import { toast } from 'react-toastify';
 
@@ -29,7 +29,7 @@ export const login = createAsyncThunk<UserData|void, AuthData, {
       saveToken(data.token);
       return data;}
     catch{
-      toast.error(ApiErrors.Login, {toastId:'login'});
+      toast.error(ApiError.Login, {toastId:'login'});
     }
   },
 );
@@ -47,7 +47,7 @@ export const logout = createAsyncThunk<void, undefined, {
       dropToken();
     }
     catch{
-      toast.error(ApiErrors.Logout, {toastId:'logout'});
+      toast.error(ApiError.Logout, {toastId:'logout'});
     }
   },
 );

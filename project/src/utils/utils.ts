@@ -10,9 +10,9 @@ const formatReviewDate = (date: string) => dayjs(date).format(DATE_FORMAT);
 const formatReviewRaiting = (rating: number) => rating.toFixed(1);
 
 const findRatingName = (rating: number) => {
-  const possibleRating = RATING_NAMES.find((item, i, arr) => rating >= item.rating
-    && arr[i + 1]
-    ? rating < arr[i + 1].rating
+  const possibleRating = RATING_NAMES.find((item, i, items) => rating >= item.rating
+    && items[i + 1]
+    ? rating < items[i + 1].rating
     : true);
   if(possibleRating){
     return possibleRating.name;

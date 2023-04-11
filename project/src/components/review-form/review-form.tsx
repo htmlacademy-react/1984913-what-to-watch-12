@@ -22,16 +22,16 @@ function ReviewForm({onReviewSubmit}:ReviewFormProps): JSX.Element {
   const [formData, setFormData] = useState(DEFAULT_REVIEW);
   const isReviewPosting = useAppSelector(getPostingStatus);
 
-  const handleChange = (
-    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  const handleInputChange = (
+    evt: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    const { name, value } = event.target;
+    const { name, value } = evt.target;
     const currentValue = name === 'rating' ? +value : value;
     setFormData({ ...formData, [name]: currentValue });
   };
 
-  const handleSubmit = (event: FormEvent<HTMLElement>) => {
-    event.preventDefault();
+  const handleFormSubmit = (evt: FormEvent<HTMLElement>) => {
+    evt.preventDefault();
     setFormData(DEFAULT_REVIEW);
     onReviewSubmit(formData);
   };
@@ -43,7 +43,7 @@ function ReviewForm({onReviewSubmit}:ReviewFormProps): JSX.Element {
 
   return (
     <div className="add-review">
-      <form action="#" className="add-review__form" onSubmit={handleSubmit}>
+      <form action="#" className="add-review__form" onSubmit={handleFormSubmit}>
         <div className="rating">
           <div className="rating__stars">
             {RATING_STARS.map((star) => (
@@ -54,7 +54,7 @@ function ReviewForm({onReviewSubmit}:ReviewFormProps): JSX.Element {
                   type="radio"
                   name="rating"
                   value={star}
-                  onChange={handleChange}
+                  onChange={handleInputChange}
                   checked={star === formData.rating}
                   disabled={isReviewPosting}
                 />
@@ -72,7 +72,7 @@ function ReviewForm({onReviewSubmit}:ReviewFormProps): JSX.Element {
             name="comment"
             id="review-text"
             placeholder="Review text"
-            onChange={handleChange}
+            onChange={handleInputChange}
             value={formData.comment}
             disabled={isReviewPosting}
           >
