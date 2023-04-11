@@ -2,7 +2,6 @@ import { RunTimeFormat, DATE_FORMAT, MINUTES_PER_HOUR, RATING_NAMES } from './co
 import { generatePath } from 'react-router-dom';
 import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
-import { Films } from '../types/film';
 dayjs.extend(duration);
 
 const formatReviewDate = (date: string) => dayjs(date).format(DATE_FORMAT);
@@ -29,6 +28,4 @@ const formatFilmDuration = (minutes: number) => {
 
 const getSpecificPath = (route: string, id: number): string => generatePath(route, { id });
 
-const findCurrentFilm = (films: Films, id: number) => films.find((film) => film.id === id) || null;
-
-export { formatReviewDate, formatFilmDuration, formatReviewRaiting, findRatingName, findCurrentFilm, getSpecificPath };
+export { formatReviewDate, formatFilmDuration, formatReviewRaiting, findRatingName, getSpecificPath };

@@ -1,40 +1,54 @@
 import { Helmet } from 'react-helmet-async';
 import { useNavigate } from 'react-router-dom';
-import { Films } from '../../types/film';
 import { STEP_BACK } from '../../utils/constants';
-import { findCurrentFilm } from '../../utils/utils';
 import {useParams} from 'react-router-dom';
 import ErrorPage from '../error-page/error-page';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { getFilm, getFilmStatus } from '../../store/film-data/selectors';
+import { useEffect, useRef, useState } from 'react';
+import { fetchFilmById } from '../../store/film-data/api-actions';
+import Spinner from '../../components/spinner/spinner';
 
-type PlayerPageProps = {
-  films:Films;
-}
 
-function PlayerPage({films}:PlayerPageProps):JSX.Element{
+function PlayerPage():JSX.Element{
   const navigate = useNavigate();
   const {id:filmId} = useParams();
-  if(!filmId ){
+  const id = Number(filmId);
+  const dispatch = useAppDispatch();
+  const film = useAppSelector(getFilm);
+  const isFilmLoading = useAppSelector(getFilmStatus);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  const [isPaused, setIsPaused] = useState(false);
+
+  useEffect(()=>{
+    if(id){
+      dispatch(fetchFilmById(id));
+    }
+  },[dispatch, id]);
+
+  if(isFilmLoading){
+    return <Spinner/>;
+  }
+
+  if(!id || !film){
     return <ErrorPage/>;
   }
-  const id = +filmId;
 
-  const film = findCurrentFilm(films, id);
-
-  if(!film){
-    return <ErrorPage/>;
-  }
-
-  const isPaused = false;
   const handleExitClick = ()=> navigate(STEP_BACK);
 
-  const{previewImage, videoLink} = film;
+  const handleChangeIsPausedClick = ()=> setIsPaused((prevState)=> !prevState);
+
+  const handleFullScreenClick = ()=> {videoRef.current?.requestFullscreen();};
+
+  const{previewImage, videoLink, name} = film;
 
   return(
     <div className="player">
       <Helmet>
         <title>WTW Player</title>
       </Helmet>
-      <video src={videoLink} className="player__video" poster={previewImage}></video>
+      <video ref = {videoRef} src={videoLink} className="player__video" poster={previewImage} autoPlay/>
 
       <button type="button" className="player__exit" onClick={handleExitClick}>Exit</button>
 
@@ -49,7 +63,7 @@ function PlayerPage({films}:PlayerPageProps):JSX.Element{
 
         <div className="player__controls-row">
           { isPaused ? (
-            <button type="button" className="player__play">
+            <button type="button" className="player__play" onClick={handleChangeIsPausedClick}>
               <svg viewBox="0 0 19 19" width="19" height="19">
                 <use xlinkHref="#play-s"></use>
               </svg>
@@ -57,16 +71,16 @@ function PlayerPage({films}:PlayerPageProps):JSX.Element{
             </button>
           ) :
             (
-              <button type="button" className="player__play">
+              <button type="button" className="player__play" onClick={handleChangeIsPausedClick}>
                 <svg viewBox="0 0 14 21" width="14" height="21">
                   <use xlinkHref="#pause"></use>
                 </svg>
                 <span>Pause</span>
               </button>
             )}
-          <div className="player__name">Transpotting</div>
+          <div className="player__name">{name}</div>
 
-          <button type="button" className="player__full-screen">
+          <button type="button" className="player__full-screen" onClick = {handleFullScreenClick}>
             <svg viewBox="0 0 27 27" width="27" height="27">
               <use xlinkHref="#full-screen"></use>
             </svg>

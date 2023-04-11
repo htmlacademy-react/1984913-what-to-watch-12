@@ -1,5 +1,5 @@
 import { Fragment, ChangeEvent, FormEvent, useState } from 'react';
-import { RATING_MAX, ReviewLength } from '../../utils/constants';
+import { PostingMessage, RATING_MAX, ReviewLength } from '../../utils/constants';
 import { NewReview } from '../../types/review';
 import { useAppSelector } from '../../hooks';
 import { getPostingStatus } from '../../store/reviews-data/selectors';
@@ -26,7 +26,7 @@ function ReviewForm({onReviewSubmit}:ReviewFormProps): JSX.Element {
     evt: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = evt.target;
-    const currentValue = name === 'rating' ? +value : value;
+    const currentValue = name === Object.keys(DEFAULT_REVIEW)[0] ? +value : value;
     setFormData({ ...formData, [name]: currentValue });
   };
 
@@ -79,7 +79,7 @@ function ReviewForm({onReviewSubmit}:ReviewFormProps): JSX.Element {
           </textarea>
           <div className="add-review__submit">
             <button className="add-review__btn" type="submit" disabled={isDisabled}>
-              {isReviewPosting ? 'Posting...' : 'Post'}
+              {isReviewPosting ? PostingMessage.InProgress : PostingMessage.Default}
             </button>
           </div>
         </div>

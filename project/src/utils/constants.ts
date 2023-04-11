@@ -90,6 +90,11 @@ export const ReducerName = {
   User: 'USER',
 } as const;
 
+export const PostingMessage = {
+  Default: 'Post',
+  InProgress: 'Posting',
+} as const;
+
 export const ReviewLength = {
   Min: 50,
   Max: 400,

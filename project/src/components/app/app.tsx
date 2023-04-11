@@ -1,7 +1,7 @@
 import ErrorPage from '../../pages/error-page/error-page';
 import {Route, Routes, BrowserRouter } from 'react-router-dom';
 import MainPage from '../../pages/main-page/main-page';
-// import PlayerPage from '../../pages/player-page/player-page';
+import PlayerPage from '../../pages/player-page/player-page';
 import SingInPage from '../../pages/sign-in-page/sign-in-page';
 import MyListPage from '../../pages/my-list-page/my-list-page';
 import ReviewPage from '../../pages/review-page/rewiev-page';
@@ -48,7 +48,7 @@ function App(): JSX.Element {
             }
             />
           </Route>
-          {/* <Route path={`${AppRoute.Player}/:id`} element={<PlayerPage films={films}/>}/> */}
+          <Route path={`${AppRoute.Player}/:id`} element={<PlayerPage />}/>
           <Route path={AppRoute.Error} element={<ErrorPage/>}/>
         </Routes>
       </BrowserRouter>
