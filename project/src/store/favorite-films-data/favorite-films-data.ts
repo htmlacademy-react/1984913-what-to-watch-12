@@ -34,10 +34,9 @@ export const favoriteFilmsData = createSlice({
         const film = action.payload;
         if (film){
           if(film.isFavorite) {
-            state.films.push(film);
+            state.films = state.films.concat(film);
           }else {
-            const index = state.films.findIndex((item) => item.id === film.id);
-            state.films.splice(index, 1);
+            state.films = state.films.filter((item)=> item.id !== film.id);
           }
         }});
   }

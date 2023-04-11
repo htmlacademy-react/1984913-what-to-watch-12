@@ -9,5 +9,5 @@ export const getFavoriteFilmsStatus = (state: State): boolean => state[ReducerNa
 
 export const getIsFilmFavorite = (filmId:number) => createSelector(
   getFavoriteFilms,
-  (films):boolean=> !!films.find((film)=> film.id === filmId)
+  (films):boolean=> films.some((film)=> film.id === filmId)
 );

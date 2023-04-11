@@ -2,14 +2,18 @@ import { Helmet } from 'react-helmet-async';
 import FilmsList from '../../components/films-list/films-list';
 import Logo from '../../components/logo/logo';
 import UserBlock from '../../components/user-block/user-block';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getFavoriteFilms, getFavoriteFilmsAmount, getFavoriteFilmsStatus } from '../../store/favorite-films-data/selectors';
 import Loader from '../../components/loader/loader';
+import { useEffect } from 'react';
+import { fetchFavoriteFilms } from '../../store/favorite-films-data/api-actions';
 
 function MyListPage():JSX.Element{
   const films = useAppSelector(getFavoriteFilms);
   const filmsAmount = useAppSelector(getFavoriteFilmsAmount);
   const isFavoriteLoading = useAppSelector(getFavoriteFilmsStatus);
+  const dispatch = useAppDispatch();
+  useEffect(()=>{dispatch(fetchFavoriteFilms());},[dispatch]);
   if(isFavoriteLoading){
     return <Loader/>;
   }
