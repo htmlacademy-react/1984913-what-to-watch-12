@@ -38,7 +38,7 @@ function PromoFilmCard({promoFilm}:PromoFilmCardProps):JSX.Element{
 
             <div className="film-card__buttons">
               <PlayFilmButton filmId={id}/>
-              <MyListButton/>
+              <MyListButton filmId={id}/>
             </div>
           </div>
         </div>

@@ -24,7 +24,7 @@ export const promoFilmData = createSlice({
       })
       .addCase(fetchPromoFilm.fulfilled, (state, action) => {
         state.isPromoFilmLoading = false;
-        state.promoFilm = action.payload;
+        state.promoFilm = action.payload ?? null;
       });
   }
 });

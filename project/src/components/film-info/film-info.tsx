@@ -3,18 +3,16 @@ import { Film } from '../../types/film';
 import FilmDetails from '../film-details/film-details';
 import FilmOverview from '../film-overview/film-overview';
 import FilmReviews from '../film-reviews/film-reviews';
-import { Reviews } from '../../types/review';
 import { useEffect, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 
 type FilmInfoProps = {
   film:Film;
-  reviews:Reviews;
 }
 
 const TABS = Object.values(FilmTab);
 
-function FilmInfo({film, reviews}:FilmInfoProps):JSX.Element{
+function FilmInfo({film}:FilmInfoProps):JSX.Element{
   const [searchParams] = useSearchParams();
   const searchTab = searchParams.get('tab');
   const [currentTab, setCurrentTab] = useState<string>();
@@ -34,7 +32,7 @@ function FilmInfo({film, reviews}:FilmInfoProps):JSX.Element{
       case FilmTab.Details:
         return <FilmDetails film={film}/>;
       case FilmTab.Reviews:
-        return <FilmReviews reviews={reviews}/>;
+        return <FilmReviews filmId={film.id}/>;
     }
   };
 
