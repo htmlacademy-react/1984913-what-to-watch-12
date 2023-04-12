@@ -8,6 +8,8 @@ export const RATING_MAX = 10;
 
 export const MINUTES_PER_HOUR = 60;
 
+export const SECONDS_PER_HOUR = 3600;
+
 export const STEP_BACK = -1;
 
 export const DATE_FORMAT = 'MMMM D, YYYY';
@@ -21,6 +23,11 @@ export const REQUEST_TIMEOUT = 5000;
 export const RunTimeFormat = {
   Long: 'H[h] mm[m]',
   Short: 'mm[m]'
+} as const;
+
+export const TimeLeftFormat = {
+  Long: '-HH:mm:ss',
+  Short: '-mm:ss'
 } as const;
 
 export const FilmTab = {

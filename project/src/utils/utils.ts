@@ -1,4 +1,4 @@
-import { RunTimeFormat, DATE_FORMAT, MINUTES_PER_HOUR, RATING_NAMES } from './constants';
+import { RunTimeFormat, DATE_FORMAT, MINUTES_PER_HOUR, SECONDS_PER_HOUR, RATING_NAMES, TimeLeftFormat } from './constants';
 import { generatePath } from 'react-router-dom';
 import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
@@ -26,6 +26,12 @@ const formatFilmDuration = (minutes: number) => {
   return currentDuration.format(pattern);
 };
 
+const getTimeLeft = (timeLeft:number)=>{
+  const minutesLeft = dayjs.duration(timeLeft, 'seconds');
+  const pattern = timeLeft >= SECONDS_PER_HOUR ? TimeLeftFormat.Long : TimeLeftFormat.Short;
+  return minutesLeft.format(pattern);
+};
+
 const getSpecificPath = (route: string, id: number): string => generatePath(route, { id });
 
-export { formatReviewDate, formatFilmDuration, formatReviewRaiting, findRatingName, getSpecificPath };
+export { formatReviewDate, formatFilmDuration, formatReviewRaiting, findRatingName,getTimeLeft, getSpecificPath };
