@@ -1,15 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { ReducerName } from '../../utils/constants';
-import { Reviews } from '../../types/review';
 import { fetchFilmReviews, postFilmReview } from './api-actions';
+import { ReviewsState } from '../../types/state';
 
-type InitialState = {
-  comments: Reviews;
-  isReviewsLoading: boolean;
-  isReviewPosting: boolean;
-}
-
-const initialState:InitialState = {
+const initialState:ReviewsState = {
   comments: [],
   isReviewsLoading: false,
   isReviewPosting: false
