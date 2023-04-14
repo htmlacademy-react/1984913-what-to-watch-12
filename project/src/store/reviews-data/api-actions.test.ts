@@ -8,6 +8,7 @@ import { ApiRoute } from '../../utils/constants';
 import {makeFakeFilm, makeFakeNewReview, makeFakeReviews } from '../../utils/mocks';
 import { fetchFilmReviews } from './api-actions';
 import { postFilmReview } from './api-actions';
+import { redirectToRoute } from '../action';
 
 const mockReviews = makeFakeReviews();
 const mockFilmId = makeFakeFilm().id;
@@ -48,6 +49,7 @@ describe('Async actions', () => {
 
     expect(actions).toEqual([
       postFilmReview.pending.type,
+      redirectToRoute.type,
       postFilmReview.fulfilled.type,
     ]);
   });

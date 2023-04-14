@@ -1,9 +1,8 @@
 import { FormEvent, useRef, useState } from 'react';
-import { AppRoute, SignInError, ValidationPattern } from '../../utils/constants';
+import { SignInError, ValidationPattern } from '../../utils/constants';
 import { login } from '../../store/user-data/api-actions';
 import { AuthData } from '../../types/user-auth-data';
 import { useAppDispatch } from '../../hooks';
-import { useNavigate } from 'react-router-dom';
 
 function SignInForm(): JSX.Element {
   const [invalidFields, setInvalidFields] = useState(false);
@@ -11,7 +10,6 @@ function SignInForm(): JSX.Element {
   const emailRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
 
   const onSubmit = (authData: AuthData) => dispatch(login(authData));
 
@@ -30,7 +28,6 @@ function SignInForm(): JSX.Element {
         });
         setInvalidFields(false);
         setErrorMessage('');
-        navigate(AppRoute.Main);
       } else {
         setInvalidFields(true);
         const error = !isEmailValid ? SignInError.InvalidEmail : SignInError.InvalidPassword;

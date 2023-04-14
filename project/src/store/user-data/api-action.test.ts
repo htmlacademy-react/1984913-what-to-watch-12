@@ -7,6 +7,7 @@ import { State } from '../../types/state';
 import { ApiRoute } from '../../utils/constants';
 import { makeFakeUser } from '../../utils/mocks';
 import { checkAuth, login, logout } from './api-actions';
+import { redirectToRoute } from '../action';
 
 const mockUser = makeFakeUser();
 const mockPassword = '1a';
@@ -53,6 +54,7 @@ describe('Async actions', () => {
 
     expect(actions).toEqual([
       login.pending.type,
+      redirectToRoute.type,
       login.fulfilled.type
     ]);
 

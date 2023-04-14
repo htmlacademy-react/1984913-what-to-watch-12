@@ -2,14 +2,12 @@ import { Helmet } from 'react-helmet-async';
 import Logo from '../../components/logo/logo';
 import ReviewForm from '../../components/review-form/review-form';
 import UserBlock from '../../components/user-block/user-block';
-import { useNavigate, useParams} from 'react-router-dom';
+import { useParams} from 'react-router-dom';
 import ErrorPage from '../error-page/error-page';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getFilm } from '../../store/film-data/selectors';
 import { NewReview } from '../../types/review';
 import { postFilmReview } from '../../store/reviews-data/api-actions';
-import { getSpecificPath } from '../../utils/utils';
-import { AppRoute } from '../../utils/constants';
 import { useEffect } from 'react';
 import { fetchFilmById } from '../../store/film-data/api-actions';
 
@@ -18,15 +16,12 @@ function ReviewPage ():JSX.Element{
   const film = useAppSelector(getFilm);
   const {id} = useParams();
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
   const filmId = Number(id);
 
   useEffect(()=>{dispatch(fetchFilmById(filmId));},[dispatch, filmId]);
 
   const handleReviewSubmit = (review: NewReview) => {
     dispatch(postFilmReview({filmId, review}));
-    const path = getSpecificPath(`${AppRoute.Film}/:id`, +filmId).concat('?tab=Reviews');
-    navigate(path);
   };
 
   if(!film || !id ){
