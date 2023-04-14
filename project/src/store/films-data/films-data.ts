@@ -6,7 +6,6 @@ import { FilmsState } from '../../types/state';
 
 const initialState:FilmsState = {
   genre: DEFAULT_GENRE,
-  filteredFilms: [],
   films: [],
   isFilmsLoading:false,
 };
@@ -26,6 +25,10 @@ export const filmsData = createSlice({
       .addCase(fetchFilms.fulfilled, (state, action) => {
         state.isFilmsLoading = false;
         state.films = action.payload ?? [];
+      })
+      .addCase(fetchFilms.rejected, (state, ) => {
+        state.isFilmsLoading = false;
+        state.films = [];
       });
   }
 });

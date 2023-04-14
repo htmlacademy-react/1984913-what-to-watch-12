@@ -4,12 +4,12 @@ import { fetchFilmReviews, postFilmReview } from './api-actions';
 import { ReviewsState } from '../../types/state';
 
 const initialState:ReviewsState = {
-  comments: [],
+  reviews: [],
   isReviewsLoading: false,
   isReviewPosting: false
 };
 
-export const commentsData = createSlice({
+export const reviewsData = createSlice({
   name: ReducerName.Reviews,
   initialState,
   reducers:{},
@@ -20,7 +20,7 @@ export const commentsData = createSlice({
       })
       .addCase(fetchFilmReviews.fulfilled, (state, action) => {
         state.isReviewsLoading = false;
-        state.comments = action.payload ?? [];
+        state.reviews = action.payload ?? [];
       })
       .addCase(postFilmReview.pending, (state) => {
         state.isReviewPosting = true;

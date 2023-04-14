@@ -20,7 +20,6 @@ export type FilmState = {
 
 export type FilmsState = {
   genre: Genre;
-  filteredFilms: Films;
   films: Films;
   isFilmsLoading: boolean;
 };
@@ -31,7 +30,7 @@ export type PromoFilmState = {
 }
 
 export type ReviewsState ={
-  comments: Reviews;
+  reviews: Reviews;
   isReviewsLoading: boolean;
   isReviewPosting: boolean;
 }
