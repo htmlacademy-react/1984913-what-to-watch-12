@@ -2,7 +2,7 @@ import { Film, Films } from '../types/film';
 import {lorem, image,internet, datatype, name, date } from 'faker';
 import { FILMS_AMOUNT } from './constants';
 import { UserData } from '../types/user-auth-data';
-import { Review, Reviews } from '../types/review';
+import { NewReview, Review, Reviews } from '../types/review';
 
 const MOCK_DEFAULT_NUMBER = 1;
 const MOCK_AMOUNT = 3;
@@ -59,5 +59,10 @@ export const makeFakeReview = (id = MOCK_DEFAULT_NUMBER):Review=>({
     id: datatype.number(MOCK_AMOUNT),
     name: name.firstName(),
   }});
+
+export const makeFakeNewReview = ():NewReview=>({
+  comment: lorem.sentence(MOCK_AMOUNT),
+  rating: fakeRating,
+});
 
 export const makeFakeReviews = (amount = MOCK_REVIEWS_AMOUNT):Reviews=> Array.from({length:amount},(_, i)=> makeFakeReview(i + 1));

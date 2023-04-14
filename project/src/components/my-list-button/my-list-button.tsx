@@ -3,7 +3,7 @@ import { getFavoriteFilmsAmount, getIsFilmFavorite } from '../../store/favorite-
 import { getIsAuthorized } from '../../store/user-data/selectors';
 import { fetchFavoriteFilms, postFavoriteFilm } from '../../store/favorite-films-data/api-actions';
 import { useNavigate } from 'react-router-dom';
-import { AppRoute } from '../../utils/constants';
+import { AppRoute, FilmStatusToCode } from '../../utils/constants';
 import { useEffect } from 'react';
 
 type MyListButtonProps = {
@@ -23,7 +23,7 @@ function MyListButton({ filmId }: MyListButtonProps): JSX.Element {
   }, [isAuthorized, dispatch]);
   const handleButtonClick = () => {
     isAuthorized
-      ? dispatch(postFavoriteFilm({ filmId, status: isFavorite ? 0 : 1 }))
+      ? dispatch(postFavoriteFilm({ filmId, status: isFavorite ? FilmStatusToCode.Disliked : FilmStatusToCode.Favorite }))
       : navigate(AppRoute.SignIn);
   };
   return (

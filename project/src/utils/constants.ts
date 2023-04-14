@@ -107,6 +107,11 @@ export const ReviewLength = {
   Max: 400,
 };
 
+export const FilmStatusToCode = {
+  Favorite: 1,
+  Disliked: 0,
+};
+
 export const RATING_NAMES = [
   { rating: 0, name: 'Bad' },
   { rating: 3, name: 'Normal' },
