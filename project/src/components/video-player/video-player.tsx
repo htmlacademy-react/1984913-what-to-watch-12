@@ -5,7 +5,6 @@ type VideoPlayerProps = {
   isActive: boolean;
   src: string;
   poster: string;
-
 };
 
 function VideoPlayer({ isActive, src, poster }: VideoPlayerProps): JSX.Element {
@@ -38,7 +37,7 @@ function VideoPlayer({ isActive, src, poster }: VideoPlayerProps): JSX.Element {
     videoRef.current.pause();
   },[isPlaying]);
 
-  return <video ref = {videoRef} src={src} poster={poster} width="280" height="175" autoPlay loop muted />;
+  return <video ref = {videoRef} data-testid="video-element" src={src} poster={poster} width="280" height="175" autoPlay loop muted />;
 }
 
 export default VideoPlayer;

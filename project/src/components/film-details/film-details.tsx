@@ -33,8 +33,8 @@ function FilmDetails({film}:FilmDetailsProps):JSX.Element{
           <span className="film-card__details-value">{filmDuration}</span>
         </p>
         <p className="film-card__details-item">
-          <strong className="film-card__details-name">{genre}</strong>
-          <span className="film-card__details-value">Comedy</span>
+          <strong className="film-card__details-name">Genre</strong>
+          <span className="film-card__details-value">{genre}</span>
         </p>
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Released</strong>
