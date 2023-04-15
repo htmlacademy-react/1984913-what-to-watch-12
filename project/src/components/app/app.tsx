@@ -14,8 +14,7 @@ import { checkAuth } from '../../store/user-data/api-actions';
 import { useEffect } from 'react';
 import { getAuthCheckedStatus, getIsAuthorized } from '../../store/user-data/selectors';
 import Loader from '../loader/loader';
-import HistoryRouter from '../history-route/history-route';
-import browserHistory from '../../browser-history';
+
 
 function App(): JSX.Element {
   const isAuthChecked = useAppSelector(getAuthCheckedStatus);
@@ -32,29 +31,27 @@ function App(): JSX.Element {
 
   return (
     <HelmetProvider>
-      <HistoryRouter history={browserHistory}>
-        <Routes>
-          <Route path={AppRoute.Main} element={<MainPage/>}/>
-          <Route path={AppRoute.MyList} element={
-            <PrivateRoute isAuthorized={isAuthorized} >
-              <MyListPage />
+      <Routes>
+        <Route path={AppRoute.Main} element={<MainPage/>}/>
+        <Route path={AppRoute.MyList} element={
+          <PrivateRoute isAuthorized={isAuthorized} >
+            <MyListPage />
+          </PrivateRoute>
+        }
+        />
+        <Route path={AppRoute.SignIn} element={<SingInPage/>}/>
+        <Route path={`${AppRoute.Film}/:id`}>
+          <Route index element={<FilmPage />}/>
+          <Route path={`${AppRoute.Review}`} element={
+            <PrivateRoute isAuthorized={isAuthorized}>
+              <ReviewPage />
             </PrivateRoute>
           }
           />
-          <Route path={AppRoute.SignIn} element={<SingInPage/>}/>
-          <Route path={`${AppRoute.Film}/:id`}>
-            <Route index element={<FilmPage />}/>
-            <Route path={`${AppRoute.Review}`} element={
-              <PrivateRoute isAuthorized={isAuthorized}>
-                <ReviewPage />
-              </PrivateRoute>
-            }
-            />
-          </Route>
-          <Route path={`${AppRoute.Player}/:id`} element={<PlayerPage />}/>
-          <Route path={AppRoute.Error} element={<ErrorPage/>}/>
-        </Routes>
-      </HistoryRouter>
+        </Route>
+        <Route path={`${AppRoute.Player}/:id`} element={<PlayerPage />}/>
+        <Route path={AppRoute.Error} element={<ErrorPage/>}/>
+      </Routes>
     </HelmetProvider>
   );
 }

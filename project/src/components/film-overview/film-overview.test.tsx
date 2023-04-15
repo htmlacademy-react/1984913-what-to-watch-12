@@ -1,22 +1,14 @@
-import {render, screen} from '@testing-library/react';
-import {HelmetProvider} from 'react-helmet-async';
-import HistoryRouter from '../history-route/history-route';
-import {createMemoryHistory} from 'history';
+import { render, screen } from '@testing-library/react';
 import { makeFakeFilm } from '../../utils/mocks';
 import FilmOverview from './film-overview';
 
 const mockFilm = makeFakeFilm();
-const history = createMemoryHistory();
 
 describe('Component: FilmOverview', () => {
   it('should render correctly', () => {
 
     render(
-      <HelmetProvider>
-        <HistoryRouter history={history}>
-          <FilmOverview film={mockFilm}/>
-        </HistoryRouter>
-      </HelmetProvider>
+      <FilmOverview film={mockFilm} />
     );
 
     const scoresTextElement = screen.getByText(`${mockFilm.scoresCount} ratings`);

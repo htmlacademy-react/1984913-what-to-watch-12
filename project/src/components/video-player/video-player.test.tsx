@@ -1,27 +1,19 @@
-import {render, screen} from '@testing-library/react';
-import {HelmetProvider} from 'react-helmet-async';
-import HistoryRouter from '../history-route/history-route';
-import {createMemoryHistory} from 'history';
+import { render, screen} from '@testing-library/react';
 import { makeFakeFilm} from '../../utils/mocks';
 import VideoPlayer from './video-player';
 
 const mockFilm = makeFakeFilm();
-const history = createMemoryHistory();
 
 describe('Component: VideoPlayer', () => {
-
+  beforeAll(() => {
+    window.HTMLMediaElement.prototype.play = jest.fn();
+    window.HTMLMediaElement.prototype.pause = jest.fn();
+  });
   it('should render correctly', () => {
-
     render(
-      <HelmetProvider>
-        <HistoryRouter history={history}>
-          <VideoPlayer src={mockFilm.previewVideoLink} poster={mockFilm.previewImage}isActive/>
-        </HistoryRouter>
-      </HelmetProvider>
+      <VideoPlayer src={mockFilm.previewVideoLink} poster={mockFilm.previewImage} isActive/>
     );
-
     const videoElement = screen.getByTestId('video-element');
-
     expect(videoElement).toBeInTheDocument();
   });
 });

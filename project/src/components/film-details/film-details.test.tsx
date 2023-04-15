@@ -1,22 +1,14 @@
-import {render, screen} from '@testing-library/react';
-import {HelmetProvider} from 'react-helmet-async';
-import HistoryRouter from '../history-route/history-route';
-import {createMemoryHistory} from 'history';
+import { render, screen } from '@testing-library/react';
 import FilmDetails from './film-details';
 import { makeFakeFilm } from '../../utils/mocks';
 
 const mockFilm = makeFakeFilm();
-const history = createMemoryHistory();
 
 describe('Component: FilmDetails', () => {
   it('should render correctly', () => {
 
     render(
-      <HelmetProvider>
-        <HistoryRouter history={history}>
-          <FilmDetails film={mockFilm}/>
-        </HistoryRouter>
-      </HelmetProvider>
+      <FilmDetails film={mockFilm} />
     );
 
     const directorTextElement = screen.getByText('Director');
