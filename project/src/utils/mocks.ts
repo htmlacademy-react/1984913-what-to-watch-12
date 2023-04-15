@@ -17,7 +17,7 @@ const MockReleaseDate = {
   Min:1980,
   Max:2023,
 };
-const fakeFullName = `${name.firstName()} ${name.lastName()}`;
+const getFakeFullName = ()=> `${name.firstName()} ${name.lastName()}`;
 const fakeRating = datatype.number({min:MockRating.Min, max:MockRating.Max, precision:MockRating.Precision});
 
 export const makeFakeFilm = (id = MOCK_DEFAULT_NUMBER):Film=>({
@@ -32,8 +32,8 @@ export const makeFakeFilm = (id = MOCK_DEFAULT_NUMBER):Film=>({
   description: lorem.sentences(MOCK_AMOUNT),
   rating: fakeRating,
   scoresCount: datatype.number(MOCK_SCORES_AMOUNT),
-  director: fakeFullName,
-  starring: Array.from({length:MOCK_AMOUNT}, ()=> fakeFullName),
+  director: getFakeFullName(),
+  starring: Array.from({length:MOCK_AMOUNT}, ()=> getFakeFullName()),
   runTime: datatype.number(),
   genre: lorem.sentence(MOCK_DEFAULT_NUMBER),
   released: datatype.number({min:MockReleaseDate.Min, max:MockReleaseDate.Max}),
