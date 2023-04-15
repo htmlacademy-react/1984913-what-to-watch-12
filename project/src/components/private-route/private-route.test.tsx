@@ -5,7 +5,7 @@ import {Provider} from 'react-redux';
 import {configureMockStore} from '@jedmao/redux-mock-store';
 import HistoryRouter from '../history-route/history-route';
 import PrivateRoute from './private-route';
-import { AppRoute, AuthStatus } from '../../utils/constants';
+import { AppRoute, AuthStatus, ReducerName } from '../../utils/constants';
 
 const mockStore = configureMockStore();
 const history = createMemoryHistory();
@@ -17,7 +17,7 @@ describe('Component: PrivateRouter', () => {
 
   it('should render component for public route, when user not authorized', () => {
     const store = mockStore({
-      USER: {authStatus: AuthStatus.NoAuth,userData: null}
+      [ReducerName.User]: {authStatus: AuthStatus.NoAuth,userData: null}
     });
     const isAuthorized = false;
     render(
@@ -49,7 +49,7 @@ describe('Component: PrivateRouter', () => {
 
   it('should render component for private route, when user authorized', () => {
     const store = mockStore({
-      USER: {authStatus: AuthStatus.Auth},
+      [ReducerName.User]: {authStatus: AuthStatus.Auth},
     });
     const isAuthorized = true;
 

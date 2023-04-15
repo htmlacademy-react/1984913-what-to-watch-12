@@ -15,17 +15,17 @@ describe('Component: PlayFilmButton', () => {
   it('should render correctly', () => {
 
     render(
-      <HelmetProvider>
-        <HistoryRouter history={history}>
+      <HistoryRouter history={history}>
+        <HelmetProvider>
           <PlayFilmButton filmId={mockFilm.id}/>
-        </HistoryRouter>
-      </HelmetProvider>
+        </HelmetProvider>
+      </HistoryRouter>
     );
     const buttonTextElement = screen.getByText('Play');
     expect(buttonTextElement).toBeInTheDocument();
   });
   it('should redirect to player when button clicked', async () => {
-    history.push('/fake');
+    history.push(AppRoute.Main);
 
     render(
       <HistoryRouter history={history}>

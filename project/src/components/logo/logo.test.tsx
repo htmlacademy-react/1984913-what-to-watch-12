@@ -5,17 +5,18 @@ import Logo from './logo';
 import userEvent from '@testing-library/user-event';
 import { createMemoryHistory } from 'history';
 import HistoryRouter from '../history-route/history-route';
+import { AppRoute } from '../../utils/constants';
 
 const history = createMemoryHistory();
 const mainComponent = () => <h1>This is main page</h1>;
 describe('Component: Logo', () => {
   it('should render correctly', () => {
     render(
-      <HelmetProvider>
-        <HistoryRouter history={history}>
+      <HistoryRouter history={history}>
+        <HelmetProvider>
           <Logo />
-        </HistoryRouter>
-      </HelmetProvider>
+        </HelmetProvider>
+      </HistoryRouter>
     );
     const linkLetterWElements = screen.getAllByText('W');
     const linkLetterTElement = screen.getByText('T');
@@ -23,7 +24,7 @@ describe('Component: Logo', () => {
     expect(linkLetterTElement).toBeInTheDocument();
   });
   it('should redirect to main page when user clicked', async () => {
-    history.push('/fake');
+    history.push(AppRoute.SignIn);
     render(
       <HistoryRouter history={history}>
         <Routes>

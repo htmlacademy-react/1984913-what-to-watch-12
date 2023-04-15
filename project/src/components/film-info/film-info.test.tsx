@@ -12,11 +12,11 @@ const history = createMemoryHistory();
 describe('Component: FilmInfo', () => {
   it('should render correctly', () => {
     render(
-      <HelmetProvider>
-        <HistoryRouter history={history}>
+      <HistoryRouter history={history}>
+        <HelmetProvider>
           <FilmInfo film={mockFilm} />
-        </HistoryRouter>
-      </HelmetProvider>
+        </HelmetProvider>
+      </HistoryRouter>
     );
     Object.values(FilmTab).forEach((tab) => {
       const tabTextElement = screen.getByText(tab);

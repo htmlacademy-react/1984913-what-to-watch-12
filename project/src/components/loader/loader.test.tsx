@@ -8,11 +8,11 @@ const history = createMemoryHistory();
 describe('Component: Loader', () => {
   it('should render correctly', () => {
     render(
-      <HelmetProvider>
-        <HistoryRouter history={history}>
+      <HistoryRouter history={history}>
+        <HelmetProvider>
           <Loader />
-        </HistoryRouter>
-      </HelmetProvider>
+        </HelmetProvider>
+      </HistoryRouter>
     );
     const headerElement = screen.getByText('Loading...');
     const textElement = screen.getByText('Please wait');

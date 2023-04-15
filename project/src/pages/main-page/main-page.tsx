@@ -35,7 +35,7 @@ function MainPage(): JSX.Element {
     return <Loader/>;
   }
 
-  if( !promoFilm){
+  if(!promoFilm){
     return <ErrorPage/>;
   }
 

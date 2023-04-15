@@ -22,11 +22,11 @@ describe('Component: SmallFilmCard', () => {
   it('should render correctly', () => {
     render(
       <Provider store={store}>
-        <HelmetProvider>
-          <HistoryRouter history={history}>
+        <HistoryRouter history={history}>
+          <HelmetProvider>
             <SmallFilmCard film={mockFilm} />
-          </HistoryRouter>
-        </HelmetProvider>
+          </HelmetProvider>
+        </HistoryRouter>
       </Provider>
     );
     const nameTextElement = screen.getByText(`${mockFilm.name}`);
@@ -38,7 +38,7 @@ describe('Component: SmallFilmCard', () => {
   });
 
   it('should redirect to film page when user clicked to card link', async () => {
-    history.push('/');
+    history.push(AppRoute.Main);
     render(
       <HistoryRouter history={history}>
         <Routes>

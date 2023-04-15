@@ -9,11 +9,11 @@ describe('Component: NotFoundScreen', () => {
   it('should render correctly', () => {
 
     render(
-      <HelmetProvider>
-        <HistoryRouter history={history}>
+      <HistoryRouter history={history}>
+        <HelmetProvider>
           <ErrorPage/>
-        </HistoryRouter>
-      </HelmetProvider>
+        </HelmetProvider>
+      </HistoryRouter>
     );
 
     const headerElement = screen.getByText('404. Page not found');

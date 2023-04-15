@@ -6,7 +6,7 @@ import { makeFakeFilm } from '../../utils/mocks';
 import PromoFilmCard from './promo-film-card';
 import { Provider } from 'react-redux';
 import { configureMockStore } from '@jedmao/redux-mock-store';
-import { AuthStatus } from '../../utils/constants';
+import { AuthStatus, ReducerName } from '../../utils/constants';
 import { createAPI } from '../../services/api';
 import thunk from 'redux-thunk';
 
@@ -17,17 +17,17 @@ const middlewares = [thunk.withExtraArgument(api)];
 const mockStore = configureMockStore(middlewares);
 describe('Component: PromoFilmCard', () => {
   const store = mockStore({
-    USER: { authStatus: AuthStatus.Auth },
-    FAVORITE: { films: [] }
+    [ReducerName.User]: { authStatus: AuthStatus.Auth },
+    [ReducerName.FavoriteFilms]: { films: [] }
   });
   it('should render correctly', () => {
     render(
       <Provider store={store}>
-        <HelmetProvider>
-          <HistoryRouter history={history}>
+        <HistoryRouter history={history}>
+          <HelmetProvider>
             <PromoFilmCard promoFilm={mockFilm} />
-          </HistoryRouter>
-        </HelmetProvider>
+          </HelmetProvider>
+        </HistoryRouter>
       </Provider>
     );
     const nameTextElement = screen.getByText(`${mockFilm.name}`);

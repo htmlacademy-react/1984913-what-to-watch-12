@@ -7,14 +7,15 @@ import { createMemoryHistory } from 'history';
 import { configureMockStore } from '@jedmao/redux-mock-store';
 import { Route, Routes } from 'react-router-dom';
 import { makeFakeFilm } from '../../utils/mocks';
-import { AppRoute } from '../../utils/constants';
+import { AppRoute, ReducerName } from '../../utils/constants';
 import { HelmetProvider } from 'react-helmet-async';
 
 const history = createMemoryHistory();
 const mockStore = configureMockStore();
-const store = mockStore({REVIEWS:{isReviewPosting:false}});
+const store = mockStore({[ReducerName.Reviews]:{isReviewPosting:false}});
 const mockFilm = makeFakeFilm();
 const handleSubmitClick = jest.fn();
+const reviewsComponent = ()=> <h1>This is film reviews page</h1>;
 
 describe('Component: ReviewForm', () => {
 
@@ -53,7 +54,7 @@ describe('Component: ReviewForm', () => {
             <Routes>
               <Route
                 path={`${AppRoute.Film}/${mockFilm.id}`}
-                element={<h1>This is film reviews page</h1>}
+                element={reviewsComponent()}
               />
               <Route
                 path={path}

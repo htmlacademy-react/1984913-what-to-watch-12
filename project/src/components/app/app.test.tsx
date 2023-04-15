@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { configureMockStore } from '@jedmao/redux-mock-store';
 import HistoryRouter from '../history-route/history-route';
 import App from './app';
-import { AppRoute, AuthStatus, DEFAULT_GENRE } from '../../utils/constants';
+import { AppRoute, AuthStatus, DEFAULT_GENRE, ReducerName } from '../../utils/constants';
 import { makeFakeFilms, makeFakeReviews, makeFakeUser } from '../../utils/mocks';
 import { createAPI } from '../../services/api';
 import thunk from 'redux-thunk';
@@ -17,13 +17,13 @@ const mockFilm = mockFilms[0];
 const mockReviews = makeFakeReviews();
 const mockUser = makeFakeUser();
 const store = mockStore({
-  USER: { authStatus: AuthStatus.Auth, userData: mockUser },
-  FILMS: { genre: DEFAULT_GENRE, films: mockFilms, isFilmsLoading: false },
-  PROMO: { promoFilm: mockFilm, isPromoFilmLoading: false, },
-  FILM: { film: mockFilm, isFilmLoading: false, hasError: false, },
-  SIMILAR: { similarFilms: mockFilms, isSimilarFilmsLoading: false, },
-  FAVORITE: { films: mockFilms, isFavoriteFilmsLoading: false, },
-  REVIEWS: { reviews: mockReviews, isReviewsLoading: false, isReviewPosting: false },
+  [ReducerName.User]: { authStatus: AuthStatus.Auth, userData: mockUser },
+  [ReducerName.Films]: { genre: DEFAULT_GENRE, films: mockFilms, isFilmsLoading: false },
+  [ReducerName.PromoFilm]: { promoFilm: mockFilm, isPromoFilmLoading: false, },
+  [ReducerName.Film]: { film: mockFilm, isFilmLoading: false, hasError: false, },
+  [ReducerName.SimilarFilms]: { similarFilms: mockFilms, isSimilarFilmsLoading: false, },
+  [ReducerName.FavoriteFilms]: { films: mockFilms, isFavoriteFilmsLoading: false, },
+  [ReducerName.Reviews]: { reviews: mockReviews, isReviewsLoading: false, isReviewPosting: false },
 });
 
 const history = createMemoryHistory();
