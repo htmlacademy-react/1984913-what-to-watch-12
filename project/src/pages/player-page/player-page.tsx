@@ -32,7 +32,11 @@ function PlayerPage(): JSX.Element {
   }, [dispatch, id]);
 
   useEffect(() => {
-    setIsLoaded(!isFilmLoading);
+    let isPlayerMounted = true;
+    isPlayerMounted && setIsLoaded(!isFilmLoading);
+    return()=>{
+      isPlayerMounted = false;
+    };
   }, [isFilmLoading]);
 
   useEffect(() => {

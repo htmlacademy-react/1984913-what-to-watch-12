@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import ShowMoreButton from './show-more-button';
 
@@ -18,7 +18,7 @@ describe('Component: ShowMoreButton', () => {
     render(
       <ShowMoreButton onShown={handleShownClick} />,
     );
-    await userEvent.click(screen.getByRole('button'));
+    await waitFor(async()=> await userEvent.click(screen.getByRole('button')));
     expect(handleShownClick).toBeCalled();
   });
 });

@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import HistoryRouter from '../history-route/history-route';
 import { Provider } from 'react-redux';
@@ -32,8 +32,11 @@ describe('Component: SignInForm', () => {
     );
     expect(screen.getByLabelText('Email address')).toBeInTheDocument();
     expect(screen.getByLabelText('Password')).toBeInTheDocument();
-    await userEvent.type(screen.getByTestId('email-input'), mockAuth.email);
-    await userEvent.type(screen.getByTestId('password-input'), mockAuth.password);
+    await waitFor(async()=>{
+      await userEvent.type(screen.getByTestId('email-input'), mockAuth.email);
+      await userEvent.type(screen.getByTestId('password-input'), mockAuth.password);
+    });
+
     expect(screen.getByDisplayValue(mockAuth.email)).toBeInTheDocument();
     expect(screen.getByDisplayValue(mockAuth.password)).toBeInTheDocument();
   });

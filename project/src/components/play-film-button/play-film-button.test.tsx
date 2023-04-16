@@ -1,4 +1,4 @@
-import {fireEvent, render, screen} from '@testing-library/react';
+import { render, screen} from '@testing-library/react';
 import {HelmetProvider} from 'react-helmet-async';
 import {Routes, Route} from 'react-router-dom';
 import {createMemoryHistory} from 'history';
@@ -6,6 +6,7 @@ import HistoryRouter from '../history-route/history-route';
 import PlayFilmButton from './play-film-button';
 import { makeFakeFilm } from '../../utils/mocks';
 import { AppRoute } from '../../utils/constants';
+import userEvent from '@testing-library/user-event';
 
 const history = createMemoryHistory();
 const mockFilm = makeFakeFilm();
@@ -41,7 +42,7 @@ describe('Component: PlayFilmButton', () => {
         </Routes>
       </HistoryRouter>);
 
-    fireEvent.click(screen.getByRole('button'));
+    await userEvent.click(screen.getByRole('button'));
     expect(screen.queryByText('Play')).not.toBeInTheDocument();
     await screen.findByText('This is player');
   });

@@ -13,7 +13,9 @@ function MyListPage():JSX.Element{
   const filmsAmount = useAppSelector(getFavoriteFilmsAmount);
   const isFavoriteLoading = useAppSelector(getFavoriteFilmsStatus);
   const dispatch = useAppDispatch();
-  useEffect(()=>{dispatch(fetchFavoriteFilms());},[dispatch]);
+  useEffect(()=>{
+    dispatch(fetchFavoriteFilms());
+  },[dispatch]);
   if(isFavoriteLoading){
     return <Loader/>;
   }

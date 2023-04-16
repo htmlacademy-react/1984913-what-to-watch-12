@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { HelmetProvider } from 'react-helmet-async';
 import { Routes, Route } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
@@ -50,8 +50,11 @@ describe('Component: UserBlock', () => {
         </HistoryRouter>
       </Provider>
     );
-    await userEvent.click(screen.getByRole('link'));
-    await screen.findByText('This is sign in page');
+    await waitFor(async()=>{
+      await userEvent.click(screen.getByRole('link'));
+      await screen.findByText('This is sign in page');
+    });
+
   });
   it('should redirect to my list page when user clicked', async () => {
     const store = mockStore({ [ReducerName.User]: { authStatus: AuthStatus.Auth, userData: mockUser } });

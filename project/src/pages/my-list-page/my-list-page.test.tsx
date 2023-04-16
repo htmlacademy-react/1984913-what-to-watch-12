@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { HelmetProvider } from 'react-helmet-async';
 import HistoryRouter from '../../components/history-route/history-route';
 import { createMemoryHistory } from 'history';
@@ -61,7 +61,7 @@ describe('Component: MyListPage', () => {
         </HistoryRouter>
       </Provider>,
     );
-    await userEvent.click(screen.getByText('Sign out'));
+    await waitFor(async()=> await userEvent.click(screen.getByText('Sign out')));
     expect(screen.getByText('This is main page')).toBeInTheDocument();
     expect(history.location.pathname).toBe(`${AppRoute.Main}`);
   });

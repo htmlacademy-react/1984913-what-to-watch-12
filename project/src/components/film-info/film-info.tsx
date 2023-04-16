@@ -18,11 +18,15 @@ function FilmInfo({film}:FilmInfoProps):JSX.Element{
   const [currentTab, setCurrentTab] = useState<string>();
 
   useEffect(()=>{
-    if(searchTab){
+    let isFilmInfoMounted = true;
+    if(searchTab && isFilmInfoMounted){
       setCurrentTab(searchTab);
     }else{
       setCurrentTab(FilmTab.Default);
     }
+    return()=>{
+      isFilmInfoMounted = false;
+    };
   },[searchTab]);
 
   const getCurrentInfo = ()=>{

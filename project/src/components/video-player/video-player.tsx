@@ -12,16 +12,16 @@ function VideoPlayer({ isActive, src, poster }: VideoPlayerProps): JSX.Element {
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
   useEffect(()=>{
-    let isMounted = true;
+    let isVideoPlayerMounted = true;
     let timer:ReturnType<typeof setTimeout>;
 
-    if(isMounted && isActive){
+    if(isVideoPlayerMounted && isActive){
       timer = setTimeout(setIsPlaying, PLAYING_DELAY, isActive);
     }
 
     return()=>{
       clearTimeout(timer);
-      isMounted = false;
+      isVideoPlayerMounted = false;
     };
 
   },[isActive]);

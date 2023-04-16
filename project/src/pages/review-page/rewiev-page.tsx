@@ -18,7 +18,9 @@ function ReviewPage ():JSX.Element{
   const dispatch = useAppDispatch();
   const filmId = Number(id);
 
-  useEffect(()=>{dispatch(fetchFilmById(filmId));},[dispatch, filmId]);
+  useEffect(()=>{
+    dispatch(fetchFilmById(filmId));
+  },[dispatch, filmId]);
 
   const handleReviewSubmit = (review: NewReview) => {
     dispatch(postFilmReview({filmId, review}));

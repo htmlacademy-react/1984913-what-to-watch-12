@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { HelmetProvider } from 'react-helmet-async';
 import { createMemoryHistory } from 'history';
 import HistoryRouter from '../history-route/history-route';
@@ -53,7 +53,7 @@ describe('Component: SmallFilmCard', () => {
         </Routes>
       </HistoryRouter>);
     expect(screen.queryByTestId('small-film-card-name')).not.toHaveValue(mockFilm.name);
-    await userEvent.click(screen.getAllByRole('link')[0]);
+    await waitFor(async()=> await userEvent.click(screen.getAllByRole('link')[0]));
     expect(screen.getByText('This is film page')).toBeInTheDocument();
   });
 

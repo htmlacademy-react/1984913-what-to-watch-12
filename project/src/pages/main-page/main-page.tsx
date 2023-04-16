@@ -28,7 +28,11 @@ function MainPage(): JSX.Element {
   }, [dispatch]);
 
   useEffect(() => {
-    setShownAmount(Math.min(FILMS_AMOUNT, filteredFilms.length));
+    let isMainPageMounted = true;
+    isMainPageMounted && setShownAmount(Math.min(FILMS_AMOUNT, filteredFilms.length));
+    return()=>{
+      isMainPageMounted = false;
+    };
   }, [filteredFilms]);
 
   if(isFilmsLoading || isPromoFilmLoading){
