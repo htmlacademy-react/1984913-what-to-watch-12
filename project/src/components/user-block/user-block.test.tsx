@@ -1,7 +1,6 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { HelmetProvider } from 'react-helmet-async';
 import { Routes, Route } from 'react-router-dom';
-import userEvent from '@testing-library/user-event';
 import { createMemoryHistory } from 'history';
 import HistoryRouter from '../history-route/history-route';
 import UserBlock from './user-block';
@@ -50,10 +49,9 @@ describe('Component: UserBlock', () => {
         </HistoryRouter>
       </Provider>
     );
-    await waitFor(async()=>{
-      await userEvent.click(screen.getByRole('link'));
-      await screen.findByText('This is sign in page');
-    });
+    fireEvent.click(screen.getByRole('link'));
+    await screen.findByText('This is sign in page');
+
   });
   it('should redirect to my list page when user clicked', async () => {
     const store = mockStore({ [ReducerName.User]: { authStatus: AuthStatus.Auth, userData: mockUser } });
@@ -74,9 +72,7 @@ describe('Component: UserBlock', () => {
         </HistoryRouter>
       </Provider>
     );
-    await waitFor(async()=>{
-      await userEvent.click(screen.getAllByRole('link')[0]);
-    });
+    fireEvent.click(screen.getAllByRole('link')[0]);
     await screen.findByText('This is my list page');
   });
 });

@@ -1,8 +1,7 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { HelmetProvider } from 'react-helmet-async';
 import { Routes, Route } from 'react-router-dom';
 import Logo from './logo';
-import userEvent from '@testing-library/user-event';
 import { createMemoryHistory } from 'history';
 import HistoryRouter from '../history-route/history-route';
 import { AppRoute } from '../../utils/constants';
@@ -39,9 +38,8 @@ describe('Component: Logo', () => {
         </Routes>
       </HistoryRouter>);
     expect(screen.queryByText('This is main page')).not.toBeInTheDocument();
-    await waitFor(async()=> {
-      await userEvent.click(screen.getByRole('link'));
-    });
+    fireEvent.click(screen.getByRole('link'));
+
 
     await screen.findByText('This is main page');
   });

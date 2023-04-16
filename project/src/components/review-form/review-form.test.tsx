@@ -1,5 +1,4 @@
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { fireEvent, render, screen } from '@testing-library/react';
 import ReviewForm from './review-form';
 import HistoryRouter from '../history-route/history-route';
 import { Provider } from 'react-redux';
@@ -34,7 +33,7 @@ describe('Component: ReviewForm', () => {
     });
   });
 
-  it('should send review and redirect when clicked', async () => {
+  it('should send review and redirect when clicked', () => {
     const path = `${AppRoute.Film}/${mockFilm.id}/${AppRoute.Review}`;
     const reviewsPath = `${AppRoute.Film}/${mockFilm.id}`;
     history.push(path);
@@ -69,9 +68,7 @@ describe('Component: ReviewForm', () => {
     fireEvent.click(screen.getByLabelText('Rating 1'));
     fireEvent.change(screen.getByTestId('review-text'), {target: {value: mockText}});
     expect(screen.getByTestId('submit-review')).not.toHaveAttribute('disabled');
-    await waitFor(async()=>{
-      await userEvent.click(screen.getByTestId('submit-review'));
-    });
+    fireEvent.click(screen.getByTestId('submit-review'));
     expect(handleSubmitClick).toBeCalled();
     expect(history.location.pathname).toBe(reviewsPath);
     expect(screen.getByText('This is film reviews page')).toBeInTheDocument();

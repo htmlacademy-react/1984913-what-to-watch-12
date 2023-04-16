@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, render, screen} from '@testing-library/react';
 import { HelmetProvider } from 'react-helmet-async';
 import HistoryRouter from '../../components/history-route/history-route';
 import { createMemoryHistory } from 'history';
@@ -10,7 +10,6 @@ import { createAPI } from '../../services/api';
 import thunk from 'redux-thunk';
 import MyListPage from './my-list-page';
 import { Route, Routes } from 'react-router-dom';
-import userEvent from '@testing-library/user-event';
 
 const api = createAPI();
 const middlewares = [thunk.withExtraArgument(api)];
@@ -41,7 +40,7 @@ describe('Component: MyListPage', () => {
     expect(screen.getByText('My list')).toBeInTheDocument();
     expect(history.location.pathname).toBe(`${AppRoute.MyList}`);
   });
-  it('should redirect to main page if clicked logout', async () => {
+  it('should redirect to main page if clicked logout', () => {
     const mainComponent = () => <h1>This is main page</h1>;
     render(
       <Provider store={store}>
@@ -61,9 +60,7 @@ describe('Component: MyListPage', () => {
         </HistoryRouter>
       </Provider>,
     );
-    await waitFor(async()=> {
-      await userEvent.click(screen.getByText('Sign out'));
-    });
+    fireEvent.click(screen.getByText('Sign out'));
     expect(screen.getByText('This is main page')).toBeInTheDocument();
     expect(history.location.pathname).toBe(`${AppRoute.Main}`);
   });

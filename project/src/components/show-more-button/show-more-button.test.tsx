@@ -1,5 +1,4 @@
-import { render, screen, waitFor } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { fireEvent, render, screen } from '@testing-library/react';
 import ShowMoreButton from './show-more-button';
 
 const handleShownClick = jest.fn();
@@ -14,13 +13,13 @@ describe('Component: ShowMoreButton', () => {
     expect(screen.getByRole('button')).toHaveClass('catalog__button');
   });
 
-  it('should show more films when clicked', async () => {
+  it('should show more films when clicked', () => {
     render(
       <ShowMoreButton onShown={handleShownClick} />,
     );
-    await waitFor(async()=> {
-      await userEvent.click(screen.getByRole('button'));
-    });
+
+    fireEvent.click(screen.getByRole('button'));
+
     expect(handleShownClick).toBeCalled();
   });
 });

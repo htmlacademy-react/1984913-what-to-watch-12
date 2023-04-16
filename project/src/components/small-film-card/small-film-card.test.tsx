@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { HelmetProvider } from 'react-helmet-async';
 import { createMemoryHistory } from 'history';
 import HistoryRouter from '../history-route/history-route';
@@ -10,7 +10,6 @@ import thunk from 'redux-thunk';
 import SmallFilmCard from './small-film-card';
 import { AppRoute } from '../../utils/constants';
 import { Route, Routes } from 'react-router-dom';
-import userEvent from '@testing-library/user-event';
 
 const history = createMemoryHistory();
 const mockFilm = makeFakeFilm();
@@ -41,7 +40,7 @@ describe('Component: SmallFilmCard', () => {
     });
   });
 
-  it('should redirect to film page when user clicked to card link', async () => {
+  it('should redirect to film page when user clicked to card link', () => {
     history.push(AppRoute.Main);
     render(
       <HistoryRouter history={history}>
@@ -57,9 +56,7 @@ describe('Component: SmallFilmCard', () => {
         </Routes>
       </HistoryRouter>);
     expect(screen.queryByTestId('small-film-card-name')).not.toHaveValue(mockFilm.name);
-    await waitFor(async()=> {
-      await userEvent.click(screen.getAllByRole('link')[0]);
-    });
+    fireEvent.click(screen.getAllByRole('link')[0]);
     expect(screen.getByText('This is film page')).toBeInTheDocument();
   });
 

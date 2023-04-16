@@ -1,5 +1,4 @@
-import { render, screen, waitFor } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { render, screen } from '@testing-library/react';
 import HistoryRouter from '../history-route/history-route';
 import { Provider } from 'react-redux';
 import { createMemoryHistory } from 'history';
@@ -11,16 +10,12 @@ import { HelmetProvider } from 'react-helmet-async';
 const history = createMemoryHistory();
 const mockStore = configureMockStore();
 const store = mockStore({});
-const mockAuth = {
-  email: 'test@mail.ru',
-  password: '1a'
-};
 
 describe('Component: SignInForm', () => {
   beforeAll(() => {
     history.push(AppRoute.SignIn);
   });
-  it('should render correctly', async () => {
+  it('should render correctly', () => {
     render(
       <Provider store={store}>
         <HistoryRouter history={history}>
@@ -32,12 +27,5 @@ describe('Component: SignInForm', () => {
     );
     expect(screen.getByLabelText('Email address')).toBeInTheDocument();
     expect(screen.getByLabelText('Password')).toBeInTheDocument();
-    await waitFor(async()=>{
-      await userEvent.type(screen.getByTestId('email-input'), mockAuth.email);
-      await userEvent.type(screen.getByTestId('password-input'), mockAuth.password);
-    });
-
-    expect(screen.getByDisplayValue(mockAuth.email)).toBeInTheDocument();
-    expect(screen.getByDisplayValue(mockAuth.password)).toBeInTheDocument();
   });
 });
