@@ -54,7 +54,6 @@ describe('Component: UserBlock', () => {
       await userEvent.click(screen.getByRole('link'));
       await screen.findByText('This is sign in page');
     });
-
   });
   it('should redirect to my list page when user clicked', async () => {
     const store = mockStore({ [ReducerName.User]: { authStatus: AuthStatus.Auth, userData: mockUser } });
@@ -75,7 +74,9 @@ describe('Component: UserBlock', () => {
         </HistoryRouter>
       </Provider>
     );
-    await userEvent.click(screen.getAllByRole('link')[0]);
+    await waitFor(async()=>{
+      await userEvent.click(screen.getAllByRole('link')[0]);
+    });
     await screen.findByText('This is my list page');
   });
 });

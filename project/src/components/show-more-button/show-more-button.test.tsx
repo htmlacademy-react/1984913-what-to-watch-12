@@ -18,7 +18,9 @@ describe('Component: ShowMoreButton', () => {
     render(
       <ShowMoreButton onShown={handleShownClick} />,
     );
-    await waitFor(async()=> await userEvent.click(screen.getByRole('button')));
+    await waitFor(async()=> {
+      await userEvent.click(screen.getByRole('button'));
+    });
     expect(handleShownClick).toBeCalled();
   });
 });

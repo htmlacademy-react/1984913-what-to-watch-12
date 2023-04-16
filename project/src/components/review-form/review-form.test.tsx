@@ -69,7 +69,9 @@ describe('Component: ReviewForm', () => {
     fireEvent.click(screen.getByLabelText('Rating 1'));
     fireEvent.change(screen.getByTestId('review-text'), {target: {value: mockText}});
     expect(screen.getByTestId('submit-review')).not.toHaveAttribute('disabled');
-    await waitFor(async()=> await userEvent.click(screen.getByTestId('submit-review')));
+    await waitFor(async()=>{
+      await userEvent.click(screen.getByTestId('submit-review'));
+    });
     expect(handleSubmitClick).toBeCalled();
     expect(history.location.pathname).toBe(reviewsPath);
     expect(screen.getByText('This is film reviews page')).toBeInTheDocument();

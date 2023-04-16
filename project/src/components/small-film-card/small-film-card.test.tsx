@@ -18,6 +18,10 @@ const api = createAPI();
 const middlewares = [thunk.withExtraArgument(api)];
 const mockStore = configureMockStore(middlewares);
 describe('Component: SmallFilmCard', () => {
+  beforeAll(() => {
+    window.HTMLMediaElement.prototype.play = () => Promise.resolve();
+    window.HTMLMediaElement.prototype.pause = jest.fn();
+  });
   const store = mockStore();
   it('should render correctly', () => {
     render(
@@ -53,7 +57,9 @@ describe('Component: SmallFilmCard', () => {
         </Routes>
       </HistoryRouter>);
     expect(screen.queryByTestId('small-film-card-name')).not.toHaveValue(mockFilm.name);
-    await waitFor(async()=> await userEvent.click(screen.getAllByRole('link')[0]));
+    await waitFor(async()=> {
+      await userEvent.click(screen.getAllByRole('link')[0]);
+    });
     expect(screen.getByText('This is film page')).toBeInTheDocument();
   });
 

@@ -1,4 +1,4 @@
-import { render, screen} from '@testing-library/react';
+import { render, screen, waitFor} from '@testing-library/react';
 import {HelmetProvider} from 'react-helmet-async';
 import {Routes, Route} from 'react-router-dom';
 import {createMemoryHistory} from 'history';
@@ -41,8 +41,10 @@ describe('Component: PlayFilmButton', () => {
           />
         </Routes>
       </HistoryRouter>);
+    await waitFor(async()=>{
+      await userEvent.click(screen.getByRole('button'));
 
-    await userEvent.click(screen.getByRole('button'));
+    });
     expect(screen.queryByText('Play')).not.toBeInTheDocument();
     await screen.findByText('This is player');
   });

@@ -61,7 +61,9 @@ describe('Component: MyListPage', () => {
         </HistoryRouter>
       </Provider>,
     );
-    await waitFor(async()=> await userEvent.click(screen.getByText('Sign out')));
+    await waitFor(async()=> {
+      await userEvent.click(screen.getByText('Sign out'));
+    });
     expect(screen.getByText('This is main page')).toBeInTheDocument();
     expect(history.location.pathname).toBe(`${AppRoute.Main}`);
   });

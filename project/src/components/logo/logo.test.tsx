@@ -39,7 +39,9 @@ describe('Component: Logo', () => {
         </Routes>
       </HistoryRouter>);
     expect(screen.queryByText('This is main page')).not.toBeInTheDocument();
-    await waitFor(async()=> await userEvent.click(screen.getByRole('link')));
+    await waitFor(async()=> {
+      await userEvent.click(screen.getByRole('link'));
+    });
 
     await screen.findByText('This is main page');
   });
