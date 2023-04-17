@@ -1,19 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { ReducerName, DEFAULT_GENRE } from '../../utils/constants';
-import { Genre, Films } from '../../types/film';
 import { fetchFilms } from './api-actions';
 import { changeGenre } from './action';
+import { FilmsState } from '../../types/state';
 
-type InitialState = {
-  genre: Genre;
-  filteredFilms: Films;
-  films: Films;
-  isFilmsLoading: boolean;
-}
-
-const initialState:InitialState = {
+const initialState:FilmsState = {
   genre: DEFAULT_GENRE,
-  filteredFilms: [],
   films: [],
   isFilmsLoading:false,
 };
@@ -33,6 +25,10 @@ export const filmsData = createSlice({
       .addCase(fetchFilms.fulfilled, (state, action) => {
         state.isFilmsLoading = false;
         state.films = action.payload ?? [];
+      })
+      .addCase(fetchFilms.rejected, (state, ) => {
+        state.isFilmsLoading = false;
+        state.films = [];
       });
   }
 });

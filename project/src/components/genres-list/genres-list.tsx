@@ -2,7 +2,7 @@ import { Link, useSearchParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { changeGenre } from '../../store/films-data/action';
 import { DEFAULT_GENRE} from '../../utils/constants';
-import { getActiveGenre, getFilmsData } from '../../store/films-data/selectors';
+import { getActiveGenre, getAllGenres } from '../../store/films-data/selectors';
 import { useEffect } from 'react';
 
 
@@ -11,8 +11,7 @@ function GenresList():JSX.Element{
   const [searchParams] = useSearchParams();
   const searchGenre = searchParams.get('genre');
   const activeGenre = useAppSelector(getActiveGenre);
-  const filmsData = useAppSelector(getFilmsData);
-  const genres = [DEFAULT_GENRE, ...new Set(filmsData.map(({genre})=>genre))];
+  const genres = useAppSelector(getAllGenres);
 
   useEffect(() => {
     if(searchGenre === activeGenre){

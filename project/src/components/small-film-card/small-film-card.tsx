@@ -26,7 +26,7 @@ function SmallFilmCard({ film }: SmallFilmCardProps): JSX.Element {
             : <img src={previewImage} alt={name} width="280" height="175" />}
         </div>
       </Link>
-      <h3 className="small-film-card__title">
+      <h3 className="small-film-card__title" data-testid="small-film-card-name">
         <Link className="small-film-card__link" to={pathName}>
           {name}
         </Link>

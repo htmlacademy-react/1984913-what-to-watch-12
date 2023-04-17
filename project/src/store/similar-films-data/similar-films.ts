@@ -1,14 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { ReducerName} from '../../utils/constants';
-import { Films } from '../../types/film';
 import { fetchSimilarFilms } from './api-actions';
+import { SimilarFilmsState } from '../../types/state';
 
-type InitialState = {
-  similarFilms: Films;
-  isSimilarFilmsLoading:boolean;
-}
-
-const initialState:InitialState = {
+const initialState:SimilarFilmsState = {
   similarFilms: [],
   isSimilarFilmsLoading:false,
 };

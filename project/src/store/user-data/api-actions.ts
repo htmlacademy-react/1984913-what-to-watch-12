@@ -2,9 +2,10 @@ import {AxiosInstance} from 'axios';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {AppDispatch, State} from '../../types/state.js';
 import {AuthData, UserData} from '../../types/user-auth-data.js';
-import { ApiError, ApiRoute, ReducerName } from '../../utils/constants';
+import { ApiError, ApiRoute, AppRoute, ReducerName } from '../../utils/constants';
 import {saveToken, dropToken} from '../../services/token';
 import { toast } from 'react-toastify';
+import { redirectToRoute } from '../action';
 
 export const checkAuth = createAsyncThunk<UserData, undefined, {
   dispatch: AppDispatch;
@@ -24,9 +25,11 @@ export const login = createAsyncThunk<UserData|void, AuthData, {
   extra: AxiosInstance;
 }>(
   `${ReducerName.User}/login`,
-  async (authData, { extra: api}) => {
-    try{ const {data} = await api.post<UserData>(ApiRoute.Login, authData);
+  async (authData, { dispatch, extra: api}) => {
+    try{
+      const {data} = await api.post<UserData>(ApiRoute.Login, authData);
       saveToken(data.token);
+      dispatch(redirectToRoute(AppRoute.Main));
       return data;}
     catch{
       toast.error(ApiError.Login, {toastId:'login'});

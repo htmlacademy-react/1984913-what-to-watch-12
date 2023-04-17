@@ -1,14 +1,9 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {fetchFavoriteFilms, postFavoriteFilm} from './api-actions';
-import {Films} from '../../types/film';
 import {ReducerName} from '../../utils/constants';
+import { FavoriteFilmsState } from '../../types/state';
 
-type InitialState = {
-  films: Films;
-  isFavoriteFilmsLoading: boolean;
-};
-
-const initialState:InitialState = {
+const initialState:FavoriteFilmsState = {
   films: [],
   isFavoriteFilmsLoading: false,
 };

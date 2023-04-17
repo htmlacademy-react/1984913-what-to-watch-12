@@ -17,3 +17,8 @@ export const getFilteredFilms = createSelector(
     return film.genre === genre;
   })
 );
+
+export const getAllGenres = createSelector(
+  [getFilmsData],
+  (films): string[] =>[DEFAULT_GENRE, ...new Set(films.map(({genre})=>genre))]
+);

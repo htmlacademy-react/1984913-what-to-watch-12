@@ -1,17 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { AuthStatus, ReducerName} from '../../utils/constants';
-import { UserAuthStatus, UserData } from '../../types/user-auth-data';
 import { checkAuth, login, logout } from './api-actions';
+import { UserState } from '../../types/state';
 
-type InitialState = {
- authStatus: UserAuthStatus;
- userData: UserData | null;
-}
-
-const initialState:InitialState = {
+const initialState:UserState = {
   authStatus:AuthStatus.Unknown,
   userData: null
-
 };
 
 export const userData = createSlice({

@@ -75,10 +75,11 @@ function ReviewForm({onReviewSubmit}:ReviewFormProps): JSX.Element {
             onChange={handleInputChange}
             value={formData.comment}
             disabled={isReviewPosting}
+            data-testid="review-text"
           >
           </textarea>
           <div className="add-review__submit">
-            <button className="add-review__btn" type="submit" disabled={isDisabled}>
+            <button className="add-review__btn" type="submit" data-testid="submit-review" disabled={isDisabled}>
               {isReviewPosting ? PostingMessage.InProgress : PostingMessage.Default}
             </button>
           </div>

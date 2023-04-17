@@ -4,7 +4,7 @@ import { filmsData } from './films-data/films-data';
 import { promoFilmData } from './promo-film-data/promo-film-data';
 import { filmData } from './film-data/film-data';
 import { similarFilmsData } from './similar-films-data/similar-films';
-import { commentsData } from './reviews-data/reviews-data';
+import { reviewsData } from './reviews-data/reviews-data';
 import { userData } from './user-data/user-data';
 import { favoriteFilmsData } from './favorite-films-data/favorite-films-data';
 
@@ -14,6 +14,6 @@ export const rootReducer = combineReducers({
   [ReducerName.Film]: filmData.reducer,
   [ReducerName.SimilarFilms]: similarFilmsData.reducer,
   [ReducerName.FavoriteFilms]: favoriteFilmsData.reducer,
-  [ReducerName.Reviews]: commentsData.reducer,
+  [ReducerName.Reviews]: reviewsData.reducer,
   [ReducerName.User]: userData.reducer
 });

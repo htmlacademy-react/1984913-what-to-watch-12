@@ -1,14 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { ReducerName } from '../../utils/constants';
-import { Film } from '../../types/film';
 import { fetchPromoFilm } from './api-actions';
+import { PromoFilmState } from '../../types/state';
 
-type InitialState = {
-  promoFilm: Film|null;
-  isPromoFilmLoading: boolean;
-}
-
-const initialState:InitialState = {
+const initialState:PromoFilmState = {
   promoFilm: null,
   isPromoFilmLoading:false,
 };
