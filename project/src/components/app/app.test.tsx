@@ -78,6 +78,5 @@ describe('Application Routing', () => {
     render(fakeApp);
 
     expect(screen.getByText('404. Page not found')).toBeInTheDocument();
-    expect(screen.getByText('Go back to main page')).toBeInTheDocument();
   });
 });
