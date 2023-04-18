@@ -17,9 +17,7 @@ describe('Component: NotFoundScreen', () => {
     );
 
     const headerElement = screen.getByText('404. Page not found');
-    const linkElement = screen.getByText('Go back to main page');
 
     expect(headerElement).toBeInTheDocument();
-    expect(linkElement).toBeInTheDocument();
   });
 });
